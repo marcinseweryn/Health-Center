@@ -1,0 +1,29 @@
+
+#fotter{
+	background-color:  #466464;
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-top: 0%;
+	margin-bottom: : 0%;
+	width: 90vw;
+	height: 6vh;
+	text-align: center;
+}
+
+a.fotter{
+	color: white;
+	text-decoration: none;
+}
+
+.text-fotter{
+	margin:0%;	
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	color: white;
+	font-size: 1vw;
+	font-family:  'Raleway', sans-serif;
+	font-weight: 700;
+	letter-spacing: 0.2vw
+	
+}

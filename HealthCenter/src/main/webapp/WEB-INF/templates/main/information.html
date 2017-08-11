@@ -1,0 +1,24 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+	  style="margin:0px">
+<head>
+	<title th:text="#{home.information}"></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/fragments/mainBody.css}" />
+</head>
+
+<body  style="margin: 0px;">
+
+	<div th:replace = "fragments/mainHeader"></div>
+	
+	<div id = "body">
+		<p class = "textLogin"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at diam porttitor arcu tristique iaculis. Quisque pharetra felis sit amet arcu hendrerit, vel tempor arcu dignissim. Phasellus nec ipsum vitae purus volutpat sagittis sed ut magna. Integer turpis enim, semper eget ullamcorper id, facilisis in libero. Nulla nec elit eu turpis pretium lacinia. Curabitur fringilla urna at nisl mattis, at condimentum elit porttitor. Vestibulum quis sem id diam pretium ultricies. Fusce interdum nisl at lectus blandit interdum. Nullam sollicitudin eros et sagittis lobortis. Cras id tellus mauris. Sed mattis mi eu tortor euismod dapibus.</p>
+
+		<p class = "textLogin">Duis nec vestibulum libero. Pellentesque interdum finibus ex in bibendum. Sed lacus quam, dictum in neque et, porttitor interdum sapien. Vivamus dignissim placerat dolor sed euismod. Quisque posuere arcu tempus, euismod lacus vel, tristique libero. Duis erat erat, fringilla porttitor condimentum nec, congue nec enim. Nulla et magna at felis porttitor rhoncus. Duis at consequat risus, a sollicitudin mauris. Quisque quis nisi a est scelerisque bibendum et in nisl. Nulla pretium nisl maximus, iaculis sem ut, hendrerit libero. Suspendisse potenti. Nam sit amet metus aliquet, facilisis quam eget, semper enim. Nam congue, sem non dictum pulvinar, ex nibh commodo sapien, ac finibus lacus turpis id felis. Nullam malesuada dui vel fermentum auctor. Donec quis luctus massa. </p>
+	</div>
+	
+	<div th:replace = "fragments/fotter"></div>
+
+</body>
+</html>

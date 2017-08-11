@@ -1,0 +1,95 @@
+div{
+	text-align: center;
+}
+
+p.textHeader-Menu{
+	margin:0%;	
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	
+	font-size: 1.5vw;
+	font-family:  'Raleway', sans-serif;
+	font-weight: 780;
+	color: white;
+	letter-spacing: 0.25vw;
+	text-shadow: 2px 2px 4px #000000;
+}
+
+h1{
+	margin:0%;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	
+	font-size: 3.2vw;
+	font-family:  'Raleway', sans-serif;
+	font-weight: 800;
+	color: white;
+	letter-spacing: 0.7vw;
+	text-shadow: 2px 2px 4px #000000;
+	
+}
+
+#gb{
+	float: right;
+	width: 2.6%;
+	height: 18%;
+	background-image: url("./../../images/GB_flag.jpg");
+	background-size: 100% 100%;
+	cursor: pointer;
+}
+
+#pl{
+	float: right;
+	width: 2.6%;
+	height: 18%;
+	background-image: url("./../../images/PL_flag.png");
+	background-size: 100% 100%;
+	cursor: pointer;
+}
+
+#mainHeader{
+	width: 90vw;
+	height: 20vh;
+	margin-left: 5%;
+	margin-right: 5%;
+	border-bottom: 0.25vw solid white;
+}
+
+#mainHeader-title{
+	width: 100%;
+	height: 70%;
+	background-color: #0063c6;
+	border-bottom: 0.25vw solid white;
+}
+
+#mainHeader-menu{
+	width: 100%;
+	height: 29%;
+	background-color: black;
+	
+}
+
+.mainHeader-menu{
+	float: left;
+	width: 24.74%;
+	height: 100%;
+	border-right:  0.25vw solid white;
+	cursor: pointer;
+}
+.mainHeader-menu:HOVER{
+	background-color: #595959;
+}
+
+
+#mainHeader-menu-aboutUs{
+	float: left;
+	width: 24.74%;
+	height: 100%;
+	cursor: pointer;
+	
+}
+#mainHeader-menu-aboutUs:HOVER{
+	background-color: #595959;
+}

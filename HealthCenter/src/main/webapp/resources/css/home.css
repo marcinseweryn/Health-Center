@@ -1,0 +1,140 @@
+
+div{
+	background-color: #0080ff;
+	text-align: center;
+}
+
+p{
+	margin:0%;	
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	
+	font-size: 2.5vw;
+	font-family:  'Raleway', sans-serif;
+	font-weight: 700;
+	color: white;
+	letter-spacing: 0.5vw;
+	text-shadow: 2px 2px 4px #000000;
+	
+}
+
+h1{
+	margin:0%;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	
+	font-size: 3.7vw;
+	font-family:  'Raleway', sans-serif;
+	font-weight: 800;
+	color: white;
+	letter-spacing: 1vw;
+	text-shadow: 2px 2px 4px #000000;
+	
+}
+
+#header{
+	width: 90vw;
+	height: 15vh; 
+    margin-left: 5%;
+	margin-right: 5%;
+	margin-top: 0%;
+	margin-bottom: : 0%;
+	border-bottom: 0.25vw solid white;
+	background-color: #0063c6;
+	
+}
+
+#body{
+	position: relative;
+	width: 90vw; 
+	height: 85vh;
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-top: 0%;
+	margin-bottom: : 0%;
+}
+
+#menu-left{
+	width: 40%;
+	height: 66%; 
+	float: left;
+	border-bottom: 0.25vw solid white;
+}
+
+#login{
+	width: 100%;
+	height: 50%;
+	border-bottom: 0.25vw solid white;
+	cursor: pointer;
+}
+#login:HOVER{
+	background-color: #003d99;
+}
+
+#registration{
+	width: 100%;
+	height: 50%;
+	cursor: pointer;
+}
+#registration:HOVER{
+	background-color: #003d99;
+}
+
+#menu-bottom{
+	width: 100%;
+	height: 34%;
+	float: left;
+	border-top: 0.25vw solid white;
+	border-bottom: 0.25vw solid white;
+}
+
+#information{
+	width: 49.8%;
+	height: 100%;
+	float: left;
+	cursor: pointer;
+}
+#information:HOVER{
+	background-color: #003d99;
+}
+
+#about-us{
+	width: 49.8%;
+	height: 100%;
+	border-left:0.25vw solid white;
+	float: left;
+	cursor: pointer;
+
+}
+#about-us:HOVER{
+	background-color: #003d99;
+}
+
+#mainpicture{
+	float:left;
+	background-image: url("./../images/main_picture.jpg");
+	background-size: 100% 100%;
+	background-position: center center;
+	width: 60%;
+	height: 66%;	
+}
+
+#gb{
+	float: right;
+	width: 5%;
+	height: 5.5%;
+	background-image: url("./../images/GB_flag.jpg");
+	background-size: 100% 100%;
+	cursor: pointer;
+}
+
+#pl{
+	float: right;
+	width: 5%;
+	height: 5.5%;
+	background-image: url("./../images/PL_flag.png");
+	background-size: 100% 100%;
+	cursor: pointer;
+}
