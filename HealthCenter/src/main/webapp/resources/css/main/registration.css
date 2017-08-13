@@ -1,0 +1,116 @@
+#registration-form{
+	margin-top: 5%;
+	margin-bottom: 5%;
+	margin-left: 17%;
+	margin-right: 17%;
+	
+	width: 60vw;
+	height: 60vh auto;
+	
+	background-color: #f2f2f2;
+	border: 0.2vw solid #0063c6;
+	border-radius: 0.8vw;
+	
+}
+
+#registration-header{
+	witdh: 100%;
+	height: 12vh;
+	margin: 0%;
+	background-color: #0063c6;
+	text-align: center;
+	
+}
+
+#registration-title{
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	font-weight: 700;
+	font-size: 3vw;
+	color: white;
+	letter-spacing: 0.4vw;
+	
+}
+
+h2{
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	font-weight: 700;
+	font-size: 2.1vw;
+	text-align: left;
+	margin-left: 5vw;
+	border-bottom: 0.3vw solid black;
+	margin-top: 1vw;
+}
+
+.registration-label{
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	font-size: 1.5vw;
+	text-shadow: 0.2vw 0.2vw 0.2vw #b3b3b3;
+	font-weight: 650;
+}
+
+.registration-input{
+	border: 0.1vw solid blue;
+	border-radius: 0.5vw;
+	box-sizing: border-box;
+	
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	font-size: 1.2vw;
+	padding: 0.2vw 0.8vw;
+	margin: 0.1vw;
+	box-shadow: 0.2vw 0.2vw 0.1vw grey;
+
+}
+.registration-input:FOCUS{
+	background-color: #f2f2f2;
+	box-shadow: 0.5vw 0.5vw 0.4vw grey;
+}
+.registration-input:HOVER{
+	background-color: #f2f2f2;
+}
+
+select {
+	position: relative;
+	border-radius: 0.3vw;
+	height: 2vw;
+	width: 4.45vw;
+	font-size: 1.2vw;
+    background-color: #ffffff;
+}
+
+
+.registration-table{
+	white-space: nowrap;
+	margin-top: 3%;
+	margin-bottom: 5%;
+}
+td{
+	padding: 4%;	
+	width: 50%;
+}
+
+.registration-table-column-1{
+	text-align: right;
+}
+
+.registration-table-column-2{
+	text-align: left; 
+}
+
+button{	
+	text-align: center;
+	color: white;
+	background-color: #0063c6;
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	font-size: 1.6vw;
+	padding: 0.5vw 4vw;
+	
+	border: none;
+	border-radius: 1.5vw;
+	box-shadow: 0.2vw 0.2vw 0.1vw grey;
+	margin-bottom: 4vw;
+	cursor: pointer;
+}
+button:HOVER {
+	background-color: #3333cc;
+	box-shadow: 0.5vw 0.5vw 0.4vw grey;
+}

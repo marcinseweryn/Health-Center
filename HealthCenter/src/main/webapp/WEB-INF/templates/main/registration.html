@@ -5,17 +5,141 @@
 <head>
 	<title th:text="#{home.registration}"></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/fragments/mainBody.css}" />
-</head>
-
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/main/mainBody.css}" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/main/registration.css}" />
 <body  style="margin: 0px;">
 
 	<div th:replace = "fragments/mainHeader"></div>
 	
 	<div id = "body">
-		<p class = "textLogin"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at diam porttitor arcu tristique iaculis. Quisque pharetra felis sit amet arcu hendrerit, vel tempor arcu dignissim. Phasellus nec ipsum vitae purus volutpat sagittis sed ut magna. Integer turpis enim, semper eget ullamcorper id, facilisis in libero. Nulla nec elit eu turpis pretium lacinia. Curabitur fringilla urna at nisl mattis, at condimentum elit porttitor. Vestibulum quis sem id diam pretium ultricies. Fusce interdum nisl at lectus blandit interdum. Nullam sollicitudin eros et sagittis lobortis. Cras id tellus mauris. Sed mattis mi eu tortor euismod dapibus.</p>
-
-		<p class = "textLogin">Duis nec vestibulum libero. Pellentesque interdum finibus ex in bibendum. Sed lacus quam, dictum in neque et, porttitor interdum sapien. Vivamus dignissim placerat dolor sed euismod. Quisque posuere arcu tempus, euismod lacus vel, tristique libero. Duis erat erat, fringilla porttitor condimentum nec, congue nec enim. Nulla et magna at felis porttitor rhoncus. Duis at consequat risus, a sollicitudin mauris. Quisque quis nisi a est scelerisque bibendum et in nisl. Nulla pretium nisl maximus, iaculis sem ut, hendrerit libero. Suspendisse potenti. Nam sit amet metus aliquet, facilisis quam eget, semper enim. Nam congue, sem non dictum pulvinar, ex nibh commodo sapien, ac finibus lacus turpis id felis. Nullam malesuada dui vel fermentum auctor. Donec quis luctus massa. </p>
+	
+		<div id = "registration-form">
+			<div id = "registration-header">
+				<h1 id = "registration-title" th:text = "#{registration.title}"></h1>
+				
+			</div>
+			
+			<form action = "#" th:action="@{/registration}"  method="post">	
+			<h2 th:text="#{registration.personalDetails}"></h2>
+			<table class = "registration-table">
+				<tr>
+					<td class = "registration-table-column-1">
+						<label class = "registration-label" th:text="#{registration.gender}"></label>
+					</td>
+					<td class = "registration-table-column-2">
+						<label class = "registration-label" style ="padding-right: 0.1vw;" th:text="#{registration.gender.male}"></label>
+						<input type="radio"  th:value="#{registration.gender.male}" checked/>
+						
+						<label class = "registration-label" style ="padding-right: 0.1vw; padding-left: 1.5vw;" th:text="#{registration.gender.female}"></label>
+						<input type="radio"  th:value="#{registration.gender.female}" />
+					</td>
+				</tr>
+				<tr>	
+					<td class = "registration-table-column-1">
+						<label class = "registration-label" th:text = "#{registration.name}"></label>
+					</td>
+					<td class = "registration-table-column-2">
+						<input type = "text"  class = "registration-input"/>
+					</td>
+				</tr>
+				<tr>
+					<td class = "registration-table-column-1">
+						<label class = "registration-label" th:text = "#{registration.surname}"></label>
+					</td>
+					<td class = "registration-table-column-2">
+						<input type = "text"  class = "registration-input"/>
+					</td>
+				</tr>
+				<tr>
+					<td class = "registration-table-column-1">
+						<label class = "registration-label" th:text = "#{registration.birthDate}"></label>
+					</td>
+					<td class = "registration-table-column-2">
+						<label class = "registration-label" style ="padding-right: 0.1vw;" th:text = "#{registration.birthDate.day}"></label>
+						<select name="week_scroll">
+						    <option th:each="n : ${#numbers.sequence(1,31)}" th:value="${n}" th:text="${n}"/>
+						</select>
+						
+						<label class = "registration-label" style ="padding-right: 0.1vw; padding-left: 1vw;" th:text = "#{registration.birthDate.month}"></label>
+						<select name="week_scroll">
+						    <option th:each="n : ${#numbers.sequence(1,12)}" th:value="${n}" th:text="${n}"/>
+						</select>
+						
+						<label class = "registration-label" style ="padding-right: 0.1vw; padding-left: 1vw;" th:text = "#{registration.birthDate.year}"></label>
+						<select name="week_scroll">
+						    <option th:each="n : ${#numbers.sequence(#dates.year(#dates.createNow()),1900)}" th:value="${n}" th:text="${n}"/>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td class = "registration-table-column-1">
+						<label class = "registration-label" th:text = "#{registration.personalIdentificationNumber}"></label>
+					</td>
+					<td class = "registration-table-column-2">
+						<input type = "text"  class = "registration-input"/>
+					</td>
+				</tr>
+				<tr>
+					<td class = "registration-table-column-1">
+						<label class = "registration-label" th:text = "#{registration.password}"></label>
+					</td>
+					<td class = "registration-table-column-2">
+						<input type = "password"  class = "registration-input"/>
+					</td>
+				</tr>			
+			</table>
+			
+			<h2 th:text="#{registration.address}"></h2>
+			<table style ="padding-left: 9.5vw;" class = "registration-table">
+				<tr>
+					<td class = "registration-table-column-1">
+						<label class = "registration-label" th:text = "#{registration.streetAddress}"></label>
+					</td>
+					<td class = "registration-table-column-2">
+						<input type = "text"  class = "registration-input"/>
+					</td>
+				</tr>
+				<tr>
+					<td class = "registration-table-column-1">
+						<label class = "registration-label" th:text = "#{registration.city}"></label>
+					</td>
+					<td class = "registration-table-column-2">
+						<input type = "text"  class = "registration-input"/>
+					</td>
+				</tr>
+				<tr>
+					<td class = "registration-table-column-1">
+						<label class = "registration-label" th:text = "#{registration.postalCode}"></label>
+					</td>
+					<td class = "registration-table-column-2">
+						<input type = "text"  class = "registration-input"/>
+					</td>
+				</tr>
+			</table>
+			
+			<h2 th:text="#{registration.contact}"></h2>
+			<table style ="padding-left: 9.5vw;" class = "registration-table">
+				<tr>
+					<td class = "registration-table-column-1">
+						<label class = "registration-label" th:text = "#{registration.phone}"></label>
+					</td>
+					<td class = "registration-table-column-2">
+						<input type = "text"  class = "registration-input"/>
+					</td>
+				</tr>
+				<tr>
+					<td class = "registration-table-column-1">
+						<label class = "registration-label" th:text = "#{registration.email}"></label>
+					</td>
+					<td class = "registration-table-column-2">
+						<input type = "text"  class = "registration-input"/>
+					</td>
+				</tr>
+			</table>
+			 <button type="submit"  th:text="#{registration.send}"></button>
+			</form>
+		</div>	
+	
 	</div>
 	
 	<div th:replace = "fragments/fotter"></div>
