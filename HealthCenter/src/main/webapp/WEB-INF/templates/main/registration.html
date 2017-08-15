@@ -7,6 +7,17 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/main/mainBody.css}" />
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/main/registration.css}" />
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  
+  <script>
+  $(document).ready(function() {
+    $("#datepicker").datepicker();
+  });
+  </script>
+</head>
 <body  style="margin: 0px;">
 
 	<div th:replace = "fragments/mainHeader"></div>
@@ -19,19 +30,19 @@
 				
 			</div>
 			
-			<form action = "#" th:action="@{/registration}"  method="post">	
+			<form action = "#" th:action="@{/registration}" th:object="${user}"  method="post">	
 			<h2 th:text="#{registration.personalDetails}"></h2>
-			<table class = "registration-table">
+			<table style ="padding-left: 3.5vw;" class = "registration-table">
 				<tr>
 					<td class = "registration-table-column-1">
 						<label class = "registration-label" th:text="#{registration.gender}"></label>
 					</td>
 					<td class = "registration-table-column-2">
 						<label class = "registration-label" style ="padding-right: 0.1vw;" th:text="#{registration.gender.male}"></label>
-						<input type="radio"  th:value="#{registration.gender.male}" checked/>
+						<input type="radio" th:field="*{gender}"  th:value="#{registration.gender.male}" checked/>
 						
 						<label class = "registration-label" style ="padding-right: 0.1vw; padding-left: 1.5vw;" th:text="#{registration.gender.female}"></label>
-						<input type="radio"  th:value="#{registration.gender.female}" />
+						<input type="radio"  th:field="*{gender}"  th:value="#{registration.gender.female}" />
 					</td>
 				</tr>
 				<tr>	
@@ -39,7 +50,7 @@
 						<label class = "registration-label" th:text = "#{registration.name}"></label>
 					</td>
 					<td class = "registration-table-column-2">
-						<input type = "text"  class = "registration-input"/>
+						<input type = "text" th:field="*{name}"  class = "registration-input"/>
 					</td>
 				</tr>
 				<tr>
@@ -47,7 +58,7 @@
 						<label class = "registration-label" th:text = "#{registration.surname}"></label>
 					</td>
 					<td class = "registration-table-column-2">
-						<input type = "text"  class = "registration-input"/>
+						<input type = "text" th:field="*{surname}"  class = "registration-input"/>
 					</td>
 				</tr>
 				<tr>
@@ -55,20 +66,8 @@
 						<label class = "registration-label" th:text = "#{registration.birthDate}"></label>
 					</td>
 					<td class = "registration-table-column-2">
-						<label class = "registration-label" style ="padding-right: 0.1vw;" th:text = "#{registration.birthDate.day}"></label>
-						<select name="week_scroll">
-						    <option th:each="n : ${#numbers.sequence(1,31)}" th:value="${n}" th:text="${n}"/>
-						</select>
+						<input id = "datepicker" th:field="*{birthDate}" class = "registration-input"/>
 						
-						<label class = "registration-label" style ="padding-right: 0.1vw; padding-left: 1vw;" th:text = "#{registration.birthDate.month}"></label>
-						<select name="week_scroll">
-						    <option th:each="n : ${#numbers.sequence(1,12)}" th:value="${n}" th:text="${n}"/>
-						</select>
-						
-						<label class = "registration-label" style ="padding-right: 0.1vw; padding-left: 1vw;" th:text = "#{registration.birthDate.year}"></label>
-						<select name="week_scroll">
-						    <option th:each="n : ${#numbers.sequence(#dates.year(#dates.createNow()),1900)}" th:value="${n}" th:text="${n}"/>
-						</select>
 					</td>
 				</tr>
 				<tr>
@@ -76,7 +75,7 @@
 						<label class = "registration-label" th:text = "#{registration.personalIdentificationNumber}"></label>
 					</td>
 					<td class = "registration-table-column-2">
-						<input type = "text"  class = "registration-input"/>
+						<input type = "text" th:field="*{pesel}"  class = "registration-input"/>
 					</td>
 				</tr>
 				<tr>
@@ -84,7 +83,7 @@
 						<label class = "registration-label" th:text = "#{registration.password}"></label>
 					</td>
 					<td class = "registration-table-column-2">
-						<input type = "password"  class = "registration-input"/>
+						<input type = "password" th:field="*{password}"  class = "registration-input"/>
 					</td>
 				</tr>			
 			</table>
@@ -96,7 +95,7 @@
 						<label class = "registration-label" th:text = "#{registration.streetAddress}"></label>
 					</td>
 					<td class = "registration-table-column-2">
-						<input type = "text"  class = "registration-input"/>
+						<input type = "text" th:field="*{streetAddress}"  class = "registration-input"/>
 					</td>
 				</tr>
 				<tr>
@@ -104,7 +103,7 @@
 						<label class = "registration-label" th:text = "#{registration.city}"></label>
 					</td>
 					<td class = "registration-table-column-2">
-						<input type = "text"  class = "registration-input"/>
+						<input type = "text" th:field="*{city}"  class = "registration-input"/>
 					</td>
 				</tr>
 				<tr>
@@ -112,7 +111,7 @@
 						<label class = "registration-label" th:text = "#{registration.postalCode}"></label>
 					</td>
 					<td class = "registration-table-column-2">
-						<input type = "text"  class = "registration-input"/>
+						<input type = "text" th:field="*{postalCode}" class = "registration-input"/>
 					</td>
 				</tr>
 			</table>
@@ -124,7 +123,7 @@
 						<label class = "registration-label" th:text = "#{registration.phone}"></label>
 					</td>
 					<td class = "registration-table-column-2">
-						<input type = "text"  class = "registration-input"/>
+						<input type = "text" th:field="*{phone}"  class = "registration-input"/>
 					</td>
 				</tr>
 				<tr>
@@ -132,7 +131,7 @@
 						<label class = "registration-label" th:text = "#{registration.email}"></label>
 					</td>
 					<td class = "registration-table-column-2">
-						<input type = "text"  class = "registration-input"/>
+						<input type = "text" th:field="*{email}"  class = "registration-input"/>
 					</td>
 				</tr>
 			</table>

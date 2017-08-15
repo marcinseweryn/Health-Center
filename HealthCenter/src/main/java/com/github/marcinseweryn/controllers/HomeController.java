@@ -1,51 +1,63 @@
 package com.github.marcinseweryn.controllers;
 
-import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
- * Handles requests for the application home page.
- */
+import com.github.marcinseweryn.model.User;
+import com.github.marcinseweryn.service.UserService;
+
+
 @Controller
 public class HomeController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {	
+	public String home() {	
 		
 		return "main/home";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(Locale locale){
+	public String login(){
 		
 		return "main/login";
 	}
 	
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
-	public String registration(Locale locale){
+	public String registration(Model model){
 		
+		model.addAttribute("user", new User());
+
 		return "main/registration";
 	}
 	
+	@Autowired
+	private UserService userService;
+	
+	@RequestMapping(value = "/registration", method = RequestMethod.POST)
+	public String register(@Valid User user, BindingResult  bindingResult){
+		
+		userService.addUser(user);
+		
+		return "redirect:/user/home";
+	}
+	
+	
 	@RequestMapping(value = "/information", method = RequestMethod.GET)
-	public String information(Locale locale){
+	public String information(){
 		
 		return "main/information";
 	}
 	
 	@RequestMapping(value = "/aboutUs", method = RequestMethod.GET)
-	public String aboutUs(Locale locale){
+	public String aboutUs(){
 		
 		return "main/aboutUs";
 	}
