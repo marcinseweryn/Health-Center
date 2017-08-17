@@ -25,9 +25,19 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(){
+	public String login(Model model){
+		
+		model.addAttribute("user", new User());
 		
 		return "main/login";
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String logIn(Model model){
+		
+		
+		
+		return "redirect:/user/home";
 	}
 	
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
