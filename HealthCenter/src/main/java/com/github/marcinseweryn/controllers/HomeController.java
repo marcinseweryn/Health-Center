@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -27,18 +26,10 @@ public class HomeController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model){
 		
-		model.addAttribute("user", new User());
 		
 		return "main/login";
 	}
 	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String logIn(Model model){
-		
-		
-		
-		return "redirect:/user/home";
-	}
 	
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String registration(Model model){
@@ -56,7 +47,7 @@ public class HomeController {
 		
 		userService.addUser(user);
 		
-		return "redirect:/user/home";
+		return "redirect:/";
 	}
 	
 	

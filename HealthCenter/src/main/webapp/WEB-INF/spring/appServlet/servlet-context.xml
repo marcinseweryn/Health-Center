@@ -17,7 +17,7 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
-	<tx:annotation-driven proxy-target-class="true" transaction-manager="transactionManager"/>
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 	<context:component-scan base-package="com.github.marcinseweryn" />
 	
@@ -65,12 +65,19 @@
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 			<beans:property name="dataSource" ref="dataSource"/>
 			 <beans:property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
-		</beans:bean>
+	</beans:bean>
 		
 		<beans:bean id="transactionManager" 
 		class="org.springframework.orm.jpa.JpaTransactionManager">
 			<beans:property name="dataSource" ref="dataSource"/>
 		</beans:bean>
+		
+	<beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<beans:property name="url" value="jdbc:mysql://localhost:3306/health_center"/>
+		<beans:property name="username" value="root" />
+		<beans:property name="password" value="1234" />
+	</beans:bean>
 	<!-- ****************************************************************** -->	
 	
 </beans:beans>
