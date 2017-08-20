@@ -63,5 +63,11 @@ public class HomeController {
 		return "main/aboutUs";
 	}
 	
+	@RequestMapping(value = "/403", method = RequestMethod.GET)
+	public String error403(){
+		
+		return "errors/403";
+	}
+	
 	
 }

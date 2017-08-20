@@ -4,7 +4,7 @@
 	margin-right: 30%;
 	
 	width: 40%;
-	height: 45vh;
+	height: 45vh auto;
 	
 	background-color: #f2f2f2;
 	border: 0.2vw solid #0063c6;
@@ -71,6 +71,7 @@ button{
 	border-radius: 1vw;
 	box-shadow: 0.1vw 0.1vw 0.05vw grey;
 	margin-top: 0.8vw;
+	margin-bottom: 0.5vw;
 	cursor: pointer;
 }
 button:HOVER {

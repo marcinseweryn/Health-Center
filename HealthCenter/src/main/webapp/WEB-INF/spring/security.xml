@@ -5,19 +5,27 @@
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd">
 
-	<http auto-config="true">
-		
-		<intercept-url pattern="/user/home" access="hasRole('ROLE_USER')" />
+	<beans:bean id="authSuccessHandler" class="com.github.marcinseweryn.handlers.MyAuthenticationSuccessHandler" />
+	
+	<http auto-config="true" >
+		<intercept-url pattern="/**" requires-channel="https" />
+		<intercept-url pattern="/user/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/doctor/**" access="hasRole('ROLE_DOCTOR')" />
 		<!-- access denied page -->
 		<access-denied-handler error-page="/403" />
 
 		<form-login
 		    login-page="/login"
-		    default-target-url="/user/home"
+		    authentication-success-handler-ref="authSuccessHandler"
 			authentication-failure-url="/login?error"
 			username-parameter="pesel"
-			password-parameter="password" />
-		<logout logout-success-url="/login?logout"  />
+			password-parameter="password" 
+		/>
+		<logout
+			logout-url="/logout"
+		 	logout-success-url="/" 
+		/>
 		<!-- enable csrf protection -->
 		<csrf/>
 	</http>
@@ -35,7 +43,7 @@
 	</authentication-manager>
 	
 	<beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
-		<beans:constructor-arg name="strength" value="11" />
+		<beans:constructor-arg name="strength" value="15" />
 	</beans:bean>
 
 </beans:beans>

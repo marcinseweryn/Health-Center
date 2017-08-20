@@ -1,0 +1,23 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+	  style="margin:0px">
+<head>
+	<title th:text="#{home.information}"></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/main/mainBody.css}" />
+</head>
+
+<body  style="margin: 0px;">
+
+	<div th:replace = "fragments/mainHeader"></div>
+	
+	<div id = "body">
+		<h2 style = "text-align: center; font-size: 4vw; margin-top: 5vw;">HTTP Status 403 - Access is denied</h2>
+		 <h2 style = "text-align: center; font-size: 2.2vw; margin-top: 2vw;" th:text="#{403error}"></h2>
+	</div>	
+	
+	<div th:replace = "fragments/fotter"></div>
+
+</body>
+</html>
