@@ -1,0 +1,37 @@
+
+#admin-header{
+	height: 10vh;
+	width: 100%;
+	background-color: #00004d;
+	border-bottom: 0.35vw solid  #009900;
+	color: white;
+}
+
+#admin-header-title{
+	margin-top: 0%;
+	font-size: 2vw;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 700;
+	letter-spacing: 0.4vw;
+	text-shadow: 2px 2px 4px #000000;
+	text-align: left;
+	padding-top: 2.5vh;
+	padding-left: 0.5vw;
+}
+
+.admin-header-buttons{
+	float: right;
+	margin: 0.3vw 0.3vw;
+	text-align: center;	
+	font-family: Arial, Helvetica, sans-serif;
+	color: white;
+	font-size: 0.9vw;
+	font-weight: 650;
+	background-color: #009933;
+	border: none;
+	cursor: pointer;
+}
+
+#myAccount{
+	background-color: #0066ff;
+}

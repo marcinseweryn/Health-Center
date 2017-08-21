@@ -1,0 +1,25 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+	  style="margin:0px">
+<head>
+	 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/fragments/adminHeader.css}" />
+</head>
+<body>
+
+	<div id = "admin-header">	
+	
+		<form th:action="@{/logout}" method="post">
+		    <button class = "admin-header-buttons" type="submit" th:text="#{logout}"></button>
+		</form>
+		
+		<form th:action="@{/user/myaccount}" method="post">
+		    <button class = "admin-header-buttons" id = "myAccount" type="submit" th:text="#{myAccount}"></button>
+		</form>
+		
+		<h1 id ="admin-header-title" th:text = "#{admin.header.title}"></h1>
+	</div>
+
+</body>
+</html>
