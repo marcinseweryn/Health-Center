@@ -1,7 +1,14 @@
 package com.github.marcinseweryn.dao;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
@@ -18,6 +25,17 @@ public class UserDAOImpl implements UserDAO {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void addUser(User user) {
 		entityManager.persist(user);
+		
+	}
+
+	@Override
+	public List<User> findAllUsers() {
+		
+		Query query = entityManager.createQuery("from User");
+		
+		List<User> list = query.getResultList();
+		
+		return list;
 	}
 
 }

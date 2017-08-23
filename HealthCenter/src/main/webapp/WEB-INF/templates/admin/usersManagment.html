@@ -1,0 +1,55 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+	  style="margin:0px">
+<head>
+	<title th:text="#{home.login}"></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/admin/body.css}" />
+</head>
+
+<body  style="margin: 0px;">
+
+	<div th:replace = "fragments/adminHeader"></div>
+	<div th:replace = "fragments/adminMenu"></div>
+	
+	<div id ="body">
+		<table class ="admin-table">
+			<thead>
+			<tr>
+				<th class = "table-header">Personal identyfication number</th>
+				<th class = "table-header">Name</th>
+				<th class = "table-header">Surname</th>
+				<th class = "table-header">Birth date</th>
+				<th class = "table-header">Street addres</th>
+				<th class = "table-header">City</th>
+				<th class = "table-header">Postal code</th>
+				<th class = "table-header">Phone</th>
+				<th class = "table-header">Email</th>
+				<th class = "table-header">Role</th>
+				<th class = "table-header">Select</th>
+				
+				
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="user, iterStat : ${users}" th:class = "${iterStat.odd}? 'odd' : 'even'">
+				<td th:text = "${user.getPesel()}"></td>
+				<td th:text = "${user.getName()}"></td>
+				<td th:text = "${user.getSurname()}"></td>
+				<td th:text = "${user.getBirthDate()}"></td>
+				<td th:text = "${user.getStreetAddress()}"></td>
+				<td th:text = "${user.getCity()}"></td>
+				<td th:text = "${user.getPostalCode()}"></td>
+				<td th:text = "${user.getPhone()}"></td>
+				<td th:text = "${user.getEmail()}"></td>
+				<td th:text = "${user.getRole()}"></td>
+				<td style = "max-width: 4.35vw;"><input type ="checkbox" value = "${user.getPesel()}"></td>
+			</tr>
+			</tbody>
+		</table>
+	
+	</div>
+
+</body>
+</html>

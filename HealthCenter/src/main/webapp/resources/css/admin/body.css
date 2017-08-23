@@ -4,5 +4,60 @@
 	height: 90vh;
 	height-max: auto;
 	width: 78.65vw;
-	background-color: #e6e6e6;
+	background-color: white;
+}
+
+
+.admin-table{
+	display: block;
+    border-collapse: collapse;
+    border: 0.2vw solid black;
+    margin-left: 1%;
+    margin-top: 1%;
+    font-size: 0.8vw;
+    font-family: Arial, Helvetica, sans-serif; 
+    width: 98%; 
+ 
+}
+.admin-table thead{
+	position: relative;
+	display: block;
+}
+.admin-table tbody{
+	display: block;
+	overflow-y: scroll;
+	max-height: 40vh;  
+}
+.table-header{
+	
+	background-color: #00004d;
+	font-size: 1vw;
+	font-weight: 600;
+	color: white;
+	border-right: 0.1vw solid white;
+	border-bottom: 0.1vw solid white;
+}
+
+tr.odd{
+	background-color:  #f2f2f2;
+	border-bottom: 0.1vw solid black;
+}
+
+
+tr.even{
+	background-color:  #d9d9d9;
+	border-bottom: 0.1vw solid black;
+}
+tr.even:HOVER, tr.odd:HOVER {
+	background-color: #79ff4d;
+}	
+
+.admin-table td, .admin-table th{
+	min-width: 6vw;
+	max-width: 6vw;
+	max-height: 1vw;
+	min-height: 1vw;
+	border-right: 0.1vw solid black;
+	text-align: center;
+	padding: 1vw 0.5vw;
 }
