@@ -1,9 +1,5 @@
 package com.github.marcinseweryn.dao;
 
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -36,6 +32,19 @@ public class UserDAOImpl implements UserDAO {
 		List<User> list = query.getResultList();
 		
 		return list;
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void deleteUsers(List<Integer> usersIDs) {
+		
+		for(Integer ID:usersIDs){
+		Query query = entityManager.createQuery("delete from User u"
+				+ " WHERE u.pesel ="+ID+"");
+		System.out.println(ID);
+		query.executeUpdate();
+		}
+		
 	}
 
 }

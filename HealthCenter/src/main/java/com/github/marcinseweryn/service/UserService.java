@@ -9,4 +9,6 @@ public interface UserService {
 	public void addUser(User user);
 	
 	public List<User> findAllUsers();
+	
+	public void deleteUsers(List<Integer> usersIDs);
 }

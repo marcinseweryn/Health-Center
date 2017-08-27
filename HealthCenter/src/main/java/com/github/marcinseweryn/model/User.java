@@ -2,7 +2,7 @@ package com.github.marcinseweryn.model;
 
 
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Table(name = "users")
 public class User {
 	private String gender, name, surname, password,
-		streetAddress, city, postalCode, phone, email, role;
+		streetAddress, city, postalCode, phone, email, role, enabled;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO) 
@@ -96,6 +96,12 @@ public class User {
 	}
 	public void setRole(String role) {
 		this.role = role;
+	}
+	public String getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(String enabled) {
+		this.enabled = enabled;
 	}
 	
 		

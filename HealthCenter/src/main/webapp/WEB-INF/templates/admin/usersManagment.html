@@ -3,6 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
 	  style="margin:0px">
 <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<title th:text="#{home.login}"></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/admin/body.css}" />
@@ -27,28 +28,138 @@
 				<th class = "table-header">Phone</th>
 				<th class = "table-header">Email</th>
 				<th class = "table-header">Role</th>
-				<th class = "table-header">Select</th>
-				
-				
+				<th class = "table-header">Select</th>		
 			</tr>
 			</thead>
 			<tbody>
-			<tr th:each="user, iterStat : ${users}" th:class = "${iterStat.odd}? 'odd' : 'even'">
+		<tr th:each="user, iterStat : ${users}" th:class = "${iterStat.odd}? 'odd' : 'even'">
 				<td th:text = "${user.getPesel()}"></td>
 				<td th:text = "${user.getName()}"></td>
 				<td th:text = "${user.getSurname()}"></td>
-				<td th:text = "${user.getBirthDate()}"></td>
+				<td th:text = "${#strings.substring(user.getBirthDate(),0,11)}"></td>
 				<td th:text = "${user.getStreetAddress()}"></td>
 				<td th:text = "${user.getCity()}"></td>
 				<td th:text = "${user.getPostalCode()}"></td>
 				<td th:text = "${user.getPhone()}"></td>
 				<td th:text = "${user.getEmail()}"></td>
 				<td th:text = "${user.getRole()}"></td>
-				<td style = "max-width: 4.35vw;"><input type ="checkbox" value = "${user.getPesel()}"></td>
+				<td style = "max-width: 4vw;min-width: 4vw;">
+				<input id="select" name = "select" type ="checkbox" onclick="sub()" th:value = "${user.getPesel()}"></td>
 			</tr>
 			</tbody>
 		</table>
-	
+		
+		
+		
+		<script type="text/javascript">
+			function sub(){
+		         var val = [];
+		         
+		         $(':checkbox:checked').each(function(i){
+		           val[i] = $(this).val();
+		         });
+		         
+		         document.getElementById("usersIDs").value = val;
+			}		
+		</script>
+		
+		<form id ="delete" action = "#" th:action="@{/admin/usersManagment}" th:object="${list}"  method="post">
+			<input id ="usersIDs" type="hidden" th:field ="*{usersIDs}"/>
+		</form>
+		
+		<form id ="update" action = "#" th:action="@{/admin/usersManagment}" th:object="${user}"  method="post">
+			<table>
+				<tr>
+					<td>
+						<label th:text = "#{personalIdentificationNumber}"></label>
+					</td>
+					<td>
+						<input th:field = "*{pesel}" type = "text"/>
+					</td>
+					<td>
+						<label th:text = "#{registration.name}"></label>
+					</td>
+					<td>
+						<input th:field = "*{name}" type = "text"/>
+					</td>
+					<td>
+						<label th:text = "#{registration.surname}"></label>
+					</td>
+					<td>
+						<input th:field = "*{surname}" type = "text"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label th:text = "#{registration.gender}"></label>
+					</td>
+					<td>
+						<select th:field = "*{gender}">
+							<option th:value = "#{registration.gender.male}" th:text = "#{registration.gender.male}"></option>
+							<option th:value = "#{registration.gender.female}" th:text = "#{registration.gender.female}"></option>
+						</select>
+					</td>
+					<td>
+						<label th:text = "#{registration.birthDate}"></label>
+					</td>
+					<td>
+						<input th:field = "*{birthDate}" type = "text"/>
+					</td>
+					<td>
+						<label th:text = "#{registration.streetAddress}"></label>
+					</td>
+					<td>
+						<input th:field = "*{streetAddress}" type = "text"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label th:text = "#{registration.city}"></label>
+					</td>
+					<td>
+						<input th:field = "*{city}" type = "text"/>
+					</td>
+					<td>
+						<label th:text = "#{registration.postalCode}"></label>
+					</td>
+					<td>
+						<input th:field = "*{postalCode}" type = "text"/>
+					</td>
+					<td>
+						<label th:text = "#{registration.phone}"></label>
+					</td>
+					<td>
+						<input type = "text"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label th:text = "#{registration.email}"></label>
+					</td>
+					<td>
+						<input th:field = "*{email}" type = "text"/>
+					</td>
+					<td>
+						<label>Role</label>
+					</td>
+					<td>
+						<select th:field = "*{role}">
+							<option th:value = "ROLE_USER" th:text = "ROLE_USER"></option>
+							<option th:value = "ROLE_ADMIN" th:text = "ROLE_ADMIN"></option>
+							<option th:value = "ROLE_DOCTOR"  th:text = "ROLE_DOCTOR"></option>
+						</select>
+					</td>
+					<td>
+						<label>Enabled</label>
+					</td>
+					<td>
+						<input type = "text"/>
+					</td>
+				</tr>
+			</table>
+			
+		</form>
+		<button id="delete" form = "delete" type="submit" >delete</button>
 	</div>
 
 </body>

@@ -60,4 +60,8 @@ tr.even:HOVER, tr.odd:HOVER {
 	border-right: 0.1vw solid black;
 	text-align: center;
 	padding: 1vw 0.5vw;
+	
+	overflow-wrap: break-word;
+
 }
+
