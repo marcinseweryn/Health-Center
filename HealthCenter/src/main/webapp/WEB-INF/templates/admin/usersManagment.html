@@ -4,9 +4,12 @@
 	  style="margin:0px">
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+		
 	<title th:text="#{home.login}"></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/admin/body.css}" />
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 </head>
 
 <body  style="margin: 0px;">
@@ -18,7 +21,7 @@
 		<table class ="admin-table">
 			<thead>
 			<tr>
-				<th class = "table-header">Personal identyfication number</th>
+				<th class = "table-header" th:text = "#{personalIdentificationNumber}"></th>
 				<th class = "table-header">Name</th>
 				<th class = "table-header">Surname</th>
 				<th class = "table-header">Birth date</th>
@@ -28,7 +31,7 @@
 				<th class = "table-header">Phone</th>
 				<th class = "table-header">Email</th>
 				<th class = "table-header">Role</th>
-				<th class = "table-header">Select</th>		
+				<th class = "table-header" style ="max-width: 5.2vw;min-width: 5.2vw;">Select</th>		
 			</tr>
 			</thead>
 			<tbody>
@@ -48,8 +51,7 @@
 			</tr>
 			</tbody>
 		</table>
-		
-		
+			
 		
 		<script type="text/javascript">
 			function sub(){
@@ -60,14 +62,18 @@
 		         });
 		         
 		         document.getElementById("usersIDs").value = val;
-			}		
+			}
+			$(document).ready(function() {
+				    $("#datepicker").datepicker();
+			});		
 		</script>
 		
-		<form id ="delete" action = "#" th:action="@{/admin/usersManagment}" th:object="${list}"  method="post">
+		
+		<form id ="delete" action = "#" th:action="@{/admin/usersManagement/delete}" th:object="${list}"  method="post">
 			<input id ="usersIDs" type="hidden" th:field ="*{usersIDs}"/>
 		</form>
 		
-		<form id ="update" action = "#" th:action="@{/admin/usersManagment}" th:object="${user}"  method="post">
+		<form id ="update" action = "#" th:action="@{/admin/usersManagement/update}" th:object="${user}"  method="post">
 			<table>
 				<tr>
 					<td>
@@ -103,16 +109,23 @@
 						<label th:text = "#{registration.birthDate}"></label>
 					</td>
 					<td>
-						<input th:field = "*{birthDate}" type = "text"/>
+						<input id = "datepicker" th:field = "*{birthDate}"/>
 					</td>
+					<td>
+						<label th:text = "#{password}"></label>
+					</td>
+					<td>
+						<input th:field = "*{password}" type = "password"/>
+					</td>
+				</tr>
+				<tr>			
 					<td>
 						<label th:text = "#{registration.streetAddress}"></label>
 					</td>
 					<td>
 						<input th:field = "*{streetAddress}" type = "text"/>
 					</td>
-				</tr>
-				<tr>
+
 					<td>
 						<label th:text = "#{registration.city}"></label>
 					</td>
@@ -125,14 +138,15 @@
 					<td>
 						<input th:field = "*{postalCode}" type = "text"/>
 					</td>
+				</tr>
+				<tr>				
 					<td>
 						<label th:text = "#{registration.phone}"></label>
 					</td>
 					<td>
-						<input type = "text"/>
+						<input th:field = "*{phone}" type = "text"/>
 					</td>
-				</tr>
-				<tr>
+
 					<td>
 						<label th:text = "#{registration.email}"></label>
 					</td>
@@ -149,17 +163,12 @@
 							<option th:value = "ROLE_DOCTOR"  th:text = "ROLE_DOCTOR"></option>
 						</select>
 					</td>
-					<td>
-						<label>Enabled</label>
-					</td>
-					<td>
-						<input type = "text"/>
-					</td>
 				</tr>
 			</table>
 			
 		</form>
 		<button id="delete" form = "delete" type="submit" >delete</button>
+		<button id="create" form = "update" type="submit" >create</button>
 	</div>
 
 </body>

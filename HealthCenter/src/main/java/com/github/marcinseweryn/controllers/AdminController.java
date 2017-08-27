@@ -1,6 +1,6 @@
 package com.github.marcinseweryn.controllers;
 
-import java.util.ArrayList;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,8 +25,8 @@ public class AdminController {
 		return "admin/home";
 	}
 	
-	@RequestMapping(value = "/admin/usersManagment", method = RequestMethod.GET)
-	public String userManagment(Model model) {	
+	@RequestMapping(value = "/admin/usersManagement", method = RequestMethod.GET)
+	public String userManagement(Model model) {	
 		
 		model.addAttribute("users", userService.findAllUsers());
 		model.addAttribute("user", new User());
@@ -35,12 +35,20 @@ public class AdminController {
 		return "admin/usersManagment";
 	}
 	
-	@RequestMapping(value = "/admin/usersManagment", method = RequestMethod.POST)
-	public String userManagmentDelete(IDsList list, BindingResult bindingResult) {	
+	@RequestMapping(value = "/admin/usersManagement/delete", method = RequestMethod.POST)
+	public String userManagementDelete(IDsList list, BindingResult bindingResult) {	
 		
 		userService.deleteUsers(list.getUsersIDs());
 		
-		return "redirect:/admin/usersManagment";
+		return "redirect:/admin/usersManagement";
+	}
+	
+	@RequestMapping(value = "/admin/usersManagement/update", method = RequestMethod.POST)
+	public String userManagementAdd(@Valid User user, BindingResult bindingResult) {	
+		
+		userService.addUser(user);
+		
+		return "redirect:/admin/usersManagement";
 	}
 	
 }
