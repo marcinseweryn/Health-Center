@@ -11,4 +11,6 @@ public interface UserService {
 	public List<User> findAllUsers();
 	
 	public void deleteUsers(List<Integer> usersIDs);
+	
+	public void updateUsers(List<Integer> usersIDs, User user);
 }

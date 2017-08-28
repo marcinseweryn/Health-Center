@@ -1,5 +1,7 @@
 package com.github.marcinseweryn.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.marcinseweryn.model.IDsList;
 import com.github.marcinseweryn.model.User;
@@ -35,19 +38,22 @@ public class AdminController {
 		return "admin/usersManagment";
 	}
 	
-	@RequestMapping(value = "/admin/usersManagement/delete", method = RequestMethod.POST)
-	public String userManagementDelete(IDsList list, BindingResult bindingResult) {	
-		
-		userService.deleteUsers(list.getUsersIDs());
-		
-		return "redirect:/admin/usersManagement";
-	}
 	
 	@RequestMapping(value = "/admin/usersManagement/update", method = RequestMethod.POST)
-	public String userManagementAdd(@Valid User user, BindingResult bindingResult) {	
+	public String userManagementupdate(@RequestParam String action,@RequestParam List<Integer> IDsList, User user, BindingResult bindingResult) {	
 		
-		userService.addUser(user);
-		
+		if(action.equals("create")){
+			
+			userService.addUser(user);
+			
+		}else if(action.equals("delete")){
+			
+			userService.deleteUsers(IDsList);
+			
+		}else{
+			
+			userService.updateUsers(IDsList, user);
+		}
 		return "redirect:/admin/usersManagement";
 	}
 	

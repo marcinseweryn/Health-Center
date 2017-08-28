@@ -37,14 +37,28 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void deleteUsers(List<Integer> usersIDs) {
+		String IDs = usersIDs.toString().substring(1, usersIDs.toString().length() - 1);
+		System.out.println(IDs);
 		
 		for(Integer ID:usersIDs){
-		Query query = entityManager.createQuery("delete from User u"
-				+ " WHERE u.pesel ="+ID+"");
-		System.out.println(ID);
-		query.executeUpdate();
+			Query query = entityManager.createQuery("delete from User u"
+					+ " WHERE u.pesel IN(" + IDs + ")");
+			System.out.println(ID);
+			query.executeUpdate();
 		}
 		
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void updateUsers(List<Integer> usersIDs, User user, String columns) {
+		String IDs = usersIDs.toString().substring(1, usersIDs.toString().length() - 1);
+		System.out.println(IDs);
+		
+		Query query = entityManager.createQuery("UPDATE User SET " + columns
+				+ " WHERE pesel IN(" + IDs + ")");
+		System.out.println(IDs);
+		query.executeUpdate();
 	}
 
 }

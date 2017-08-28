@@ -69,10 +69,6 @@
 		</script>
 		
 		
-		<form id ="delete" action = "#" th:action="@{/admin/usersManagement/delete}" th:object="${list}"  method="post">
-			<input id ="usersIDs" type="hidden" th:field ="*{usersIDs}"/>
-		</form>
-		
 		<form id ="update" action = "#" th:action="@{/admin/usersManagement/update}" th:object="${user}"  method="post">
 			<table>
 				<tr>
@@ -165,10 +161,11 @@
 					</td>
 				</tr>
 			</table>
-			
+			<input id ="usersIDs" name ="IDsList" type="hidden" th:value ="${list.usersIDs}"/>
 		</form>
-		<button id="delete" form = "delete" type="submit" >delete</button>
-		<button id="create" form = "update" type="submit" >create</button>
+		<button name = "action" form = "update" type="submit" value = "delete">delete</button>
+		<button name = "action" form = "update" type="submit" value = "create" >create</button>
+		<button name = "action" form = "update" type="submit" value = "update" >update</button>
 	</div>
 
 </body>
