@@ -2,8 +2,6 @@ package com.github.marcinseweryn.controllers;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +19,8 @@ public class AdminController {
 	
 	@Autowired
 	UserService userService;
+	
+	List<User> foundUsersList = null;
 
 	@RequestMapping(value = "/admin/home", method = RequestMethod.GET)
 	public String home() {	
@@ -31,13 +31,19 @@ public class AdminController {
 	@RequestMapping(value = "/admin/usersManagement", method = RequestMethod.GET)
 	public String userManagement(Model model) {	
 		
-		model.addAttribute("users", userService.findAllUsers());
+		if(foundUsersList != null){
+			System.out.println(foundUsersList.size());
+			model.addAttribute("users", foundUsersList);
+			foundUsersList = null;
+		}else{
+			model.addAttribute("users", userService.findAllUsers());
+		}
+				
 		model.addAttribute("user", new User());
 		model.addAttribute("list", new IDsList());
 		
 		return "admin/usersManagment";
 	}
-	
 	
 	@RequestMapping(value = "/admin/usersManagement/update", method = RequestMethod.POST)
 	public String userManagementupdate(@RequestParam String action,@RequestParam List<Integer> IDsList, User user, BindingResult bindingResult) {	
@@ -50,9 +56,13 @@ public class AdminController {
 			
 			userService.deleteUsers(IDsList);
 			
-		}else{
+		}else if(action.equals("update")){
 			
 			userService.updateUsers(IDsList, user);
+			
+		}else if(action.equals("search")){
+			
+			foundUsersList = userService.findUsers(user);
 		}
 		return "redirect:/admin/usersManagement";
 	}

@@ -63,6 +63,7 @@
 		         
 		         document.getElementById("usersIDs").value = val;
 			}
+			
 			$(document).ready(function() {
 				    $("#datepicker").datepicker();
 			});		
@@ -97,6 +98,7 @@
 					</td>
 					<td>
 						<select th:field = "*{gender}">
+							<option selected="selected" value = ""></option>
 							<option th:value = "#{registration.gender.male}" th:text = "#{registration.gender.male}"></option>
 							<option th:value = "#{registration.gender.female}" th:text = "#{registration.gender.female}"></option>
 						</select>
@@ -154,6 +156,7 @@
 					</td>
 					<td>
 						<select th:field = "*{role}">
+							<option selected="selected" value = ""></option>
 							<option th:value = "ROLE_USER" th:text = "ROLE_USER"></option>
 							<option th:value = "ROLE_ADMIN" th:text = "ROLE_ADMIN"></option>
 							<option th:value = "ROLE_DOCTOR"  th:text = "ROLE_DOCTOR"></option>
@@ -166,6 +169,7 @@
 		<button name = "action" form = "update" type="submit" value = "delete">delete</button>
 		<button name = "action" form = "update" type="submit" value = "create" >create</button>
 		<button name = "action" form = "update" type="submit" value = "update" >update</button>
+		<button name = "action" form = "update" type="submit" value = "search" >search</button>
 	</div>
 
 </body>
