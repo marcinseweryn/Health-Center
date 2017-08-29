@@ -1,0 +1,63 @@
+
+.input-table{
+	margin-top: 1.5vw;
+	margin-right: 1vw;
+}
+
+.input-table td{
+	padding: 0.7vw 1.25vw;
+	text-align: right;
+}
+
+.buttons-table{
+	margin-top: 1.3vw;
+	margin-right: 1vw;
+}
+
+.buttons-table td{
+	text-align: center;
+	width: 20vw;	
+}
+
+.buttons-table button{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1.2vw;
+	font-weight: 600;
+	color: white;
+	text-shadow: 0.2vw 0.2vw 0.2vw #b3b3b3;
+	letter-spacing: 0.2vw;
+	text-align: center;
+	
+	padding: 0.7vw 4vw;
+	border: none;
+	border-radius: 0.3vw;
+	box-shadow: 0.2vw 0.2vw 0.1vw grey;
+}
+
+#button-delete{
+	background-color: #ff0000;
+}
+#button-delete:HOVER{
+	background-color: #cc0000;
+}
+
+#button-create{
+	background-color: #33cc33;
+}
+#button-create:HOVER{
+	background-color: #29a329;
+}
+
+#button-update{
+	background-color: #ff9900;
+}
+#button-update:HOVER{
+	background-color: #e68a00;
+}
+
+#button-search{
+	background-color: #3399ff;
+}
+#button-search:HOVER{
+	background-color: #0073e6;
+}

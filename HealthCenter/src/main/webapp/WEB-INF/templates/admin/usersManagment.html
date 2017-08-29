@@ -9,6 +9,7 @@
 	<title th:text="#{home.login}"></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/admin/body.css}" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/admin/usersManagement.css}" />
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 </head>
 
@@ -71,91 +72,91 @@
 		
 		
 		<form id ="update" action = "#" th:action="@{/admin/usersManagement/update}" th:object="${user}"  method="post">
-			<table>
+			<table class = "input-table">
 				<tr>
 					<td>
-						<label th:text = "#{personalIdentificationNumber}"></label>
+						<label class = "admin" th:text = "#{personalIdentificationNumber}"></label>
 					</td>
 					<td>
-						<input th:field = "*{pesel}" type = "text"/>
+						<input class = "admin" th:field = "*{pesel}" type = "text"/>
 					</td>
 					<td>
-						<label th:text = "#{registration.name}"></label>
+						<label class = "admin" th:text = "#{registration.name}"></label>
 					</td>
 					<td>
-						<input th:field = "*{name}" type = "text"/>
+						<input class = "admin" th:field = "*{name}" type = "text"/>
 					</td>
 					<td>
-						<label th:text = "#{registration.surname}"></label>
+						<label class = "admin" th:text = "#{registration.surname}"></label>
 					</td>
 					<td>
-						<input th:field = "*{surname}" type = "text"/>
+						<input class = "admin" th:field = "*{surname}" type = "text"/>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<label th:text = "#{registration.gender}"></label>
+						<label class = "admin" th:text = "#{registration.gender}"></label>
 					</td>
 					<td>
-						<select th:field = "*{gender}">
+						<select class = "admin" th:field = "*{gender}">
 							<option selected="selected" value = ""></option>
 							<option th:value = "#{registration.gender.male}" th:text = "#{registration.gender.male}"></option>
 							<option th:value = "#{registration.gender.female}" th:text = "#{registration.gender.female}"></option>
 						</select>
 					</td>
 					<td>
-						<label th:text = "#{registration.birthDate}"></label>
+						<label class = "admin" th:text = "#{registration.birthDate}"></label>
 					</td>
 					<td>
-						<input id = "datepicker" th:field = "*{birthDate}"/>
+						<input class = "admin" id = "datepicker" th:field = "*{birthDate}"/>
 					</td>
 					<td>
-						<label th:text = "#{password}"></label>
+						<label class = "admin" th:text = "#{password}"></label>
 					</td>
 					<td>
-						<input th:field = "*{password}" type = "password"/>
+						<input class = "admin" th:field = "*{password}" type = "password"/>
 					</td>
 				</tr>
 				<tr>			
 					<td>
-						<label th:text = "#{registration.streetAddress}"></label>
+						<label class = "admin" th:text = "#{registration.streetAddress}"></label>
 					</td>
 					<td>
-						<input th:field = "*{streetAddress}" type = "text"/>
+						<input class = "admin" th:field = "*{streetAddress}" type = "text"/>
 					</td>
 
 					<td>
-						<label th:text = "#{registration.city}"></label>
+						<label class = "admin" th:text = "#{registration.city}"></label>
 					</td>
 					<td>
-						<input th:field = "*{city}" type = "text"/>
+						<input class = "admin" th:field = "*{city}" type = "text"/>
 					</td>
 					<td>
-						<label th:text = "#{registration.postalCode}"></label>
+						<label class = "admin" th:text = "#{registration.postalCode}"></label>
 					</td>
 					<td>
-						<input th:field = "*{postalCode}" type = "text"/>
+						<input class = "admin" th:field = "*{postalCode}" type = "text"/>
 					</td>
 				</tr>
 				<tr>				
 					<td>
-						<label th:text = "#{registration.phone}"></label>
+						<label class = "admin" th:text = "#{registration.phone}"></label>
 					</td>
 					<td>
-						<input th:field = "*{phone}" type = "text"/>
+						<input class = "admin" th:field = "*{phone}" type = "text"/>
 					</td>
 
 					<td>
-						<label th:text = "#{registration.email}"></label>
+						<label class = "admin" th:text = "#{registration.email}"></label>
 					</td>
 					<td>
-						<input th:field = "*{email}" type = "text"/>
+						<input class = "admin" th:field = "*{email}" type = "text"/>
 					</td>
 					<td>
-						<label>Role</label>
+						<label class = "admin">Role</label>
 					</td>
 					<td>
-						<select th:field = "*{role}">
+						<select class = "admin" th:field = "*{role}">
 							<option selected="selected" value = ""></option>
 							<option th:value = "ROLE_USER" th:text = "ROLE_USER"></option>
 							<option th:value = "ROLE_ADMIN" th:text = "ROLE_ADMIN"></option>
@@ -166,10 +167,15 @@
 			</table>
 			<input id ="usersIDs" name ="IDsList" type="hidden" th:value ="${list.usersIDs}"/>
 		</form>
-		<button name = "action" form = "update" type="submit" value = "delete">delete</button>
-		<button name = "action" form = "update" type="submit" value = "create" >create</button>
-		<button name = "action" form = "update" type="submit" value = "update" >update</button>
-		<button name = "action" form = "update" type="submit" value = "search" >search</button>
+		
+		<table class = "buttons-table">
+			<tr>
+				<td><button id = "button-search" name = "action" form = "update" type="submit" value = "search" th:text = "#{search}"></button></td>
+				<td><button id = "button-create"name = "action" form = "update" type="submit" value = "create" th:text = "#{create}"></button></td>
+				<td><button id = "button-update"name = "action" form = "update" type="submit" value = "update" th:text = "#{update}"></button></td>
+				<td><button id = "button-delete" name = "action" form = "update" type="submit" value = "delete" th:text = "#{delete}"></button></td>
+			</tr>
+		</table>
 	</div>
 
 </body>
