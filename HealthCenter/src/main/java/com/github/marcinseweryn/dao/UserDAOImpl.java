@@ -67,6 +67,11 @@ public class UserDAOImpl implements UserDAO {
 		return list;
 	}
 
+	@Override
+	public User findUser(String pesel) {
+		return entityManager.find(User.class, pesel);
+	}
+
 
 
 }

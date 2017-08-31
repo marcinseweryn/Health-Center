@@ -16,10 +16,11 @@ public class User {
 	private String gender, name, surname, password,
 		streetAddress, city, postalCode, phone, email, role, enabled;
 	
-	@Id
+	
 	@GeneratedValue(strategy = GenerationType.AUTO) 
 	private Integer ID;
 
+	@Id
 	private String pesel;
 	
 	private Date birthDate;

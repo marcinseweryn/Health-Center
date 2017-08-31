@@ -86,7 +86,6 @@ public class UserServiceImpl implements UserService{
 		if(!user.getRole().equals("")){
 			columns += "role = '" + user.getRole() + "' ,";
 		}
-		System.out.println(columns);
 		if(columns.length() > 0){
 			columns = columns.substring(0, columns.length() - 1);
 		}
@@ -134,7 +133,6 @@ public class UserServiceImpl implements UserService{
 		if(!user.getRole().equals("")){
 			columns += "role = '" + user.getRole() + "' and ";
 		}
-		System.out.println(columns);
 		if(columns.length() > 0){
 			columns = columns.substring(0, columns.length() - 4);
 		}
@@ -144,5 +142,11 @@ public class UserServiceImpl implements UserService{
 		}else{
 			return userDAO.findUsers(user, columns);
 		}		
+	}
+
+
+	@Override
+	public User findUser(String pesel) {
+		return userDAO.findUser(pesel);
 	}
 }

@@ -15,4 +15,6 @@ public interface UserService {
 	public void updateUsers(List<Integer> usersIDs, User user);
 	
 	public List<User> findUsers(User user);
+	
+	public User findUser(String pesel);
 }
