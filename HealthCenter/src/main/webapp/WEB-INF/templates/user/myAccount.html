@@ -6,6 +6,7 @@
 	<title th:text = "#{myAccount}" ></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/body.css}" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/myAccount.css}" />
 </head>
 
 <body style="margin: 0px;">
@@ -14,6 +15,85 @@
 	<div th:include = "fragments/userMenu"></div>
 	
 	<div id ="body">
+	
+		<div id = "myAccount-title">
+			<p th:text = "#{myAccount}"></p>
+		</div>
+	
+		<form action = "#" th:action="@{/user/myAccount}" th:object="${user}" method="post">
+
+			<table class = "myAccount-table">
+				<tr>
+					<td>
+						<label class ="user" th:text = "#{form.name}"></label>
+					</td>
+					<td>
+						<input class ="user" type = "text" th:field="*{name}"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class ="user" th:text = "#{form.surname}"></label>
+					</td>
+					<td>
+						<input class ="user" type = "text" th:field="*{surname}"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class ="user" th:text = "#{password}"></label>
+					</td>
+					<td>
+						<input class ="user" type = "password" th:field="*{password}"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class ="user" th:text = "#{form.phone}"></label>
+					</td>
+					<td>
+						<input class ="user" type = "text" th:field="*{phone}"/>
+					</td>
+				</tr>
+			</table>
+			<table class = "myAccount-table">			
+				<tr>
+					<td>
+						<label class ="user" th:text = "#{form.streetAddress}"></label>
+					</td>
+					<td>
+						<input class ="user" type = "text" th:field="*{streetAddress}"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class ="user" th:text = "#{form.city}"></label>
+					</td>
+					<td>
+						<input class ="user" type = "text" th:field="*{city}"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class ="user" th:text = "#{form.postalCode}"></label>
+					</td>
+					<td>
+						<input class ="user" type = "text" th:field="*{postalCode}"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class ="user" th:text = "#{form.email}"></label>
+					</td>
+					<td>
+						<input class ="user" type = "text" th:field="*{email}"/>
+					</td>
+				</tr>
+			</table>
+		
+			 <button id = "myAccount-save" class ="user" type="submit"  th:text="#{save}"></button>
+		
+		</form>
 	
 	</div>
 	

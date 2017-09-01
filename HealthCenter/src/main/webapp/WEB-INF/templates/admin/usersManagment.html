@@ -81,13 +81,13 @@
 						<input class = "admin" th:field = "*{pesel}" type = "text"/>
 					</td>
 					<td>
-						<label class = "admin" th:text = "#{registration.name}"></label>
+						<label class = "admin" th:text = "#{form.name}"></label>
 					</td>
 					<td>
 						<input class = "admin" th:field = "*{name}" type = "text"/>
 					</td>
 					<td>
-						<label class = "admin" th:text = "#{registration.surname}"></label>
+						<label class = "admin" th:text = "#{form.surname}"></label>
 					</td>
 					<td>
 						<input class = "admin" th:field = "*{surname}" type = "text"/>
@@ -95,17 +95,17 @@
 				</tr>
 				<tr>
 					<td>
-						<label class = "admin" th:text = "#{registration.gender}"></label>
+						<label class = "admin" th:text = "#{form.gender}"></label>
 					</td>
 					<td>
 						<select class = "admin" th:field = "*{gender}">
 							<option selected="selected" value = ""></option>
-							<option th:value = "#{registration.gender.male}" th:text = "#{registration.gender.male}"></option>
-							<option th:value = "#{registration.gender.female}" th:text = "#{registration.gender.female}"></option>
+							<option th:value = "#{form.gender.male}" th:text = "#{form.gender.male}"></option>
+							<option th:value = "#{form.gender.female}" th:text = "#{form.gender.female}"></option>
 						</select>
 					</td>
 					<td>
-						<label class = "admin" th:text = "#{registration.birthDate}"></label>
+						<label class = "admin" th:text = "#{form.birthDate}"></label>
 					</td>
 					<td>
 						<input class = "admin" id = "datepicker" th:field = "*{birthDate}"/>
@@ -119,20 +119,20 @@
 				</tr>
 				<tr>			
 					<td>
-						<label class = "admin" th:text = "#{registration.streetAddress}"></label>
+						<label class = "admin" th:text = "#{form.streetAddress}"></label>
 					</td>
 					<td>
 						<input class = "admin" th:field = "*{streetAddress}" type = "text"/>
 					</td>
 
 					<td>
-						<label class = "admin" th:text = "#{registration.city}"></label>
+						<label class = "admin" th:text = "#{form.city}"></label>
 					</td>
 					<td>
 						<input class = "admin" th:field = "*{city}" type = "text"/>
 					</td>
 					<td>
-						<label class = "admin" th:text = "#{registration.postalCode}"></label>
+						<label class = "admin" th:text = "#{form.postalCode}"></label>
 					</td>
 					<td>
 						<input class = "admin" th:field = "*{postalCode}" type = "text"/>
@@ -140,14 +140,14 @@
 				</tr>
 				<tr>				
 					<td>
-						<label class = "admin" th:text = "#{registration.phone}"></label>
+						<label class = "admin" th:text = "#{form.phone}"></label>
 					</td>
 					<td>
 						<input class = "admin" th:field = "*{phone}" type = "text"/>
 					</td>
 
 					<td>
-						<label class = "admin" th:text = "#{registration.email}"></label>
+						<label class = "admin" th:text = "#{form.email}"></label>
 					</td>
 					<td>
 						<input class = "admin" th:field = "*{email}" type = "text"/>

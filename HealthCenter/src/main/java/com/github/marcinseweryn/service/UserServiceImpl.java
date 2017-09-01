@@ -25,6 +25,7 @@ public class UserServiceImpl implements UserService{
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			String hashedPassword = passwordEncoder.encode(user.getPassword());
 			
+			user.setEnabled("1");
 			user.setPassword(hashedPassword);
 			userDAO.addUser(user);
 		}
@@ -48,43 +49,65 @@ public class UserServiceImpl implements UserService{
 	public void updateUsers(List<Integer> usersIDs, User user) {	
 		String columns = "";
 		
-		if(!user.getPesel().equals("")){
-			columns += "pesel = '" + user.getPesel() + "' ,"; 
+		if(user.getPesel() != null){
+			if(!user.getPesel().equals("")){
+				columns += "pesel = '" + user.getPesel() + "' ,"; 
+			}
 		}
-		if(!user.getGender().equals("")){
-			columns += "gender = '" + user.getGender() + "' ,";
+		if(user.getGender() != null){
+			if(!user.getGender().equals("")){
+				columns += "gender = '" + user.getGender() + "' ,";
+			}
 		}
-		if(!user.getName().equals("")){
-			columns += "name = '" + user.getName() + "' ,";
+		if(user.getName() != null){
+			if(!user.getName().equals("")){
+				columns += "name = '" + user.getName() + "' ,";
+			}
 		}
-		if(!user.getSurname().equals("")){
-			columns += "surname = '" + user.getSurname() + "' ,";
+		if(user.getSurname() != null){
+			if(!user.getSurname().equals("")){
+				columns += "surname = '" + user.getSurname() + "' ,";
+			}
 		}
 		if(user.getBirthDate() != null){
 			columns += "birthDate = '" + df.format(user.getBirthDate()) + "' ,";
 		}
-		if(!user.getPassword().equals("")){
-			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-			String hashedPassword = passwordEncoder.encode(user.getPassword());
-			columns += "password = '" + hashedPassword + "' ,";
+		if(user.getPassword() != null){
+			if(!user.getPassword().equals("")){
+				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+				String hashedPassword = passwordEncoder.encode(user.getPassword());
+				columns += "password = '" + hashedPassword + "' ,";
+			}
 		}
-		if(!user.getStreetAddress().equals("")){
-			columns += "streetAddress = '" + user.getStreetAddress() + "' ,";
+		if(user.getStreetAddress() != null){
+			if(!user.getStreetAddress().equals("")){
+				columns += "streetAddress = '" + user.getStreetAddress() + "' ,";
+			}
 		}
-		if(!user.getCity().equals("")){
-			columns += "city = '" + user.getCity() + "' ,";
+		if(user.getCity() != null){
+			if(!user.getCity().equals("")){
+				columns += "city = '" + user.getCity() + "' ,";
+			}
 		}
-		if(!user.getPostalCode().equals("")){
-			columns += "postalCode = '" + user.getPostalCode() + "' ,";
+		if(user.getPostalCode() != null){
+			if(!user.getPostalCode().equals("")){
+				columns += "postalCode = '" + user.getPostalCode() + "' ,";
+			}
 		}
-		if(!user.getPhone().equals("")){
-			columns += "phone = '" + user.getPhone() + "' ,";
+		if(user.getPhone() != null){
+			if(!user.getPhone().equals("")){
+				columns += "phone = '" + user.getPhone() + "' ,";
+			}
 		}
-		if(!user.getEmail().equals("")){
-			columns += "email = '" + user.getEmail() + "' ,";
+		if(user.getEmail() != null){
+			if(!user.getEmail().equals("")){
+				columns += "email = '" + user.getEmail() + "' ,";
+			}
 		}
-		if(!user.getRole().equals("")){
-			columns += "role = '" + user.getRole() + "' ,";
+		if(user.getRole() != null){
+			if(!user.getRole().equals("")){
+				columns += "role = '" + user.getRole() + "' ,";
+			}
 		}
 		if(columns.length() > 0){
 			columns = columns.substring(0, columns.length() - 1);

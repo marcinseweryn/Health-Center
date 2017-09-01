@@ -1,0 +1,60 @@
+.myAccount-table{
+	margin-left: 1vw;
+	text-align: right;
+	float: left;
+	width: 38.2vw;
+}
+
+.myAccount-table td{
+	padding: 1.5vw 1.8vw;
+	border: 0.1vw solid black;
+	background-color: #008ae6;r
+}
+
+.myAccount-table label{
+	color: white;
+	text-shadow: 1px 1px 2px black;
+}
+
+.myAccount-table input{
+	box-shadow: 0.2vw 0.2vw 0.1vw #005ce6;
+}
+.myAccount-table input:HOVER{
+	background-color: #cce0ff;
+}
+.myAccount-table input:FOCUS{
+	background-color: #cce0ff;
+	box-shadow: 0.35vw 0.35vw 0.18vw #0047b3;
+}
+
+#myAccount-save{
+	background-color: #008ae6; 
+	padding: 0.7vw 7vw;
+	font-size: 1.3vw;
+	margin-top: 1vw;
+	margin-left: 30vw;
+}
+#myAccount-save:HOVER {
+	background-color: #005ce6;
+}
+
+#myAccount-title{
+	width: 77vw;
+	height: 5vw;
+	text-align: center;
+	margin-top: 1vw;
+	margin-left: 1vw;
+	background-color: #008ae6;
+	border: 0.2vw solid blue;
+
+}
+
+#myAccount-title p{
+	margin: 0vw;
+	padding: 0vw;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 800;
+	font-size: 3.5vw;
+	letter-spacing: 0.4vw;
+	color: white;
+}

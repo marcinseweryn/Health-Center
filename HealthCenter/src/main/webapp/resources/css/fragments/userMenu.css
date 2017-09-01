@@ -1,5 +1,5 @@
 
-#admin-menu{
+#user-menu{
 	float: left;
 	height: 90vh;
 	height-max: auto;
@@ -7,12 +7,12 @@
 	background-color: #008ae6;
 	color: white;
 }
-#admin-menu table{
+#user-menu table{
 	width: 100%;
 	text-align: left;
 }
 
-#admin-menu td{
+#user-menu td{
 	border: 0.1vw solid white;
 	font-size: 1.3vw;
 	font-family: Arial, Helvetica, sans-serif;
@@ -22,7 +22,7 @@
 	padding: 0.8vw 0.8vw;
 	
 }
-#admin-menu td:HOVER {
+#user-menu td:HOVER {
 	background-color: #0066cc;
 	cursor: pointer;
 }
