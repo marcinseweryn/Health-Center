@@ -1,0 +1,38 @@
+
+button.specialization{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1.5vw;
+	font-weight: bolder;
+	color: white;
+	text-align: center;
+	
+	width: 25vw;
+	height: 10vw;
+	margin-left: 2%;
+	margin-top: 1.5%;
+	background-color: #0066cc;
+}
+button.specialization:HOVER {
+	background-color: #004d99;
+}
+
+#doctors-table{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1.6vw;
+	font-weight: bolder;
+	text-align: right;
+	border: 0.1vw solid black;
+	margin-left: 20%;
+	margin-top: 5%;
+	border-spacing: 0px;
+}
+
+#doctors-table td{
+	padding: 1vw 5vw;
+	morgin: 0%;
+}
+
+#doctors-table tr:HOVER{
+	background-color: blue;
+}
+

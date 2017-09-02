@@ -17,5 +17,7 @@ public interface UserDAO {
 	public List<User> findUsers(User user, String columns);
 	
 	public User findUser(String pesel);
+	
+	public List<User> findUsersByIDs(List<Integer> usersIDs);
 
 }

@@ -60,8 +60,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public List<User> findUsers(User user, String columns) {
 		
-		Query query = entityManager.createQuery("FROM User WHERE " + columns);
-		
+		Query query = entityManager.createQuery("FROM User WHERE " + columns);	
 		List<User> list = query.getResultList();
 		
 		return list;
@@ -70,6 +69,17 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public User findUser(String pesel) {
 		return entityManager.find(User.class, pesel);
+	}
+
+	@Override
+	public List<User> findUsersByIDs(List<Integer> usersIDs) {
+		
+		String IDs = usersIDs.toString().substring(1, usersIDs.toString().length() - 1);
+		
+		Query query = entityManager.createQuery("FROM User WHERE pesel IN(" + IDs + ")");
+		List<User> list = query.getResultList();
+		
+		return list;
 	}
 
 

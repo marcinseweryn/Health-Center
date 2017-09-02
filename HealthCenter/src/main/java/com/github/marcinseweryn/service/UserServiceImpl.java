@@ -172,4 +172,13 @@ public class UserServiceImpl implements UserService{
 	public User findUser(String pesel) {
 		return userDAO.findUser(pesel);
 	}
+
+
+	@Override
+	public List<User> findUsersByIDs(List<Integer> usersIDs) {
+		if(usersIDs.size() != 0){
+			return userDAO.findUsersByIDs(usersIDs);
+		}
+		return null;
+	}
 }

@@ -17,4 +17,6 @@ public interface UserService {
 	public List<User> findUsers(User user);
 	
 	public User findUser(String pesel);
+	
+	public List<User> findUsersByIDs(List<Integer> usersIDs);
 }

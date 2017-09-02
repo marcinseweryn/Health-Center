@@ -5,5 +5,6 @@
     <persistence-unit name="jpamanager" transaction-type="RESOURCE_LOCAL">
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
     	<class>com.github.marcinseweryn.model.User</class>
+    	<class>com.github.marcinseweryn.model.Doctor</class>
     </persistence-unit>
 </persistence>
