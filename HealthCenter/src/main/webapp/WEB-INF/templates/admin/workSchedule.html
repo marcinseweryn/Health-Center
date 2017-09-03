@@ -1,0 +1,60 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+	  style="margin:0px">
+<head>
+	<title th:text="#{home.login}"></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/admin/body.css}" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/admin/workSchedule.css}" />
+</head>
+
+<body  style="margin: 0px;">
+
+	<div th:replace = "fragments/adminHeader"></div>
+	<div th:replace = "fragments/adminMenu"></div>
+	
+	<div id ="body">
+	
+		<table id = "workSchedule-table" class ="admin-table">
+			<thead>
+			<tr>
+				<th class = "table-header" >room</th>
+				<th class = "table-header" >day</th>
+				<th class = "table-header">start</th>
+				<th class = "table-header">end</th>
+				<th class = "table-header" >doctor</th>
+				<th class = "table-header" style = "max-width: 5.2vw;min-width: 5.2vw;" >select</th>
+			</tr>
+			</thead>
+			<tr th:each="schedule, iterStat : ${workSchedules}" th:class = "${iterStat.odd}? 'odd' : 'even'">
+				<td th:text = "${schedule.getRoom()}"></td>
+				<td th:text = "${schedule.getDay()}"></td>
+				<td th:text = "${schedule.getStart()}"></td>
+				<td th:text = "${schedule.getEnd()}"></td>
+				<td th:text = "${schedule.getPesel()}"></td>
+				<td style = "max-width: 4vw;min-width: 4vw;">
+				<input id="select" name = "select" type ="checkbox" onclick="sub()" th:value = "${schedule.getPesel()}"></td>
+			</tr>
+			<tbody>
+			</tbody>
+		</table>
+		
+		<script type="text/javascript">
+			function sub(){
+		         var val = [];
+		         
+		         $(':checkbox:checked').each(function(i){
+		           val[i] = $(this).val();
+		         });
+		         
+		         document.getElementById("scheduleIDs").value = val;
+			}
+		</script>
+	
+	</div>
+	
+
+
+</body>
+</html>

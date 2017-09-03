@@ -6,5 +6,6 @@
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
     	<class>com.github.marcinseweryn.model.User</class>
     	<class>com.github.marcinseweryn.model.Doctor</class>
+    	<class>com.github.marcinseweryn.model.WorkSchedule</class>
     </persistence-unit>
 </persistence>

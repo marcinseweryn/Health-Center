@@ -6,21 +6,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.marcinseweryn.model.IDsList;
 import com.github.marcinseweryn.model.User;
+import com.github.marcinseweryn.model.WorkSchedule;
 import com.github.marcinseweryn.service.UserService;
+import com.github.marcinseweryn.service.WorkScheduleService;
 
 @Controller
 public class AdminController {
 	
 	@Autowired
-	UserService userService;
+	private UserService userService;
 	
-	List<User> foundUsersList = null;
+	@Autowired
+	private WorkScheduleService workScheduleService;
+	
+	private List<User> foundUsersList = null;
 
 	@RequestMapping(value = "/admin/home", method = RequestMethod.GET)
 	public String home() {	
@@ -65,6 +71,14 @@ public class AdminController {
 			foundUsersList = userService.findUsers(user);
 		}
 		return "redirect:/admin/usersManagement";
+	}
+	
+	@RequestMapping(value = "/admin/workSchedule", method = RequestMethod.GET)
+	public String workSchedule(Model model) {	
+		
+		model.addAttribute("workSchedules", workScheduleService.findAll());
+		
+		return "admin/workSchedule";
 	}
 	
 }
