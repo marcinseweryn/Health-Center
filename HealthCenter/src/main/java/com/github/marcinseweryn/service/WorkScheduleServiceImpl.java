@@ -19,4 +19,10 @@ public class WorkScheduleServiceImpl implements WorkScheduleService{
 		return workScheduleDAO.findAll();
 	}
 
+	@Override
+	public void addSchedule(WorkSchedule schedule) {
+		workScheduleDAO.addSchedule(schedule);
+		
+	}
+
 }

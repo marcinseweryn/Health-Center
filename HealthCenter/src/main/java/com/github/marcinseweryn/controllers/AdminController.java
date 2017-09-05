@@ -76,9 +76,18 @@ public class AdminController {
 	@RequestMapping(value = "/admin/workSchedule", method = RequestMethod.GET)
 	public String workSchedule(Model model) {	
 		
+		model.addAttribute("workSchedule",new WorkSchedule());
 		model.addAttribute("workSchedules", workScheduleService.findAll());
 		
 		return "admin/workSchedule";
+	}
+	
+	@RequestMapping(value = "/admin/workSchedule", method = RequestMethod.POST)
+	public String workScheduleUpdate(WorkSchedule schedule, Model model) {	
+		
+		workScheduleService.addSchedule(schedule);
+		
+		return "redirect:/admin/workSchedule";
 	}
 	
 }

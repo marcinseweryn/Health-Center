@@ -51,6 +51,50 @@
 		         document.getElementById("scheduleIDs").value = val;
 			}
 		</script>
+		
+		<form id ="update" action = "#" th:action="@{/admin/workSchedule}" th:object="${workSchedule}"  method="post">
+			<table class = "input-table">
+				<tr>
+					<td>
+						<label class = "admin" th:text = "#{personalIdentificationNumber}"></label>
+					</td>
+					<td>
+						<input class = "admin" th:field = "*{pesel}" type = "text"/>
+					</td>
+					<td>
+						<label class = "admin" th:text = "#{form.room}"></label>
+					</td>
+					<td>
+						<input class = "admin" th:field = "*{room}" type = "text"/>
+					</td>
+					<td>
+						<label class = "admin" th:text = "#{form.day}"></label>
+					</td>
+					<td>
+						<input class = "admin" th:field = "*{day}" type = "text"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class = "admin" th:text = "#{form.begin}"></label>
+					</td>
+					<td>
+						<input class = "admin" th:field = "*{start}" type = "text"/>
+					</td>
+					<td>
+						<label class = "admin" th:text = "#{form.end}" ></label>
+					</td>
+					<td>
+						<input class = "admin" th:field = "*{end}" type = "text"/>
+					</td>
+				</tr>
+			</table>
+		</form>	
+		
+		<button id = "button-search" name = "action" form = "update" type="submit" value = "add" th:text = "#{search}"></button>
+		
+		
+		
 	
 	</div>
 	

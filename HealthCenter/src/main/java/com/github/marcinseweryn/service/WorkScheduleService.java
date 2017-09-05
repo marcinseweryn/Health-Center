@@ -7,5 +7,7 @@ import com.github.marcinseweryn.model.WorkSchedule;
 public interface WorkScheduleService {
 	
 	public List<WorkSchedule> findAll();
+	
+	public void addSchedule(WorkSchedule schedule);
 
 }
