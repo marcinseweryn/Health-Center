@@ -1,5 +1,32 @@
 #workSchedule-table{
 	width: 53%;
-	margin-left: 10%;
-	padding-bottom: 0%;
+	margin-left: 2%;
+	margin-right:1%;
+	margin-bottom: 1%;
+	float: left;
+}
+
+#workSchedule-table tbody{
+	max-height: 50vh; 
+}
+
+#workSchedule-doctors-table{
+	float: left;
+	width: 40%;
+}
+
+#workSchedule-doctors-table th,#workSchedule-doctors-table td{
+	min-width: 6.8vw;
+	max-width: 6.8vw;
+}
+
+#input-table-schedule{
+	clear: both;
+	float: left;
+	margin-left: 1%;
+	text-align: right;
+}
+
+#input-table-schedule td{
+	padding: 1vw 1vw;
 }

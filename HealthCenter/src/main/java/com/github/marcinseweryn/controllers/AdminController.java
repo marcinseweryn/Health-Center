@@ -1,5 +1,6 @@
 package com.github.marcinseweryn.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.github.marcinseweryn.model.Doctor;
 import com.github.marcinseweryn.model.IDsList;
 import com.github.marcinseweryn.model.User;
 import com.github.marcinseweryn.model.WorkSchedule;
+import com.github.marcinseweryn.service.DoctorService;
 import com.github.marcinseweryn.service.UserService;
 import com.github.marcinseweryn.service.WorkScheduleService;
 
@@ -22,6 +26,9 @@ public class AdminController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private DoctorService doctorService;
 	
 	@Autowired
 	private WorkScheduleService workScheduleService;
@@ -74,9 +81,11 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/admin/workSchedule", method = RequestMethod.GET)
-	public String workSchedule(Model model) {	
+	public String workSchedule(Model model, @ModelAttribute("searchDoctor") Doctor doctor) {	
 		
+		model.addAttribute("allDoctors", doctorService.findDoctors(doctor));
 		model.addAttribute("workSchedule",new WorkSchedule());
+		model.addAttribute("doctor", new Doctor());	
 		model.addAttribute("workSchedules", workScheduleService.findAll());
 		
 		return "admin/workSchedule";
@@ -89,5 +98,12 @@ public class AdminController {
 		
 		return "redirect:/admin/workSchedule";
 	}
+	
+	@RequestMapping(value = "/admin/workSchedule/search", method = RequestMethod.POST)
+	public String workScheduleSearch(Doctor doctor, Model model,RedirectAttributes redirectAttributes) {	
+		redirectAttributes.addFlashAttribute("searchDoctor", doctor);
+		
+		return "redirect:/admin/workSchedule";
+	} 
 	
 }

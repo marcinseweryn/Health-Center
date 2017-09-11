@@ -1,18 +1,42 @@
 package com.github.marcinseweryn.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "doctors")
+@SecondaryTable(name = "users",
+	pkJoinColumns = @PrimaryKeyJoinColumn(name = "pesel", referencedColumnName = "pesel"))
+
 public class Doctor {
 	
 	@Id
 	private String pesel;
+	@Column(table = "users")
+	private String name, surname;
 	
 	private String specialization_1, specialization_2, specialization_3, information;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
 
 	public String getPesel() {
 		return pesel;

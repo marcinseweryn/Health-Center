@@ -27,6 +27,7 @@
 				<th class = "table-header" style = "max-width: 5.2vw;min-width: 5.2vw;" >select</th>
 			</tr>
 			</thead>
+			<tbody>
 			<tr th:each="schedule, iterStat : ${workSchedules}" th:class = "${iterStat.odd}? 'odd' : 'even'">
 				<td th:text = "${schedule.getRoom()}"></td>
 				<td th:text = "${schedule.getDay()}"></td>
@@ -36,7 +37,6 @@
 				<td style = "max-width: 4vw;min-width: 4vw;">
 				<input id="select" name = "select" type ="checkbox" onclick="sub()" th:value = "${schedule.getPesel()}"></td>
 			</tr>
-			<tbody>
 			</tbody>
 		</table>
 		
@@ -52,11 +52,31 @@
 			}
 		</script>
 		
+		<table id = "workSchedule-doctors-table" class ="admin-table">
+			<thead>
+			<tr>
+				<th class = "table-header" >Doctor ID</th>
+				<th class = "table-header" >Name</th>
+				<th class = "table-header" >Surname</th>
+				<th class = "table-header" >Specialization</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="doctor, iterStat : ${allDoctors}" th:class = "${iterStat.odd}? 'odd' : 'even'">
+				<td th:text = "${doctor.getPesel()}"></td>
+				<td th:text = "${doctor.getName()}"></td>
+				<td th:text = "${doctor.getSurname()}"></td>
+				<td style = "max-width: 5.5vw;min-width: 5.5vw;" th:text = "${doctor.getSpecialization_1()}"></td>
+			</tr>
+			</tbody>
+		</table>	
+		
+		
 		<form id ="update" action = "#" th:action="@{/admin/workSchedule}" th:object="${workSchedule}"  method="post">
-			<table class = "input-table">
+			<table id = "input-table-schedule">
 				<tr>
 					<td>
-						<label class = "admin" th:text = "#{personalIdentificationNumber}"></label>
+						<label class = "admin">Doctor ID:</label>
 					</td>
 					<td>
 						<input class = "admin" th:field = "*{pesel}" type = "text"/>
@@ -66,12 +86,6 @@
 					</td>
 					<td>
 						<input class = "admin" th:field = "*{room}" type = "text"/>
-					</td>
-					<td>
-						<label class = "admin" th:text = "#{form.day}"></label>
-					</td>
-					<td>
-						<input class = "admin" th:field = "*{day}" type = "text"/>
 					</td>
 				</tr>
 				<tr>
@@ -88,13 +102,53 @@
 						<input class = "admin" th:field = "*{end}" type = "text"/>
 					</td>
 				</tr>
+				<tr>
+					<td>
+						<label class = "admin" th:text = "#{form.day}"></label>
+					</td>
+					<td>
+						<input class = "admin" th:field = "*{day}" type = "text"/>
+					</td>
+				</tr>
 			</table>
 		</form>	
 		
-		<button id = "button-search" name = "action" form = "update" type="submit" value = "add" th:text = "#{search}"></button>
-		
-		
-		
+	
+		<form id ="searchDoctors" action = "#" th:action="@{/admin/workSchedule/search}" th:object="${doctor}" method="post">
+			<table style="float: left;">
+				<tr>
+					<td>
+						<label class = "admin">Doctor ID:</label>
+					</td>
+					<td>
+						<input class = "admin" th:field="*{pesel}" type = "text"/>
+					</td>
+					<td>
+						<label class = "admin" >Specialization</label>
+					</td>
+					<td>
+						<input class = "admin" th:field="*{specialization_1}" type = "text"/>
+					</td>
+				</tr>
+				<tr>
+				<td>
+					<label class = "admin" th:text = "#{form.name}"></label>
+					</td>
+					<td>
+						<input class = "admin" th:field="*{name}" type = "text"/>
+					</td>
+					<td>
+						<label class = "admin" th:text = "#{form.surname}"></label>
+					</td>
+					<td>
+						<input class = "admin" th:field="*{surname}" type = "text"/>
+					</td>
+				</tr>
+			</table>
+		</form>	
+			
+			<button id = "button-search" name = "action" form = "update" type="submit" value = "add" >add</button>
+			<button id = "button-search" name = "action" form = "searchDoctors" type="submit" th:text = "#{search}"></button>
 	
 	</div>
 	
