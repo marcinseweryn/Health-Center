@@ -114,7 +114,7 @@ public class UserServiceImpl implements UserService{
 		}
 		
 		if(!columns.equals("")){
-			userDAO.updateUsers(usersIDs, user, columns);
+			userDAO.updateUsers(usersIDs, columns);
 		}
 	}
 
@@ -122,40 +122,69 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<User> findUsers(User user) {
 		String columns = "";
-		
-		if(!user.getPesel().equals("")){
-			columns += "pesel = '" + user.getPesel() + "' and "; 
+
+		if(user.getPesel() != null){
+			if(!user.getPesel().equals("")){
+				columns += "pesel = '" + user.getPesel() + "' and "; 
+			}
 		}
-		if(!user.getGender().equals("")){
-			columns += "gender = '" + user.getGender() + "' and ";
+		if(user.getGender() != null){
+			if(!user.getGender().equals("")){
+				columns += "gender = '" + user.getGender() + "' and ";
+			}
 		}
-		if(!user.getName().equals("")){
-			columns += "name = '" + user.getName() + "' and ";
+		if(user.getName() != null){
+			if(!user.getName().equals("")){
+				columns += "name = '" + user.getName() + "' and ";
+			}
 		}
-		if(!user.getSurname().equals("")){
-			columns += "surname = '" + user.getSurname() + "' and ";
+		if(user.getSurname() != null){
+			if(!user.getSurname().equals("")){
+				columns += "surname = '" + user.getSurname() + "' and ";
+			}
 		}
 		if(user.getBirthDate() != null){
 			columns += "birthDate = '" + df.format(user.getBirthDate()) + "' and ";
 		}
-		if(!user.getStreetAddress().equals("")){
-			columns += "streetAddress = '" + user.getStreetAddress() + "' and ";
+		if(user.getPassword() != null){
+			if(!user.getPassword().equals("")){
+				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+				String hashedPassword = passwordEncoder.encode(user.getPassword());
+				columns += "password = '" + hashedPassword + "' and ";
+			}
 		}
-		if(!user.getCity().equals("")){
-			columns += "city = '" + user.getCity() + "' and ";
+		if(user.getStreetAddress() != null){
+			if(!user.getStreetAddress().equals("")){
+				columns += "streetAddress = '" + user.getStreetAddress() + "' and ";
+			}
 		}
-		if(!user.getPostalCode().equals("")){
-			columns += "postalCode = '" + user.getPostalCode() + "' and ";
+		if(user.getCity() != null){
+			if(!user.getCity().equals("")){
+				columns += "city = '" + user.getCity() + "' and ";
+			}
 		}
-		if(!user.getPhone().equals("")){
-			columns += "phone = '" + user.getPhone() + "' and ";
+		if(user.getPostalCode() != null){
+			if(!user.getPostalCode().equals("")){
+				columns += "postalCode = '" + user.getPostalCode() + "' and ";
+			}
 		}
-		if(!user.getEmail().equals("")){
-			columns += "email = '" + user.getEmail() + "' and ";
+		if(user.getPhone() != null){
+			if(!user.getPhone().equals("")){
+				columns += "phone = '" + user.getPhone() + "' and ";
+			}
 		}
-		if(!user.getRole().equals("")){
-			columns += "role = '" + user.getRole() + "' and ";
+		if(user.getEmail() != null){
+			if(!user.getEmail().equals("")){
+				columns += "email = '" + user.getEmail() + "' and ";
+			}
 		}
+		if(user.getRole() != null){
+			if(!user.getRole().equals("")){
+				columns += "role = '" + user.getRole() + "' and ";
+			}
+		}
+		
+		
 		if(columns.length() > 0){
 			columns = columns.substring(0, columns.length() - 4);
 		}
@@ -163,7 +192,7 @@ public class UserServiceImpl implements UserService{
 		if(columns.equals("")){
 			return null;
 		}else{
-			return userDAO.findUsers(user, columns);
+			return userDAO.findUsers(columns);
 		}		
 	}
 

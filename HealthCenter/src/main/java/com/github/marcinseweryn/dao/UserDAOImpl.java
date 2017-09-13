@@ -49,7 +49,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public void updateUsers(List<Integer> usersIDs, User user, String columns) {
+	public void updateUsers(List<Integer> usersIDs, String columns) {
 		String IDs = usersIDs.toString().substring(1, usersIDs.toString().length() - 1);
 		
 		Query query = entityManager.createQuery("UPDATE User SET " + columns
@@ -58,7 +58,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public List<User> findUsers(User user, String columns) {
+	public List<User> findUsers(String columns) {
 		
 		Query query = entityManager.createQuery("FROM User WHERE " + columns);	
 		List<User> list = query.getResultList();

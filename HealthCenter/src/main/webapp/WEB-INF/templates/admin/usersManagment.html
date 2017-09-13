@@ -23,16 +23,16 @@
 			<thead>
 			<tr>
 				<th class = "table-header" th:text = "#{personalIdentificationNumber}"></th>
-				<th class = "table-header">Name</th>
-				<th class = "table-header">Surname</th>
-				<th class = "table-header">Birth date</th>
-				<th class = "table-header">Street addres</th>
-				<th class = "table-header">City</th>
-				<th class = "table-header">Postal code</th>
-				<th class = "table-header">Phone</th>
-				<th class = "table-header">Email</th>
-				<th class = "table-header">Role</th>
-				<th class = "table-header" style ="max-width: 5.2vw;min-width: 5.2vw;">Select</th>		
+				<th class = "table-header" th:text = "#{table.name}"></th>
+				<th class = "table-header" th:text = "#{table.surname}"></th>
+				<th class = "table-header" th:text = "#{table.birthDate}"></th>
+				<th class = "table-header" th:text = "#{table.streetAddress}"></th>
+				<th class = "table-header" th:text = "#{table.city}"></th>
+				<th class = "table-header" th:text = "#{table.postalCode}"></th>
+				<th class = "table-header" th:text = "#{table.phone}"></th>
+				<th class = "table-header" th:text = "#{table.email}"></th>
+				<th class = "table-header" style ="max-width: 7vw;min-width: 7vw;">Role</th>
+				<th class = "table-header" style ="max-width: 5.2vw;min-width: 5.2vw;" th:text = "#{table.select}"></th>		
 			</tr>
 			</thead>
 			<tbody>
@@ -46,14 +46,14 @@
 				<td th:text = "${user.getPostalCode()}"></td>
 				<td th:text = "${user.getPhone()}"></td>
 				<td th:text = "${user.getEmail()}"></td>
-				<td th:text = "${user.getRole()}"></td>
+				<td th:text = "${user.getRole()}" style ="max-width: 7vw;min-width: 7vw;"></td>
 				<td style = "max-width: 4vw;min-width: 4vw;">
 				<input id="select" name = "select" type ="checkbox" onclick="sub()" th:value = "${user.getPesel()}"></td>
 			</tr>
 			</tbody>
 		</table>
 			
-		
+			
 		<script type="text/javascript">
 			function sub(){
 		         var val = [];
@@ -100,8 +100,8 @@
 					<td>
 						<select class = "admin" th:field = "*{gender}">
 							<option selected="selected" value = ""></option>
-							<option th:value = "#{form.gender.male}" th:text = "#{form.gender.male}"></option>
-							<option th:value = "#{form.gender.female}" th:text = "#{form.gender.female}"></option>
+							<option th:value = "male" th:text = "#{form.gender.male}"></option>
+							<option th:value = "female" th:text = "#{form.gender.female}"></option>
 						</select>
 					</td>
 					<td>
@@ -170,10 +170,10 @@
 		
 		<table class = "buttons-table">
 			<tr>
-				<td><button id = "button-search" name = "action" form = "update" type="submit" value = "search" th:text = "#{search}"></button></td>
-				<td><button id = "button-create"name = "action" form = "update" type="submit" value = "create" th:text = "#{create}"></button></td>
-				<td><button id = "button-update"name = "action" form = "update" type="submit" value = "update" th:text = "#{update}"></button></td>
-				<td><button id = "button-delete" name = "action" form = "update" type="submit" value = "delete" th:text = "#{delete}"></button></td>
+				<td><button class = "button-search" name = "action" form = "update" type="submit" value = "search" th:text = "#{search}"></button></td>
+				<td><button class = "button-create"name = "action" form = "update" type="submit" value = "create" th:text = "#{create}"></button></td>
+				<td><button class = "button-update"name = "action" form = "update" type="submit" value = "update" th:text = "#{update}"></button></td>
+				<td><button class = "button-delete" name = "action" form = "update" type="submit" value = "delete" th:text = "#{delete}"></button></td>
 			</tr>
 		</table>
 	</div>

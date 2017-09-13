@@ -1,6 +1,5 @@
 package com.github.marcinseweryn.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +59,7 @@ public class AdminController {
 	
 	@RequestMapping(value = "/admin/usersManagement/update", method = RequestMethod.POST)
 	public String userManagementupdate(@RequestParam String action,@RequestParam List<Integer> IDsList, User user, BindingResult bindingResult) {	
-		
+
 		if(action.equals("create")){
 			
 			userService.addUser(user);
@@ -81,26 +80,44 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/admin/workSchedule", method = RequestMethod.GET)
-	public String workSchedule(Model model, @ModelAttribute("searchDoctor") Doctor doctor) {	
+	public String workSchedule(Model model, @ModelAttribute("searchDoctor") Doctor doctor, @ModelAttribute("searchSchedule") WorkSchedule schedule) {	
 		
 		model.addAttribute("allDoctors", doctorService.findDoctors(doctor));
 		model.addAttribute("workSchedule",new WorkSchedule());
 		model.addAttribute("doctor", new Doctor());	
-		model.addAttribute("workSchedules", workScheduleService.findAll());
+		model.addAttribute("workSchedules", workScheduleService.findSchedules(schedule));
+		model.addAttribute("list", new IDsList());
 		
 		return "admin/workSchedule";
 	}
 	
 	@RequestMapping(value = "/admin/workSchedule", method = RequestMethod.POST)
-	public String workScheduleUpdate(WorkSchedule schedule, Model model) {	
+	public String workScheduleUpdate(WorkSchedule schedule, Model model,@RequestParam String action,
+			@RequestParam List<Integer> IDsList, RedirectAttributes redirectAttributes) {	
 		
-		workScheduleService.addSchedule(schedule);
+		if(action.equals("create")){
+			
+			workScheduleService.addSchedule(schedule);
+			
+		}else if(action.equals("delete")){
+			
+			workScheduleService.deleteSchedules(IDsList);
+			
+		}else if(action.equals("update")){
+			
+			workScheduleService.updateSchedules(schedule, IDsList);
+			
+		}else if(action.equals("search")){
+			
+			redirectAttributes.addFlashAttribute("searchSchedule", schedule);
+		}	
 		
 		return "redirect:/admin/workSchedule";
 	}
 	
 	@RequestMapping(value = "/admin/workSchedule/search", method = RequestMethod.POST)
 	public String workScheduleSearch(Doctor doctor, Model model,RedirectAttributes redirectAttributes) {	
+		
 		redirectAttributes.addFlashAttribute("searchDoctor", doctor);
 		
 		return "redirect:/admin/workSchedule";

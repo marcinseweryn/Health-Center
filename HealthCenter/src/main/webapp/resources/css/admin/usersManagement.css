@@ -33,31 +33,3 @@
 	border-radius: 0.3vw;
 	box-shadow: 0.2vw 0.2vw 0.1vw grey;
 }
-
-#button-delete{
-	background-color: #ff0000;
-}
-#button-delete:HOVER{
-	background-color: #cc0000;
-}
-
-#button-create{
-	background-color: #33cc33;
-}
-#button-create:HOVER{
-	background-color: #29a329;
-}
-
-#button-update{
-	background-color: #ff9900;
-}
-#button-update:HOVER{
-	background-color: #e68a00;
-}
-
-#button-search{
-	background-color: #3399ff;
-}
-#button-search:HOVER{
-	background-color: #0073e6;
-}

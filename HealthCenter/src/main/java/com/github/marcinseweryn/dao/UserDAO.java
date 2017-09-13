@@ -12,9 +12,9 @@ public interface UserDAO {
 	
 	public void deleteUsers(List<Integer> usersIDs);
 	
-	public void updateUsers(List<Integer> usersIDs, User user, String columns);
+	public void updateUsers(List<Integer> usersIDs, String columns);
 	
-	public List<User> findUsers(User user, String columns);
+	public List<User> findUsers(String columns);
 	
 	public User findUser(String pesel);
 	

@@ -3,7 +3,7 @@
 	float: left;
 	height: 90vh;
 	height-max: auto;
-	width: 78.65vw;
+	width: 82.8vw;
 	background-color: white;
 }
 
@@ -12,11 +12,11 @@
 	display: block;
     border-collapse: collapse;
     border: 0.1vw solid black;
-    margin-left: 1%;
+    margin-left: 3%;
     margin-top: 1%;
     font-size: 0.8vw;
     font-family: Arial, Helvetica, sans-serif; 
-    width: 98%; 
+    width: 94.3%; 
  
 }
 .admin-table thead{
@@ -99,5 +99,33 @@ input.admin:FOCUS{
 
 select.admin{
 	width: 11.25vw;
+}
+
+.button-delete{
+	background-color: #ff0000;
+}
+.button-delete:HOVER{
+	background-color: #cc0000;
+}
+
+.button-create{
+	background-color: #33cc33;
+}
+.button-create:HOVER{
+	background-color: #29a329;
+}
+
+.button-update{
+	background-color: #ff9900;
+}
+.button-update:HOVER{
+	background-color: #e68a00;
+}
+
+.button-search{
+	background-color: #3399ff;
+}
+.button-search:HOVER{
+	background-color: #0073e6;
 }
 

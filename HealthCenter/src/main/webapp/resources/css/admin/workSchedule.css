@@ -1,9 +1,20 @@
-#workSchedule-table{
+#schedule-div{
 	width: 53%;
-	margin-left: 2%;
-	margin-right:1%;
-	margin-bottom: 1%;
+	height: 100%;
 	float: left;
+}
+
+#doctors-div{
+	width: 45%;
+	height: 100%;
+	float: left;
+	border-left: 0.5vw solid   #00004d;
+}
+
+#workSchedule-table{
+	width: 95.1%;
+	margin-left: 2%;
+	margin-bottom: 1%;
 }
 
 #workSchedule-table tbody{
@@ -11,8 +22,12 @@
 }
 
 #workSchedule-doctors-table{
-	float: left;
-	width: 40%;
+	width: 88%;
+	margin-left: 4%;
+	margin-bottom: 2%;
+}
+#workSchedule-doctors-table tbody{
+	max-height: 50vh;
 }
 
 #workSchedule-doctors-table th,#workSchedule-doctors-table td{
@@ -20,13 +35,58 @@
 	max-width: 6.8vw;
 }
 
+#search-doctors-table{
+	text-align: right;
+}
+
+#search-doctors-table input{
+	width: 7vw;
+}
+
+#search-doctors-table td{
+	padding: 1vw 0.5vw;
+}
+
 #input-table-schedule{
-	clear: both;
-	float: left;
 	margin-left: 1%;
 	text-align: right;
 }
 
 #input-table-schedule td{
-	padding: 1vw 1vw;
+	padding: 1vw 0.5vw;
+}
+
+#button-search-doctor{
+	font-family: Arial, Helvetica, sans-serif;
+	color: white;
+	font-size: 1vw;
+	letter-spacing: 0.2vw;
+	font-weight: bolder;
+	
+	padding: 0.5vw 3.4vw;
+	margin-left: 10%;
+	box-shadow: 0.2vw 0.2vw 0.1vw grey;
+	border: none;
+	border-radius: 0.2vw;
+}
+
+.buttons-table{
+	margin-top: 1%;
+	margin-left: 3.2%;
+}
+
+.buttons-table td{
+	padding-right: 0.5vw;
+}
+
+.buttons-table button{
+	font-family: Arial, Helvetica, sans-serif;
+	color: white;
+	font-size: 1vw;
+	letter-spacing: 0.1vw;
+	font-weight: bolder;
+	padding: 0.5vw 2.5vw;
+	box-shadow: 0.15vw 0.15vw 0.1vw grey;
+	border: none;
+	border-radius: 0.2vw;
 }
