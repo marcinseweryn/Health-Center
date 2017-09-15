@@ -15,12 +15,32 @@
 	<div th:include = "fragments/userMenu"></div>
 	
 	<div id ="body">
-		<table id ="doctors-table">
-			<tr th:each="user, iterStat : ${doctors}">
-				<td th:text = "${user.getName()}"></td>
-				<td th:text = "${user.getSurname()}"></td>			
-			</tr>
-		
+		<table class = "user" >
+				<tr>
+					<th colspan="2" style ="max-width: 13.16vw; min-width: 13.16vw;">Doctor</th>
+					<th th:text = "#{day.monday}"></th>
+					<th th:text = "#{day.tuesday}"></th>
+					<th th:text = "#{day.wednesday}"></th>
+					<th th:text = "#{day.thursday}"></th>
+					<th th:text = "#{day.friday}"></th>
+					<th th:text = "#{day.saturday}"></th>
+					<th th:text = "#{table.select}"></th>
+				</tr>
+		</table>
+		<table class ="user" id ="doctors-table">
+				<tr th:each="schedule, iterStat : ${weekWorkSchedule}" th:class = "${iterStat.odd}? 'odd' : 'even'">
+					<td th:text = "${schedule.getName()}"></td>
+					<td th:text = "${schedule.getSurname()}"></td>	
+					<td th:text = "${schedule.getMonday()}"></td>	
+					<td th:text = "${schedule.getTuesday()}"></td>
+					<td th:text = "${schedule.getWednesday()}"></td>
+					<td th:text = "${schedule.getThursday()}"></td>	
+					<td th:text = "${schedule.getFriday()}"></td>
+					<td th:text = "${schedule.getSaturday()}"></td>
+					<td style ="padding: 0vw 0vw; min-width: 8.5vw; max-width: 8.5vw;">
+						<button class = "user" value="${schedule.getPesel()}" th:text="#{table.select}"></button>
+					</td>
+				</tr>
 		</table>
 		
 		

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.marcinseweryn.dao.WorkScheduleDAO;
 import com.github.marcinseweryn.model.WorkSchedule;
+import com.github.marcinseweryn.pojo.WeekWorkSchedule;
 
 @Service
 public class WorkScheduleServiceImpl implements WorkScheduleService{
@@ -111,6 +112,11 @@ public class WorkScheduleServiceImpl implements WorkScheduleService{
 		}else{
 			return workScheduleDAO.findSchedules(columns);
 		}
+	}
+
+	@Override
+	public List<WeekWorkSchedule> findWeekWorkScheduleByIDs(List<Integer> IDsList) {
+		return workScheduleDAO.findWeekWorkScheduleByIDs(IDsList);
 	}
 
 }

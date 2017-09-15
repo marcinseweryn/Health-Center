@@ -27,11 +27,59 @@ input.user{
 	
 }
 
+table.user{
+    border-collapse: collapse;
+    border: 0.1vw solid black;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1vw;
+	font-weight: bold;
+	text-align: center;
+	margin-left: 2%;
+	margin-top: 3%;
+}
+
+tr.odd{
+	background-color:  #e6f3ff;
+	border-bottom: 0.1vw solid black;
+}
+
+
+tr.even{
+	background-color: #cce6ff;
+	border-bottom: 0.1vw solid black;
+}
+
+table.user th{
+	background-color: #0066ff;
+	color: white;
+	padding: 1vw 2vw;
+	min-width: 4.5vw;
+	max-width: 4.5vw;
+	border-right: 0.1vw solid black;
+}
+
+table.user td{
+	color: black;
+	padding: 1vw 2vw;
+	min-width: 4.5vw;
+	max-width: 4.5vw;
+	border-right: 0.1vw solid black;
+}
+
+table.user tr{
+	border: 0.2vw solid black;
+}
+
+table.user tr:HOVER{
+	background-color:  #4da9ff;
+}
+
+
 button.user{
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight: bold;
 	font-size: 1.2vw;
-	letter-spacing: 0.2vw;
+	letter-spacing: 0.1vw;
 	text-align: center;
 	text-shadow: 1px 1px 2px gray;
 	color: white;
@@ -40,7 +88,6 @@ button.user{
 	border: none;
 	border-radius: 0.3vw;
 	box-shadow: 0.2vw 0.2vw 0.1vw grey;
-
 	
 }
 button.user:HOVER {

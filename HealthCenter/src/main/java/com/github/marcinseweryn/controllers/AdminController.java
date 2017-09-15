@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.marcinseweryn.model.Doctor;
-import com.github.marcinseweryn.model.IDsList;
 import com.github.marcinseweryn.model.User;
 import com.github.marcinseweryn.model.WorkSchedule;
+import com.github.marcinseweryn.pojo.IDsList;
 import com.github.marcinseweryn.service.DoctorService;
 import com.github.marcinseweryn.service.UserService;
 import com.github.marcinseweryn.service.WorkScheduleService;

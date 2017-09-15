@@ -3,6 +3,7 @@ package com.github.marcinseweryn.service;
 import java.util.List;
 
 import com.github.marcinseweryn.model.WorkSchedule;
+import com.github.marcinseweryn.pojo.WeekWorkSchedule;
 
 public interface WorkScheduleService {
 	
@@ -15,5 +16,7 @@ public interface WorkScheduleService {
 	public void updateSchedules(WorkSchedule schedule, List<Integer> IDsList);
 	
 	public List<WorkSchedule> findSchedules(WorkSchedule schedule);
+	
+	public List<WeekWorkSchedule> findWeekWorkScheduleByIDs(List<Integer> IDsList);
 
 }

@@ -1,4 +1,4 @@
-package com.github.marcinseweryn.model;
+package com.github.marcinseweryn.pojo;
 
 import java.util.ArrayList;
 

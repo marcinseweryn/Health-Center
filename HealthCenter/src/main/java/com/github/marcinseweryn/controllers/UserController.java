@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.marcinseweryn.model.User;
+import com.github.marcinseweryn.model.WorkSchedule;
 import com.github.marcinseweryn.service.DoctorService;
 import com.github.marcinseweryn.service.UserService;
+import com.github.marcinseweryn.service.WorkScheduleService;
 
 @Controller
 public class UserController {
@@ -27,6 +29,9 @@ public class UserController {
 	
 	@Autowired
 	DoctorService doctorService;
+	
+	@Autowired
+	WorkScheduleService workScheduleService;
 	
 	@ModelAttribute("username")
 	public String getUsername(Principal principal){
@@ -87,7 +92,7 @@ public class UserController {
 		
 		System.out.println(doctorService.findDoctorsIDsBySpecialization(specialization).toString());
 		
-		model.addAttribute("doctors", userService.findUsersByIDs(doctorService.findDoctorsIDsBySpecialization(specialization)));
+		model.addAttribute("weekWorkSchedule", workScheduleService.findWeekWorkScheduleByIDs(doctorService.findDoctorsIDsBySpecialization(specialization)));
 		
 		return "user/registration-doctor";
 	}

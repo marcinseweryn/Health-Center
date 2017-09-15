@@ -17,22 +17,21 @@ button.specialization:HOVER {
 }
 
 #doctors-table{
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 1.6vw;
-	font-weight: bolder;
-	text-align: right;
-	border: 0.1vw solid black;
-	margin-left: 20%;
-	margin-top: 5%;
-	border-spacing: 0px;
+	margin-top: 0%;
+	max-height: 65vh;
+	display: block;
+	overflow-y: scroll; 
+	max-width: 78.65vw;
 }
 
-#doctors-table td{
-	padding: 1vw 5vw;
-	morgin: 0%;
+
+#doctors-table button{
+	background-color: #33cc33;
+	font-size: 1vw;
+	width: 90%;
+	height: 100%;
 }
 
-#doctors-table tr:HOVER{
-	background-color: blue;
+#doctors-table button:HOVER{
+	background-color: #29a329;
 }
-
