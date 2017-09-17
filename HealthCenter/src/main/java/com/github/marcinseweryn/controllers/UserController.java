@@ -1,6 +1,7 @@
 package com.github.marcinseweryn.controllers;
 
 import java.security.Principal;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.github.marcinseweryn.model.Duty;
 import com.github.marcinseweryn.model.User;
 import com.github.marcinseweryn.model.WorkSchedule;
 import com.github.marcinseweryn.service.DoctorService;
+import com.github.marcinseweryn.service.DutyService;
 import com.github.marcinseweryn.service.UserService;
 import com.github.marcinseweryn.service.WorkScheduleService;
 
@@ -33,6 +36,9 @@ public class UserController {
 	@Autowired
 	WorkScheduleService workScheduleService;
 	
+	@Autowired
+	DutyService dutyService;
+	
 	@ModelAttribute("username")
 	public String getUsername(Principal principal){
 		String pesel = principal.getName();
@@ -44,14 +50,14 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/user/home", method = RequestMethod.GET)
-	public String home(@ModelAttribute("username") String username) {	
+	public String home() {	
 		
 	    
 		return "user/home";
 	}
 	
 	@RequestMapping(value = "/user/myAccount", method = RequestMethod.GET)
-	public String myAccount(@ModelAttribute("username") String username, Model model, Principal principal) {
+	public String myAccount(Model model, Principal principal) {
 		String pesel = principal.getName();
 	
 		model.addAttribute("user",userService.findUser(pesel));
@@ -71,14 +77,14 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/user/registration-to", method = RequestMethod.GET)
-	public String registrationTo(@ModelAttribute("username") String username) {	
+	public String registrationTo() {	
 		
 	    
 		return "user/registration-to";
 	}
 	
 	@RequestMapping(value = "/user/registration-to", method = RequestMethod.POST)
-	public String registerTo(@ModelAttribute("username") String username, @RequestParam String specialization
+	public String registerTo(@RequestParam String specialization
 			 ,RedirectAttributes redirectAttributes) {	
 
 	    redirectAttributes.addFlashAttribute("specialization", specialization);
@@ -87,14 +93,41 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/user/registration-doctor", method = RequestMethod.GET)
-	public String registrationDoctor(Model model, @ModelAttribute("username") String username,
-			@ModelAttribute("specialization") String specialization) {	
-		
-		System.out.println(doctorService.findDoctorsIDsBySpecialization(specialization).toString());
-		
-		model.addAttribute("weekWorkSchedule", workScheduleService.findWeekWorkScheduleByIDs(doctorService.findDoctorsIDsBySpecialization(specialization)));
-		
-		return "user/registration-doctor";
-	}
+	public String registrationDoctor(Model model, @ModelAttribute("specialization") String specialization) {	
 
+		if(!specialization.equals("")){
+			model.addAttribute("weekWorkSchedule", workScheduleService.findWeekWorkScheduleByIDs(doctorService.findDoctorsIDsBySpecialization(specialization)));
+			return "user/registration-doctor";
+		}else{
+			return "user/registration-to";
+		}
+	}
+	
+	@RequestMapping(value = "/user/registration-doctor", method = RequestMethod.POST)
+	public String registerToDoctor(@RequestParam String doctorID, RedirectAttributes redirectAttributes){
+		
+		redirectAttributes.addFlashAttribute("doctorID", doctorID);
+		
+		return "redirect:/user/registration-date";
+	}
+	
+	@RequestMapping(value = "/user/registration-date", method = RequestMethod.GET)
+	public String registrationDate(@ModelAttribute("doctorID") String doctorID){
+		Timestamp currentDate = new Timestamp(System.currentTimeMillis());
+
+		if(!doctorID.equals("")){
+			WorkSchedule schedule = new WorkSchedule();
+			Duty duty = new Duty();
+			schedule.setPesel(doctorID);
+			duty.setDoctorID(doctorID);
+			duty.setDate(currentDate);
+			dutyService.addDuty(workScheduleService.findSchedules(schedule), dutyService.findDutyForAdd(duty));
+			
+			return "user/registration-date";
+		}else{
+			return "user/registration-to";
+		}
+		
+	}
+	
 }

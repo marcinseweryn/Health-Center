@@ -15,7 +15,7 @@ import com.github.marcinseweryn.model.Doctor;
 public class DoctorDAOImpl implements DoctorDAO{
 
 	@PersistenceContext
-	EntityManager entityManager;
+	private EntityManager entityManager;
 	
 	@Override
 	public List<Integer> findDoctorsIDsBySpecialization(String specialization) {

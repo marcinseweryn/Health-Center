@@ -27,6 +27,7 @@
 					<th th:text = "#{table.select}"></th>
 				</tr>
 		</table>
+		<form action = "#" th:action="@{/user/registration-doctor}" method="post">
 		<table class ="user" id ="doctors-table">
 				<tr th:each="schedule, iterStat : ${weekWorkSchedule}" th:class = "${iterStat.odd}? 'odd' : 'even'">
 					<td th:text = "${schedule.getName()}"></td>
@@ -38,10 +39,11 @@
 					<td th:text = "${schedule.getFriday()}"></td>
 					<td th:text = "${schedule.getSaturday()}"></td>
 					<td style ="padding: 0vw 0vw; min-width: 8.5vw; max-width: 8.5vw;">
-						<button class = "user" value="${schedule.getPesel()}" th:text="#{table.select}"></button>
+						<button name = "doctorID" class = "user" th:value="${schedule.getPesel()}" th:text="#{table.select}"></button>
 					</td>
 				</tr>
 		</table>
+		</form>
 		
 		
 	</div>

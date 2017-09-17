@@ -7,5 +7,7 @@
     	<class>com.github.marcinseweryn.model.User</class>
     	<class>com.github.marcinseweryn.model.Doctor</class>
     	<class>com.github.marcinseweryn.model.WorkSchedule</class>
+    	<class>com.github.marcinseweryn.model.Duty</class>
+    	<class>com.github.marcinseweryn.model.Visit</class>
     </persistence-unit>
 </persistence>

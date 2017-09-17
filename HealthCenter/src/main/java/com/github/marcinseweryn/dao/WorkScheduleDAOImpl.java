@@ -98,7 +98,7 @@ public class WorkScheduleDAOImpl implements WorkScheduleDAO {
 		List<WeekWorkSchedule> schedules = new ArrayList<>();
 		
 		String to = " - ";
-		String empty ="xxxxxx";
+		String empty ="--------";
 		for(Object[] list : objectList) {
 			WeekWorkSchedule schedule = new WeekWorkSchedule();
 			schedule.setPesel(list[0].toString());

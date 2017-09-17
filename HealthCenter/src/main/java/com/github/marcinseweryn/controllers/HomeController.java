@@ -45,9 +45,10 @@ public class HomeController {
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public String register(@Valid User user, BindingResult  bindingResult){
 		
+		user.setRole("ROLE_USER");
 		userService.addUser(user);
 		
-		return "redirect:/";
+		return "redirect:/login";
 	}
 	
 	
