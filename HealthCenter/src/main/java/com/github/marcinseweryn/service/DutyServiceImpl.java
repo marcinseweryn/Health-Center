@@ -24,8 +24,8 @@ public class DutyServiceImpl implements DutyService {
 		Integer day = 1, saveDayMax = 10, saveDayMin = 10, saveDay;
 		Integer lastDay;
 		String room = null, doctorID = null;
-		Boolean next = true;
-		Boolean max = false;
+		Boolean next = true;	//loop state
+		Boolean max = false;	//to determine if next duty day was bigger than last
 		
 		if(dutyList.size() < 3){
 		
@@ -43,7 +43,7 @@ public class DutyServiceImpl implements DutyService {
 				Integer nextDay = lastDay;
 				next = true;
 				System.out.println(schedule.getDay());
-				if(schedule.getDay().equals("Modnay")) day = 1;
+				if(schedule.getDay().equals("Monday")) day = 1;
 				if(schedule.getDay().equals("Tuesday")) day = 2;
 				if(schedule.getDay().equals("Wednesday")) day = 3;
 				if(schedule.getDay().equals("Thursday")) day = 4;
@@ -53,22 +53,21 @@ public class DutyServiceImpl implements DutyService {
 				while(next){
 					if(nextDay == 7) nextDay = 0;
 					System.out.println(nextDay);
-					if(nextDay == day){
-						if(nextDay > lastDay){
-							if(saveDayMax > nextDay){
+					if(nextDay == day){				
+						if(nextDay > lastDay){   		//if next duty day is bigger than last
 								saveDayMax = nextDay;
-								next = false;
-								max = true;
-							}
-						}else{
+								max = true;				
+		
+							
+						}else{						   //if next duty day is smaller than last	
 							if(saveDayMin > nextDay){
-								saveDayMin = nextDay;
-								next = false;
+								saveDayMin = nextDay;	
 							}
+							
 						}
 						room = schedule.getRoom();
 						doctorID = schedule.getPesel();
-						
+						next = false;
 					}		
 					nextDay++;
 				}
@@ -78,9 +77,9 @@ public class DutyServiceImpl implements DutyService {
 			Calendar cal = Calendar.getInstance();
 			   
 			if(max == true){
-				saveDay = saveDayMax;
+				saveDay = saveDayMax;		// for bigger days, example (last day friday - 5 next day saturday - 6)
 			}else{
-				saveDay = saveDayMin;
+				saveDay = saveDayMin;		// for smaller days
 			}
 				
 			while(next){
@@ -133,5 +132,4 @@ public class DutyServiceImpl implements DutyService {
 			return dutyDAO.findDutyForAdd(columns);
 		}
 	}
-
 }
