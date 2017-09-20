@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,22 +21,26 @@ import com.github.marcinseweryn.model.WorkSchedule;
 import com.github.marcinseweryn.service.DoctorService;
 import com.github.marcinseweryn.service.DutyService;
 import com.github.marcinseweryn.service.UserService;
+import com.github.marcinseweryn.service.VisitService;
 import com.github.marcinseweryn.service.WorkScheduleService;
 
 @Controller
 public class UserController {
 	
 	@Autowired
-	UserService userService;
+	private UserService userService;
 	
 	@Autowired
-	DoctorService doctorService;
+	private DoctorService doctorService;
 	
 	@Autowired
-	WorkScheduleService workScheduleService;
+	private WorkScheduleService workScheduleService;
 	
 	@Autowired
-	DutyService dutyService;
+	private DutyService dutyService;
+	
+	@Autowired
+	private VisitService visitService;
 	
 	@ModelAttribute("username")
 	public String getUsername(Principal principal){
@@ -112,7 +115,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/user/registration-date", method = RequestMethod.GET)
-	public String registrationDate(@ModelAttribute("doctorID") String doctorID){
+	public String registrationDate(@ModelAttribute("doctorID") String doctorID, Model model){
 		Timestamp currentDate = new Timestamp(System.currentTimeMillis());
 
 		if(!doctorID.equals("")){
@@ -121,13 +124,35 @@ public class UserController {
 			schedule.setPesel(doctorID);
 			duty.setDoctorID(doctorID);
 			duty.setDate(currentDate);
-			dutyService.addDuty(workScheduleService.findSchedules(schedule), dutyService.findDutyForAdd(duty));
+			List<Duty> dutyList =  dutyService.findDutyForAdd(duty);
+			
+			while(dutyList.size() <  6){
+				dutyService.addDuty(workScheduleService.findSchedules(schedule), dutyList);
+				dutyList =  dutyService.findDutyForAdd(duty);
+			}
+			model.addAttribute("dutyList",dutyList);
+			
+			Integer iterStat = 1;
+			for(Duty duty1 : dutyList){
+				model.addAttribute("visitList" + iterStat, visitService.findVisitForDoctorByDutyID(duty1.getID()));
+				iterStat++;
+			}
 			
 			return "user/registration-date";
 		}else{
 			return "user/registration-to";
 		}
 		
+	}
+	
+	@RequestMapping(value = "/user/registration-date", method = RequestMethod.POST)
+	public String registerDate(Principal principal, @RequestParam Integer dutyID){
+		String pesel = principal.getName();
+		Integer positionInQueue = visitService.findVisitForDoctorByDutyID(dutyID).size() + 1;
+		
+		visitService.addVisit(dutyID, pesel, positionInQueue);
+		
+		return "user/home";
 	}
 	
 }

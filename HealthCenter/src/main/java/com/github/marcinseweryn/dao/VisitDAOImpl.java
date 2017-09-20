@@ -10,29 +10,29 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.github.marcinseweryn.model.Duty;
-import com.github.marcinseweryn.model.WorkSchedule;
+import com.github.marcinseweryn.model.Visit;
 
 @Repository
-public class DutyDAOImpl implements DutyDAO{
+public class VisitDAOImpl implements VisitDAO {
 
 	@PersistenceContext
 	private EntityManager entityManager;
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public void addDuty(Duty duty) {
-		entityManager.persist(duty);		
+	public void addVisit(Visit visit) {
+		entityManager.persist(visit);
 	}
 
 	@Override
-	public List<Duty> findDutyForAdd(String columns) {
-		Query query = entityManager.createQuery("FROM Duty d " + columns + " ORDER BY d.date ASC");	
-		List<Duty> list = query.getResultList();
+	public List<Visit> findVisitForDoctorAndDate(Integer dutyID) {
+
+		Query query = entityManager.createQuery("FROM Visit v WHERE v.dutyID=" + dutyID
+				+ " ORDER BY v.positionInQueue ASC");
+		
+		List<Visit> list = query.getResultList();
 		
 		return list;
 	}
-
-
 
 }

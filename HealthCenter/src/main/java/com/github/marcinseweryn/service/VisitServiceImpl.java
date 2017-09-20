@@ -1,0 +1,37 @@
+package com.github.marcinseweryn.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.github.marcinseweryn.dao.VisitDAO;
+import com.github.marcinseweryn.model.Visit;
+
+@Service
+public class VisitServiceImpl implements VisitService {
+
+	@Autowired
+	private VisitDAO visitDAO;
+	
+	@Override
+	public void addVisit(Integer dutyID, String pesel, Integer positionInQueue) {
+
+		Visit visit = new Visit();
+		
+		visit.setDutyID(dutyID);
+		visit.setPatientPesel(pesel);
+		visit.setPositionInQueue(positionInQueue);
+		visit.setPresence(0);
+		
+		visitDAO.addVisit(visit);
+	}
+
+	@Override
+	public List<Visit> findVisitForDoctorByDutyID(Integer dutyID) {
+		
+		
+		return visitDAO.findVisitForDoctorAndDate(dutyID);
+	}
+
+}

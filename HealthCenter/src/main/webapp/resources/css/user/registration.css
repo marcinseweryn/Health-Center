@@ -35,3 +35,27 @@ button.specialization:HOVER {
 #doctors-table button:HOVER{
 	background-color: #29a329;
 }
+
+.duty-table{
+	float: left;
+}
+
+.duty-table button{
+	background-color: #33cc33;
+	font-size: 1.1vw;
+	width: 100%;
+	height: 100%;
+	border-radius: 0vw;
+}
+
+.duty-table button:HOVER{
+	background-color: #29a329;
+}
+
+.duty-table th{
+	font-size: 1.5vw;
+}
+
+.duty-table th{
+	font-size: 1.5vw;
+}

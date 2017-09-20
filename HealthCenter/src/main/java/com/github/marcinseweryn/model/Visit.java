@@ -16,7 +16,7 @@ public class Visit {
 	private Integer ID;
 	
 	@Column(name = "duty_id")
-	private Integer dutyId;
+	private Integer dutyID;
 	
 	@Column(name = "patient_pesel")
 	private String patientPesel;
@@ -30,16 +30,16 @@ public class Visit {
 		return ID;
 	}
 
-	public void setID(Integer iD) {
-		ID = iD;
+	public void setID(Integer ID) {
+		this.ID = ID;
 	}
 
-	public Integer getDutyId() {
-		return dutyId;
+	public Integer getDutyID() {
+		return dutyID;
 	}
 
-	public void setDutyId(Integer dutyId) {
-		this.dutyId = dutyId;
+	public void setDutyID(Integer dutyID) {
+		this.dutyID = dutyID;
 	}
 
 	public String getPatientPesel() {
