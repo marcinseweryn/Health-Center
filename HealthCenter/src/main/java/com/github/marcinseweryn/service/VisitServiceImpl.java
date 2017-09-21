@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.marcinseweryn.dao.DutyDAO;
 import com.github.marcinseweryn.dao.VisitDAO;
 import com.github.marcinseweryn.model.Visit;
 
@@ -14,9 +15,11 @@ public class VisitServiceImpl implements VisitService {
 	@Autowired
 	private VisitDAO visitDAO;
 	
+	@Autowired
+	private DutyDAO dutyDAO;
+	
 	@Override
 	public void addVisit(Integer dutyID, String pesel, Integer positionInQueue) {
-
 		Visit visit = new Visit();
 		
 		visit.setDutyID(dutyID);
@@ -24,6 +27,7 @@ public class VisitServiceImpl implements VisitService {
 		visit.setPositionInQueue(positionInQueue);
 		visit.setPresence(0);
 		
+		dutyDAO.decreaseDutyFreeSlots(dutyID);
 		visitDAO.addVisit(visit);
 	}
 

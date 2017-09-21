@@ -36,11 +36,11 @@ button.specialization:HOVER {
 	background-color: #29a329;
 }
 
-.duty-table{
+.user.duty-table{
 	float: left;
 }
 
-.duty-table button{
+.user.duty-table button{
 	background-color: #33cc33;
 	font-size: 1.1vw;
 	width: 100%;
@@ -48,14 +48,47 @@ button.specialization:HOVER {
 	border-radius: 0vw;
 }
 
-.duty-table button:HOVER{
+.user.duty-table button:HOVER{
 	background-color: #29a329;
 }
 
-.duty-table th{
-	font-size: 1.5vw;
+.user.duty-table th,td{
+	max-width: 10.5vw; 
+	min-width: 10.5vw;
 }
 
-.duty-table th{
-	font-size: 1.5vw;
+.user.duty-table th{
+	font-size: 1.3vw;
+	padding: 0.6vw 0.6vw;
+}
+
+.user.duty-table td{
+	font-size: 1.1vw;
+	padding: 0vw 0vw;
+	max-height: 1.2vh;
+	min-height: 1.2vh;
+}
+
+.alert {
+	margin-top: 0.5vw;
+	margin-left: 0.5vw;
+    padding: 1.4vw 1.4vw;
+    background-color: #ff0000;
+    color: white;
+    border-radius: 0.7vw;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
 }

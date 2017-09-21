@@ -14,21 +14,29 @@
 	<div th:include = "fragments/userHeader" th:with="username = ${username}"></div>
 	<div th:include = "fragments/userMenu"></div>
 	
+	
 	<div id ="body">
+	
+	<div th:if ="${alreadyRegistered == true}" class="alert">
+	  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+	  <strong th:text = "#{alreadyRegistered}"></strong>
+	</div>
+	
 		
 		<table class = "user duty-table">
 			<tr>
-				<th style = "max-width: 6.5vw; min-width: 6.5vw;" 
-				th:text = "${#strings.substring(dutyList.get(0).getDate(),0,16) 
-				 + ' '} + #{table.room} + ${': ' + dutyList.get(0).getRoom()}"></th>
+				<th th:utext = "${#strings.substring(dutyList.get(0).getDate(),0,16) 
+				 + '&lt;br /&gt;' } + #{table.room} + ${': ' + dutyList.get(0).getRoom()} + '&lt;br /&gt;'
+				 + #{table.freeSlots} + ${dutyList.get(0).getFreeSlots()}"></th>
 			</tr>
-			<tr th:each = "visit,iterStat1 : ${visitList1}">
-				<td style = "max-width: 8vw; min-width: 8vw;" th:text="${visit.getPositionInQueue()}" ></td>
+			<tr th:each = "visit : ${visitList1}">
+				<td th:text="${visit.getPositionInQueue()}" ></td>
 			</tr>
 			<tr>
-				<td style = "padding: 0vw 0vw; max-width: 8vw; min-width: 8vw;" >
+				<td>
 				<form action = "#" th:action="@{/user/registration-date}"  method="post">
-					<button name = "dutyID" class = "user" th:value = "${dutyList.get(0).getID()}" th:text = "#{table.select}"></button>
+					<button th:if ="${dutyList.get(0).getFreeSlots() > 0 and alreadyRegistered == false}" 
+						name = "dutyID" class = "user" th:value = "${dutyList.get(0).getID()}" th:text = "#{table.select}"></button>
 				</form>
 				</td>
 			</tr>
@@ -37,17 +45,18 @@
 		
 		<table class = "user duty-table">
 			<tr>
-				<th style = "max-width: 6.5vw; min-width: 6.5vw;" 
-				th:text = "${#strings.substring(dutyList.get(1).getDate(),0,16) 
-				 + ' '} + #{table.room} + ${': ' + dutyList.get(1).getRoom()}"></th>
+				<th th:utext = "${#strings.substring(dutyList.get(1).getDate(),0,16) 
+				 + '&lt;br /&gt;' } + #{table.room} + ${': ' + dutyList.get(1).getRoom()} + '&lt;br /&gt;'
+				 + #{table.freeSlots} + ${dutyList.get(1).getFreeSlots()}"></th>
 			</tr>
-			<tr th:each = "visit,iterStat1 : ${visitList2}">
-				<td style = "max-width: 8vw; min-width: 8vw;" th:text="${visit.getPositionInQueue()}" ></td>
+			<tr th:each = "visit : ${visitList2}">
+				<td th:text="${visit.getPositionInQueue()}" ></td>
 			</tr>
 			<tr>
-				<td style = "padding: 0vw 0vw; max-width: 8vw; min-width: 8vw;" >
+				<td>
 				<form action = "#" th:action="@{/user/registration-date}"  method="post">
-					<button name = "dutyID" class = "user" th:value = "${dutyList.get(1).getID()}" th:text = "#{table.select}"></button>
+					<button th:if ="${dutyList.get(1).getFreeSlots() > 0 and alreadyRegistered == false}" 
+						name = "dutyID" class = "user" th:value = "${dutyList.get(1).getID()}" th:text = "#{table.select}"></button>
 				</form>
 				</td>
 			</tr>
@@ -55,17 +64,18 @@
 		
 		<table class = "user duty-table">
 			<tr>
-				<th style = "max-width: 6.5vw; min-width: 6.5vw;" 
-				th:text = "${#strings.substring(dutyList.get(2).getDate(),0,16) 
-				 + ' '} + #{table.room} + ${': ' + dutyList.get(2).getRoom()}"></th>
+				<th th:utext = "${#strings.substring(dutyList.get(2).getDate(),0,16) 
+				 + '&lt;br /&gt;' } + #{table.room} + ${': ' + dutyList.get(2).getRoom()} + '&lt;br /&gt;'
+				 + #{table.freeSlots} + ${dutyList.get(2).getFreeSlots()}"></th>
 			</tr>
 			<tr th:each = "visit,iterStat1 : ${visitList3}">
-				<td style = "max-width: 8vw; min-width: 8vw;" th:text="${visit.getPositionInQueue()}" ></td>
+				<td th:text="${visit.getPositionInQueue()}" ></td>
 			</tr>
 			<tr>
-				<td style = "padding: 0vw 0vw; max-width: 8vw; min-width: 8vw;" >
+				<td>
 				<form action = "#" th:action="@{/user/registration-date}"  method="post">
-					<button name = "dutyID" class = "user" th:value = "${dutyList.get(3).getID()}" th:text = "#{table.select}"></button>
+					<button th:if ="${dutyList.get(2).getFreeSlots() > 0 and alreadyRegistered == false}" 
+						name = "dutyID" class = "user" th:value = "${dutyList.get(2).getID()}" th:text = "#{table.select}"></button>
 				</form>
 				</td>
 			</tr>
@@ -73,17 +83,18 @@
 		
 		<table class = "user duty-table">
 			<tr>
-				<th style = "max-width: 6.5vw; min-width: 6.5vw;" 
-				th:text = "${#strings.substring(dutyList.get(3).getDate(),0,16) 
-				 + ' '} + #{table.room} + ${': ' + dutyList.get(3).getRoom()}"></th>
+				<th th:utext = "${#strings.substring(dutyList.get(3).getDate(),0,16) 
+				 + '&lt;br /&gt;' } + #{table.room} + ${': ' + dutyList.get(3).getRoom()} + '&lt;br /&gt;'
+				 + #{table.freeSlots} + ${dutyList.get(3).getFreeSlots()}"></th>
 			</tr>
 			<tr th:each = "visit,iterStat1 : ${visitList4}">
-				<td style = "max-width: 8vw; min-width: 8vw;" th:text="${visit.getPositionInQueue()}" ></td>
+				<td th:text="${visit.getPositionInQueue()}" ></td>
 			</tr>
 			<tr>
-				<td style = "padding: 0vw 0vw; max-width: 8vw; min-width: 8vw;" >
+				<td>
 				<form action = "#" th:action="@{/user/registration-date}"  method="post">
-					<button name = "dutyID" class = "user" th:value = "${dutyList.get(3).getID()}" th:text = "#{table.select}"></button>
+					<button th:if ="${dutyList.get(3).getFreeSlots() > 0 and alreadyRegistered == false}" 
+						name = "dutyID" class = "user" th:value = "${dutyList.get(3).getID()}" th:text = "#{table.select}"></button>
 				</form>
 				</td>
 			</tr>
@@ -91,17 +102,18 @@
 		
 		<table class = "user duty-table">
 			<tr>
-				<th style = "max-width: 6.5vw; min-width: 6.5vw;" 
-				th:text = "${#strings.substring(dutyList.get(4).getDate(),0,16) 
-				 + ' '} + #{table.room} + ${': ' + dutyList.get(4).getRoom()}"></th>
+				<th th:utext = "${#strings.substring(dutyList.get(4).getDate(),0,16) 
+				 + '&lt;br /&gt;' } + #{table.room} + ${': ' + dutyList.get(4).getRoom()} + '&lt;br /&gt;'
+				 + #{table.freeSlots} + ${dutyList.get(4).getFreeSlots()}"></th>
 			</tr>
 			<tr th:each = "visit,iterStat1 : ${visitList5}">
-				<td style = "max-width: 8vw; min-width: 8vw;" th:text="${visit.getPositionInQueue()}" ></td>
+				<td th:text="${visit.getPositionInQueue()}" ></td>
 			</tr>
 			<tr>
-				<td style = "padding: 0vw 0vw; max-width: 8vw; min-width: 8vw;" >
+				<td>
 				<form action = "#" th:action="@{/user/registration-date}"  method="post">
-					<button name = "dutyID" class = "user" th:value = "${dutyList.get(4).getID()}" th:text = "#{table.select}"></button>
+					<button th:if ="${dutyList.get(4).getFreeSlots() > 0 and alreadyRegistered == false}" 
+						name = "dutyID" class = "user" th:value = "${dutyList.get(4).getID()}" th:text = "#{table.select}"></button>
 				</form>
 				</td>
 			</tr>
@@ -109,17 +121,18 @@
 		
 		<table class = "user duty-table">
 			<tr>
-				<th style = "max-width: 6.5vw; min-width: 6.5vw;" 
-				th:text = "${#strings.substring(dutyList.get(5).getDate(),0,16) 
-				 + ' '} + #{table.room} + ${': ' + dutyList.get(5).getRoom()}"></th>
+				<th th:utext = "${#strings.substring(dutyList.get(5).getDate(),0,16) 
+				 + '&lt;br /&gt;' } + #{table.room} + ${': ' + dutyList.get(5).getRoom()} + '&lt;br /&gt;'
+				 + #{table.freeSlots} + ${dutyList.get(5).getFreeSlots()}"></th>
 			</tr>
 			<tr th:each = "visit,iterStat1 : ${visitList6}">
-				<td style = "max-width: 8vw; min-width: 8vw;" th:text="${visit.getPositionInQueue()}" ></td>
+				<td th:text="${visit.getPositionInQueue()}" ></td>
 			</tr>
 			<tr>
-				<td style = "padding: 0vw 0vw; max-width: 8vw; min-width: 8vw;" >
+				<td>
 				<form action = "#" th:action="@{/user/registration-date}"  method="post">
-					<button name = "dutyID" class = "user" th:value = "${dutyList.get(5).getID()}" th:text = "#{table.select}"></button>
+					<button th:if ="${dutyList.get(5).getFreeSlots() > 0 and alreadyRegistered == false}" 
+						name = "dutyID" class = "user" th:value = "${dutyList.get(5).getID()}" th:text = "#{table.select}"></button>
 				</form>
 				</td>
 			</tr>

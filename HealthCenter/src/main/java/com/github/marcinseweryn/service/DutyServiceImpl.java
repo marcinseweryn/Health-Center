@@ -22,8 +22,8 @@ public class DutyServiceImpl implements DutyService {
 		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 		Timestamp maxDate = new Timestamp(System.currentTimeMillis());
 		Integer day = 1, saveDayMax = 10, saveDayMin = 10, saveDay;
-		Integer hourMax = null, hourMin = null, hour;
-		Integer lastDay;
+		Integer startMax = null, startMin = null, start, endMax = null, endMin = null, end;
+		Integer lastDay, numberOfPatients;
 		String room = null, roomMax = null, roomMin = null, doctorID = null;
 		Boolean next = true;	//loop state
 		Boolean max = false;	//to determine if next duty day was bigger than last
@@ -58,14 +58,16 @@ public class DutyServiceImpl implements DutyService {
 						if(saveDayMax > nextDay){	//if next day is smaller
 							saveDayMax = nextDay;
 							roomMax = schedule.getRoom();
-							hourMax = schedule.getStart();
+							startMax = schedule.getStart();
+							endMax = schedule.getEnd();
 							max = true;	
 							}
 					}else{						   //if next duty day is smaller than last	
 						if(saveDayMin > nextDay){	//if next day is smaller
 							saveDayMin = nextDay;
 							roomMin = schedule.getRoom();
-							hourMin = schedule.getStart();
+							startMin = schedule.getStart();
+							endMin = schedule.getEnd();
 						}	
 					}
 					doctorID = schedule.getPesel();
@@ -81,11 +83,13 @@ public class DutyServiceImpl implements DutyService {
 		if(max == true){
 			saveDay = saveDayMax;		// for bigger days, example (last day friday - 5 next day saturday - 6)
 			room = roomMax;
-			hour = hourMax;
+			start = startMax;
+			end = endMax;
 		}else{
 			saveDay = saveDayMin;		// for smaller days
 			room = roomMin;
-			hour = hourMin;
+			start = startMin;
+			end = endMin;
 		}
 			
 		while(next){
@@ -98,13 +102,16 @@ public class DutyServiceImpl implements DutyService {
 		
 		Duty duty = new Duty();
 		
-		maxDate.setHours(hour);
+		maxDate.setHours(start);
 		maxDate.setMinutes(0);
 		maxDate.setSeconds(0);
+		
+		numberOfPatients = (end - start) * 6;  // 6 patients per hour
 		
 		duty.setDate(maxDate);
 		duty.setRoom(room);
 		duty.setDoctorID(doctorID);
+		duty.setFreeSlots(numberOfPatients);
 		dutyDAO.addDuty(duty);
 	}
 

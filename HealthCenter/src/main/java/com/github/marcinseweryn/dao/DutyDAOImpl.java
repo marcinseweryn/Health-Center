@@ -33,6 +33,17 @@ public class DutyDAOImpl implements DutyDAO{
 		return list;
 	}
 
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void decreaseDutyFreeSlots(Integer dutyID) {
+		Query query = entityManager.createQuery("UPDATE Duty d SET d.freeSlots=d.freeSlots - 1"
+				+ " WHERE d.ID =" +dutyID);
+		query.executeUpdate();
+		
+	}
+
+
+
 
 
 }

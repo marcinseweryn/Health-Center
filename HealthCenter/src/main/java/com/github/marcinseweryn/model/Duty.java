@@ -2,6 +2,7 @@ package com.github.marcinseweryn.model;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,9 @@ public class Duty {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer ID;
+	
+	@Column(name = "free_slots")
+	private Integer freeSlots;
 	
 	private String doctorID, room;
 	
@@ -30,6 +34,14 @@ public class Duty {
 
 	public String getDoctorID() {
 		return doctorID;
+	}
+
+	public Integer getFreeSlots() {
+		return freeSlots;
+	}
+
+	public void setFreeSlots(Integer freeSlots) {
+		this.freeSlots = freeSlots;
 	}
 
 	public void setDoctorID(String doctorID) {

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.marcinseweryn.model.Duty;
 import com.github.marcinseweryn.model.User;
+import com.github.marcinseweryn.model.Visit;
 import com.github.marcinseweryn.model.WorkSchedule;
 import com.github.marcinseweryn.service.DoctorService;
 import com.github.marcinseweryn.service.DutyService;
@@ -115,9 +116,11 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/user/registration-date", method = RequestMethod.GET)
-	public String registrationDate(@ModelAttribute("doctorID") String doctorID, Model model){
+	public String registrationDate(@ModelAttribute("doctorID") String doctorID, Model model, Principal principal){
 		Timestamp currentDate = new Timestamp(System.currentTimeMillis());
-
+		String pesel = principal.getName();
+		Boolean alreadyRegistered = false;
+		
 		if(!doctorID.equals("")){
 			WorkSchedule schedule = new WorkSchedule();
 			Duty duty = new Duty();
@@ -133,11 +136,21 @@ public class UserController {
 			model.addAttribute("dutyList",dutyList);
 			
 			Integer iterStat = 1;
-			for(Duty duty1 : dutyList){
+			for(Duty duty1 : dutyList){	
 				model.addAttribute("visitList" + iterStat, visitService.findVisitForDoctorByDutyID(duty1.getID()));
+				
+				List<Visit> visitList = visitService.findVisitForDoctorByDutyID(duty1.getID());
+				if(alreadyRegistered == false){
+					for(Visit visit : visitList){
+						if(visit.getPatientPesel().equals(pesel)){
+							alreadyRegistered = true;
+							break;
+						}
+					}
+				}
 				iterStat++;
 			}
-			
+			model.addAttribute("alreadyRegistered",alreadyRegistered);
 			return "user/registration-date";
 		}else{
 			return "user/registration-to";
