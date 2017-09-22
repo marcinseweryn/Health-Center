@@ -19,6 +19,11 @@
 	padding-left: 0.5vw;
 }
 
+#admin-header-title a{
+	color: white;
+	text-decoration: none;
+}
+
 .admin-header-buttons{
 	float: right;
 	margin: 0.3vw 0.3vw;

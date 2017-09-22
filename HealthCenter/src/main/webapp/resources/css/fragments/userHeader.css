@@ -19,6 +19,11 @@
 	padding-left: 2vw;
 }
 
+#user-header-title a{
+	text-decoration: none;
+	color:white;
+}
+
 #user-header table{
 	float: right;
 	padding: 0vw 0vw;
