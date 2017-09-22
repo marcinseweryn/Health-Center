@@ -42,6 +42,15 @@ public class DutyDAOImpl implements DutyDAO{
 		
 	}
 
+	@Override
+	public Duty findDutyByID(Integer dutyID) {
+		Query query = entityManager.createQuery("FROM Duty d WHERE d.ID ="+dutyID);
+		List<Duty> list = query.getResultList();
+		Duty duty = list.get(0);
+		
+		return duty;
+	}
+
 
 
 

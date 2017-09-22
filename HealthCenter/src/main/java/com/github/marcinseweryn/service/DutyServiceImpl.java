@@ -150,4 +150,11 @@ public class DutyServiceImpl implements DutyService {
 			return dutyDAO.findDutyForAdd(columns);
 		}
 	}
+
+
+
+	@Override
+	public Duty findDutyByID(Integer dutyID) {
+		return dutyDAO.findDutyByID(dutyID);
+	}
 }

@@ -10,5 +10,7 @@ public interface DutyService {
 	public void addDuty(List<WorkSchedule> schedules, List<Duty> dutyList);
 	
 	public List<Duty> findDutyForAdd(Duty duty);
+	
+	public Duty findDutyByID(Integer dutyID);
 
 }

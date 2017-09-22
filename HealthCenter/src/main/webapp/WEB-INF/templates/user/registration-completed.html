@@ -1,0 +1,28 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+	  style="margin:0px">
+<head>
+	<title>REGISTRATION COMPLETED</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/body.css}" />
+		<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/registration.css}" />
+</head>
+
+<body style="margin: 0px;">
+
+	<div th:include = "fragments/userHeader" th:with="username = ${username}"></div>
+	<div th:include = "fragments/userMenu"></div>
+	
+	<div id ="body">
+		<div id = "information">
+			<strong th:utext = "#{registration-completed.info1} + ${doctorName + 
+				' ' + doctorSurname + ' '} + #{registration-completed.info2} + '&lt;br /&gt;' 
+				+ ${#strings.substring(date,0,16) + ' '} + '&lt;br /&gt;' 
+				+ #{positionInQueue} + ${positionInQueue}"></strong>
+		</div>
+		
+	</div>
+	
+</body>
+</html>

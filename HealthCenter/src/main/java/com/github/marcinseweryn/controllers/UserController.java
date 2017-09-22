@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.github.marcinseweryn.model.Doctor;
 import com.github.marcinseweryn.model.Duty;
 import com.github.marcinseweryn.model.User;
 import com.github.marcinseweryn.model.Visit;
@@ -159,13 +160,34 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/user/registration-date", method = RequestMethod.POST)
-	public String registerDate(Principal principal, @RequestParam Integer dutyID){
+	public String registerDate(Principal principal, @RequestParam Integer dutyID,  RedirectAttributes redirectAttributes){
 		String pesel = principal.getName();
 		Integer positionInQueue = visitService.findVisitForDoctorByDutyID(dutyID).size() + 1;
 		
 		visitService.addVisit(dutyID, pesel, positionInQueue);
 		
-		return "user/home";
+		redirectAttributes.addFlashAttribute("positionInQueue",positionInQueue);
+		redirectAttributes.addFlashAttribute("dutyID", dutyID);
+		
+		return "redirect:/user/registration-completed";
 	}
 	
+	@RequestMapping(value = "/user/registration-completed", method = RequestMethod.GET)
+	public String registrationCompleted(Model model, @ModelAttribute("dutyID") Integer dutyID, @ModelAttribute("positionInQueue") Integer positionInQueue){
+		Duty duty = dutyService.findDutyByID(dutyID);
+		
+		Doctor doctor = new Doctor();
+		doctor.setPesel(duty.getDoctorID());
+		List<Doctor> doctorList = doctorService.findDoctors(doctor);
+		
+		String doctorName = doctorList.get(0).getName();
+		String doctorSurname = doctorList.get(0).getSurname();
+		
+		model.addAttribute("doctorName", doctorName);
+		model.addAttribute("doctorSurname", doctorSurname);
+		model.addAttribute("positionInQueue", positionInQueue);
+		model.addAttribute("date",duty.getDate());
+		
+		return "user/registration-completed";
+	}
 }

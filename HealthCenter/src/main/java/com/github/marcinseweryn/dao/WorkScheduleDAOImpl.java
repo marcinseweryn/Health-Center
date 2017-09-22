@@ -101,9 +101,9 @@ public class WorkScheduleDAOImpl implements WorkScheduleDAO {
 		String empty ="--------";
 		for(Object[] list : objectList) {
 			WeekWorkSchedule schedule = new WeekWorkSchedule();
-			schedule.setPesel(list[0].toString());
-			schedule.setName(list[1].toString());
-			schedule.setSurname(list[2].toString());
+			schedule.setName(list[0].toString());
+			schedule.setSurname(list[1].toString());
+			schedule.setPesel(list[2].toString());
 			
 			if(list[3] != null){
 				schedule.setMonday(list[3].toString()+to+list[4].toString());

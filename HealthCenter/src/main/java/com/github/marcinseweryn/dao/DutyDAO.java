@@ -11,5 +11,7 @@ public interface DutyDAO {
 	public List<Duty> findDutyForAdd(String columns);
 	
 	public void decreaseDutyFreeSlots(Integer dutyID);
+	
+	public Duty findDutyByID(Integer dutyID);
 
 }
