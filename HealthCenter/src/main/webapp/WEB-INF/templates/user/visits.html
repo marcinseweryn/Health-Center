@@ -1,0 +1,47 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+	  style="margin:0px">
+<head>
+	<title> HOME</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/body.css}" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/visits.css}" />
+</head>
+
+<body style="margin: 0px;">
+
+	<div th:include = "fragments/userHeader" th:with="username = ${username}"></div>
+	<div th:include = "fragments/userMenu"></div>
+	
+	<div id ="body">
+		<table class = "user" style = "	margin-left: 7.5vw;" >
+			<tr>
+				<th style ="max-width: 8vw; min-width: 8vw;" th:text = "#{table.specialization}"></th>
+				<th colspan="2" style ="max-width: 13.16vw; min-width: 13.16vw;" th:text = "#{table.doctor}"></th>
+				<th th:text = "#{table.date}"></th>
+				<th th:text = "#{table.room}"></th>
+				<th style ="max-width: 8vw; min-width: 8vw;" th:text = "#{positionInQueue}"></th>
+				<th th:text = "#{cancel}"></th>
+			</tr>
+		</table>
+		<table class = "user" id = "visits-table">
+			<tr th:each = "visit, iterStat : ${userVisitDetailsList}" th:class = "${iterStat.odd}? 'odd' : 'even'">
+				<td style ="max-width: 8vw; min-width: 8vw;" th:text = "${visit.getSpecialization()}"></td>
+				<td th:text = "${visit.getDoctorName()}"></td>
+				<td th:text = "${visit.getDoctorSurname()}"></td>
+				<td th:text = "${#strings.substring(visit.getDate(),0,16)}"></td>
+				<td th:text = "${visit.getRoom()}"></td>
+				<td style ="max-width: 8vw; min-width: 8vw;" th:text = "${visit.getPositionInQueue()}"></td>
+				<td style ="padding: 0vw 0vw; min-width: 8.5vw; max-width: 8.5vw;">
+				<form action = "#" th:action="@{/user/visits}" method="post">
+					<button name = "visitID" class = "user" th:text = "#{cancel}" th:value="${visit.getID()}"></button>
+				</form>
+				</td>
+			</tr>
+		</table>
+		
+	</div>
+	
+</body>
+</html>

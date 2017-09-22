@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.github.marcinseweryn.dao.DutyDAO;
 import com.github.marcinseweryn.dao.VisitDAO;
 import com.github.marcinseweryn.model.Visit;
+import com.github.marcinseweryn.pojo.UserVisitDetails;
 
 @Service
 public class VisitServiceImpl implements VisitService {
@@ -33,9 +34,20 @@ public class VisitServiceImpl implements VisitService {
 
 	@Override
 	public List<Visit> findVisitForDoctorByDutyID(Integer dutyID) {
-		
-		
+			
 		return visitDAO.findVisitForDoctorAndDate(dutyID);
+	}
+
+	@Override
+	public List<UserVisitDetails> findVisitDetailsForUser(String pesel) {
+		
+		return visitDAO.findVisitDetailsForUser(pesel);
+	}
+
+	@Override
+	public void deleteVisitByID(Integer ID) {
+		
+		visitDAO.deleteVisitByID(ID);
 	}
 
 }

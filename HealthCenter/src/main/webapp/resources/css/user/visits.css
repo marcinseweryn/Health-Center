@@ -1,0 +1,21 @@
+
+#visits-table{
+	margin-top: 0vw;
+	margin-left: 7.5vw;
+	max-height: 65vh;
+	max-width: 68.5vw;
+	display: block;
+	overflow-y: scroll; 
+}
+
+#visits-table button{
+	background-color: #ff0000;
+	font-size: 1vw;
+	width: 90%;
+	height: 100%;
+	cursor: pointer;
+}
+
+#visits-table button:HOVER{
+	background-color: #cc0000;
+}

@@ -20,6 +20,7 @@ import com.github.marcinseweryn.model.Duty;
 import com.github.marcinseweryn.model.User;
 import com.github.marcinseweryn.model.Visit;
 import com.github.marcinseweryn.model.WorkSchedule;
+import com.github.marcinseweryn.pojo.UserVisitDetails;
 import com.github.marcinseweryn.service.DoctorService;
 import com.github.marcinseweryn.service.DutyService;
 import com.github.marcinseweryn.service.UserService;
@@ -190,4 +191,23 @@ public class UserController {
 		
 		return "user/registration-completed";
 	}
+	
+	@RequestMapping(value = "/user/visits", method = RequestMethod.GET)
+	public String visits(Model model, Principal principal){
+		String pesel = principal.getName();
+		List<UserVisitDetails> userVisitDetailsList = visitService.findVisitDetailsForUser(pesel);
+		
+		model.addAttribute("userVisitDetailsList", userVisitDetailsList);
+		
+		return "/user/visits";
+	}
+	
+	@RequestMapping(value = "/user/visits", method = RequestMethod.POST)
+	public String visitsPost(@RequestParam("visitID") Integer visitID){
+
+		visitService.deleteVisitByID(visitID);
+		
+		return "redirect:/user/visits";
+	}
+	
 }
