@@ -13,7 +13,9 @@
 		<form th:action="@{/logout}" method="post">
 		   	<button class = "user-header-buttons" type="submit" th:text="#{logout}"></button>
 		</form>		
-		<button class = "user-header-buttons" id = "myAccount" type="submit" th:text="#{myAccount}"></button>
+		
+		<button class = "user-header-buttons" id = "myAccount" type="submit" th:text="#{myAccount}"
+			onclick="window.location.href='/HealthCenter/doctor/myAccount'"></button>
 		
 		<p id = "username" th:text = "${username}"></p>
 		

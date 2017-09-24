@@ -64,6 +64,16 @@ public class AdminController {
 			
 			userService.addUser(user);
 			
+			if(user.getRole().equals("ROLE_DOCTOR")){
+				Doctor doctor = new Doctor();
+				doctor.setPesel(user.getPesel());
+				doctor.setSpecialization_1("");
+				doctor.setSpecialization_2("");
+				doctor.setSpecialization_3("");
+				doctor.setInformation("");
+				doctorService.addDoctor(doctor);
+			}
+			
 		}else if(action.equals("delete")){
 			
 			userService.deleteUsers(IDsList);

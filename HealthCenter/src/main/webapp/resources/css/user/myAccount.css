@@ -1,4 +1,5 @@
 .myAccount-table{
+	margin-top: 2vw;
 	margin-left: 1vw;
 	text-align: right;
 	float: left;
@@ -6,33 +7,47 @@
 }
 
 .myAccount-table td{
-	padding: 1.5vw 1.8vw;
-	border: 0.1vw solid black;
-	background-color: #008ae6;r
+	padding: 1.8vw 1.8vw;
+	background-color: white;
 }
 
 .myAccount-table label{
-	color: white;
-	text-shadow: 1px 1px 2px black;
+	color: black;
+	text-shadow: none;
 }
 
 .myAccount-table input{
-	box-shadow: 0.2vw 0.2vw 0.1vw #005ce6;
+	box-shadow: 0.2vw 0.2vw 0.1vw gray;
 }
 .myAccount-table input:HOVER{
-	background-color: #cce0ff;
+	background-color: #e6e6e6;
 }
 .myAccount-table input:FOCUS{
-	background-color: #cce0ff;
-	box-shadow: 0.35vw 0.35vw 0.18vw #0047b3;
+	background-color:  #e6e6e6;
+	box-shadow: 0.35vw 0.35vw 0.18vw gray;
+}
+
+.myAccount-table.doctor td{
+	padding: 1.3vw 1.5vw;
+}
+
+.myAccount-table.doctor select{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1.3vw;
+	max-width: 16vw;
+	min-width: 16vw;
+	border-radius: 0.2vw;
+	padding: 0vw 0.4vw;
+	border: 0.1vw solid black;
+	box-shadow: 0.2vw 0.2vw 0.1vw gray;
 }
 
 #myAccount-save{
 	background-color: #008ae6; 
 	padding: 0.7vw 7vw;
 	font-size: 1.3vw;
-	margin-top: 1vw;
-	margin-left: 30vw;
+	margin-top: 3vw;
+	margin-left: 10vw;
 }
 #myAccount-save:HOVER {
 	background-color: #005ce6;
@@ -41,20 +56,21 @@
 #myAccount-title{
 	width: 77vw;
 	height: 5vw;
-	text-align: center;
+	text-align: left;
 	margin-top: 1vw;
 	margin-left: 1vw;
-	background-color: #008ae6;
-	border: 0.2vw solid blue;
+	background-color: white;
+	border-bottom: 0.2vw solid black;
 
 }
 
 #myAccount-title p{
 	margin: 0vw;
-	padding: 0vw;
+	padding-left: 5vw;
 	font-family: Arial, Helvetica, sans-serif;
-	font-weight: 800;
+	font-weight: bolder;
+	text-shadow: 1px 1px 2px #d6d6d6;
 	font-size: 3.5vw;
 	letter-spacing: 0.4vw;
-	color: white;
+	color: black;
 }
