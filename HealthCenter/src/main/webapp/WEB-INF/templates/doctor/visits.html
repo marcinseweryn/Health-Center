@@ -1,0 +1,53 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+	  style="margin:0px">
+<head>
+	<title th:text="#{home.login}"></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/body.css}" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/doctor/visits.css}" />
+</head>
+
+<body  style="margin: 0px;">
+
+	<div th:include = "fragments/userDoctorHeader" th:with="username = ${username}"></div>
+	<div th:include = "fragments/userDoctorMenu"></div>
+	
+	<div id = "body">
+	
+	<div id = "div-main">
+		<div id= "div1">
+			<button class ="user" id = "start-button" th:text = "#{doctor.visit.start}"></button>
+			<button class ="user" id = "end-button" th:text = "#{doctor.visit.end}"></button>
+		</div>
+		
+		<div id = "div2">
+		</div>
+		
+		<div id = "div3">
+		</div>
+	</div>
+	
+	<div id = "div-patient-list">
+		<table class = "user">
+			<thead>
+			<tr>
+				<th th:utext = "${#strings.substring(dutyList.get(0).getDate(),0,16) 
+				 + '&lt;br /&gt;' } + #{table.room} + ${': ' + dutyList.get(0).getRoom()}"></th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each = "visit : ${visitList}">
+				<td th:text="${visit.getPositionInQueue()}" ></td>
+			</tr>
+			</tbody>
+		</table>
+	
+	</div>
+	
+	</div>
+	
+
+</body>
+</html>

@@ -13,5 +13,7 @@ public interface DutyDAO {
 	public void decreaseDutyFreeSlots(Integer dutyID);
 	
 	public Duty findDutyByID(Integer dutyID);
+	
+	public List<Duty> findDutyForDoctorVisitsByDoctorID(String pesel);
 
 }

@@ -51,7 +51,15 @@ public class DutyDAOImpl implements DutyDAO{
 		return duty;
 	}
 
-
+	@Override
+	public List<Duty> findDutyForDoctorVisitsByDoctorID(String pesel) {
+		
+		Query query = entityManager.createQuery("FROM Duty d WHERE d.startDate IS NULL and "
+				+ "d.date >= CURRENT_DATE and d.doctorID =" + pesel + " ORDER BY d.date ASC");
+		List<Duty> list  = query.getResultList();
+		
+		return list;
+	}
 
 
 

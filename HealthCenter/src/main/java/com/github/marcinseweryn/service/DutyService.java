@@ -12,5 +12,7 @@ public interface DutyService {
 	public List<Duty> findDutyForAdd(Duty duty);
 	
 	public Duty findDutyByID(Integer dutyID);
+	
+	public List<Duty> findDutyForDoctorVisitsByDoctorID(String pesel);
 
 }

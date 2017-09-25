@@ -15,4 +15,6 @@ public interface VisitDAO {
 	
 	public void deleteVisitByID(Integer ID);
 	
+	public List<Visit> findVisitForQueue(Integer dutyID);
+	
 }

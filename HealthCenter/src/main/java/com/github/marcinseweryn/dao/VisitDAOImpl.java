@@ -81,4 +81,15 @@ public class VisitDAOImpl implements VisitDAO {
 		query.executeUpdate();		
 	}
 
+	@Override
+	public List<Visit> findVisitForQueue(Integer dutyID) {
+		
+		Query query = entityManager.createQuery("FROM Visit v WHERE v.dutyID =" + dutyID
+				+ " ORDER BY v.presence DESC, v.positionInQueue ASC");
+		
+		List<Visit> list = query.getResultList();
+		
+		return list;
+	}
+
 }

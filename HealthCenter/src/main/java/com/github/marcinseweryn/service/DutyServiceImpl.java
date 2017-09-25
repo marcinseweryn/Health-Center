@@ -155,6 +155,14 @@ public class DutyServiceImpl implements DutyService {
 
 	@Override
 	public Duty findDutyByID(Integer dutyID) {
+		
 		return dutyDAO.findDutyByID(dutyID);
+	}
+
+	
+	@Override
+	public List<Duty> findDutyForDoctorVisitsByDoctorID(String pesel) {
+	
+		return dutyDAO.findDutyForDoctorVisitsByDoctorID(pesel);
 	}
 }

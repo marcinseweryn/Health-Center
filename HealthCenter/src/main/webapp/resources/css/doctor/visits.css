@@ -1,0 +1,53 @@
+
+#div-main{
+	float:left;
+	width: 68.65vw;
+	height: 60vh;
+}
+
+#div1{
+	width: 12vw;
+	height:90vh;
+	background-color: red;
+	float:left
+}
+
+#div2{
+	width:56.56vw;
+	height: 70vh;
+	background-color: blue;
+	float: left;
+}
+
+#div3{
+	width: 56.56vw;
+	height: 20vh;
+	background-color: green;
+	float: left
+}
+
+#div-patient-list{
+	width: 14vw;
+	height: 90vh;
+	float: left;
+	background-color: white;	
+}
+
+#div-patient-list table{
+	font-size: 1.3vw;
+	max-width: 13.7vw;
+	min-width: 13.7vw;	
+}
+
+#div-patient-list td{
+	font-size: 1vw;
+	max-height: 2vh;
+	min-height: 2vh;
+	max-width: 11.6vw;
+	min-width: 11.6vw;
+	padding: 0.5vh 0.25vw;
+}
+
+#div-patient-list tbody{
+	max-height: 74vh; 
+}

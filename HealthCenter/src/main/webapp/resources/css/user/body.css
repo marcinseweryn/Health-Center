@@ -58,6 +58,12 @@ table.user th{
 	border-right: 0.1vw solid black;
 }
 
+table.user tbody{
+	display: block;
+	overflow-y: scroll;
+	max-height: 50vh; 
+}
+
 table.user td{
 	color: black;
 	padding: 1vw 2vw;

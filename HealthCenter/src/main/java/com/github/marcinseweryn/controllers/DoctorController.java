@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.marcinseweryn.model.Doctor;
+import com.github.marcinseweryn.model.Duty;
 import com.github.marcinseweryn.model.User;
 import com.github.marcinseweryn.service.DoctorService;
+import com.github.marcinseweryn.service.DutyService;
 import com.github.marcinseweryn.service.UserService;
+import com.github.marcinseweryn.service.VisitService;
 
 @Controller
 public class DoctorController {
@@ -26,6 +29,12 @@ public class DoctorController {
 	
 	@Autowired
 	private DoctorService doctorService;
+	
+	@Autowired
+	private VisitService visitService;
+	
+	@Autowired
+	private DutyService dutyService;
 	
 	@ModelAttribute("username")
 	public String getUsername(Principal principal){
@@ -76,6 +85,20 @@ public class DoctorController {
 		doctorService.updateDoctorByID(doctor, pesel.toString());
 		
 		return "redirect:/doctor/myAccount";
+	}
+	
+	
+	@RequestMapping(value = "/doctor/visits", method = RequestMethod.GET)
+	public String visits(Model model, Principal principal){
+		String pesel = principal.getName();
+		
+		List<Duty> dutyList = dutyService.findDutyForDoctorVisitsByDoctorID(pesel);
+		
+		model.addAttribute("dutyList", dutyList);
+		model.addAttribute("visitList", visitService.findVisitForQueue(dutyList.get(0).getID()));
+		
+		
+		return "doctor/visits";
 	}
 	
 		

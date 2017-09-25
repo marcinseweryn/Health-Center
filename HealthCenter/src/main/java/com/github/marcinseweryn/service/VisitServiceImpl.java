@@ -26,7 +26,7 @@ public class VisitServiceImpl implements VisitService {
 		visit.setDutyID(dutyID);
 		visit.setPatientPesel(pesel);
 		visit.setPositionInQueue(positionInQueue);
-		visit.setPresence(0);
+		visit.setPresence(1);
 		
 		dutyDAO.decreaseDutyFreeSlots(dutyID);
 		visitDAO.addVisit(visit);
@@ -48,6 +48,12 @@ public class VisitServiceImpl implements VisitService {
 	public void deleteVisitByID(Integer ID) {
 		
 		visitDAO.deleteVisitByID(ID);
+	}
+
+	@Override
+	public List<Visit> findVisitForQueue(Integer dutyID) {
+		
+		return visitDAO.findVisitForQueue(dutyID);
 	}
 
 }

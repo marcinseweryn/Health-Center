@@ -23,6 +23,29 @@ public class Duty {
 	private String doctorID, room;
 	
 	private Timestamp date;
+	
+	@Column(name = "start_date")
+	private Timestamp startDate;
+	
+	@Column(name = "end_date")
+	private Timestamp endDate;
+
+	
+	public Timestamp getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Timestamp startDate) {
+		this.startDate = startDate;
+	}
+
+	public Timestamp getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Timestamp endDate) {
+		this.endDate = endDate;
+	}
 
 	public Integer getID() {
 		return ID;
