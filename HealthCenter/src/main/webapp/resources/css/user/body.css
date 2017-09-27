@@ -58,12 +58,6 @@ table.user th{
 	border-right: 0.1vw solid black;
 }
 
-table.user tbody{
-	display: block;
-	overflow-y: scroll;
-	max-height: 50vh; 
-}
-
 table.user td{
 	color: black;
 	padding: 1vw 2vw;
@@ -98,4 +92,18 @@ button.user{
 }
 button.user:HOVER {
 	cursor: pointer;
+}
+
+.button-color-red{
+	background-color: #ff0000;
+}
+.button-color-red:HOVER{
+	background-color: #cc0000;
+}
+
+.button-color-green{
+	background-color: #33cc33;
+}
+.button-color-green:HOVER{
+	background-color: #29a329;
 }

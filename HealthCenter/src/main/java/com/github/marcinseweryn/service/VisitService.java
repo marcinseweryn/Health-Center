@@ -17,4 +17,8 @@ public interface VisitService {
 	
 	public List<Visit> findVisitForQueue(Integer dutyID);
 	
+	public List<Visit> getCurrentQueueByDutyID(Integer dutyID);
+	
+	public void updatePresence(Integer presenceValue, Integer visitID);
+	
 }

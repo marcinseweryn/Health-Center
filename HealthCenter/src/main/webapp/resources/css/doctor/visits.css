@@ -7,22 +7,22 @@
 
 #div1{
 	width: 12vw;
-	height:90vh;
-	background-color: red;
+	height:70vh;
+	background-color: white;
 	float:left
 }
 
 #div2{
 	width:56.56vw;
 	height: 70vh;
-	background-color: blue;
+	background-color: white;
 	float: left;
 }
 
 #div3{
-	width: 56.56vw;
+	width: 68.56vw;
 	height: 20vh;
-	background-color: green;
+	background-color: white;
 	float: left
 }
 
@@ -31,6 +31,28 @@
 	height: 90vh;
 	float: left;
 	background-color: white;	
+}
+
+#div-patient{
+	width: 38vw;
+	height: 38vh;
+	
+	margin-top: 17vh;
+	margin-left: 6.5vw;
+	background-color: #0066ff;
+	color: white;
+	font-size: 2vw;
+	font-weight: bolder;
+	font-family: Arial, Helvetica, sans-serif;
+	text-shadow: 2px 2px 3px gray;	
+	letter-spacing: 0.25vw;
+	border-radius: 0.3vw;
+	box-shadow: 0.2vw 0.2vw 0.3vw gray;
+}
+
+#div-patient p{
+	text-align: center;
+	padding-top: 2vh;
 }
 
 #div-patient-list table{
@@ -48,6 +70,49 @@
 	padding: 0.5vh 0.25vw;
 }
 
+#div-patient-list td[value = "3"]{
+	background-color: red;
+}
+
 #div-patient-list tbody{
 	max-height: 74vh; 
+	display: block;
+	overflow-y: scroll;
+}
+
+#div1 button{
+	margin-top: 4vh;
+	margin-left: 0.5vw;
+	max-width: 11vw;
+	min-width: 11vw;
+}
+
+#div3 button{
+	font-size: 1.8vw;
+	padding: 1vw 4vw;
+	margin: 0vw 3.5vw;
+	max-width: 18vw;
+	min-width: 18vw;
+}
+
+.alert {
+	margin-top: 2vw;
+	margin-left: 7vw;
+	max-width: 35vw;
+	min-width: 35vw;
+    padding: 1vw 1vw;
+    font-size: 1.1vw;
+    background-color: #0066ff;
+    color: white;
+    border-radius: 0.7vw;
+}
+
+.closebtn{
+	float:right;
+	font-size: 1.5vw;
+	font-weight: bolder;
+}
+
+.closebtn:hover {
+    cursor:pointer;
 }

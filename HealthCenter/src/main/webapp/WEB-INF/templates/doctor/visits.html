@@ -7,6 +7,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/body.css}" />
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/doctor/visits.css}" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body  style="margin: 0px;">
@@ -15,39 +16,75 @@
 	<div th:include = "fragments/userDoctorMenu"></div>
 	
 	<div id = "body">
-	
-	<div id = "div-main">
-		<div id= "div1">
-			<button class ="user" id = "start-button" th:text = "#{doctor.visit.start}"></button>
-			<button class ="user" id = "end-button" th:text = "#{doctor.visit.end}"></button>
+		<div th:if = "${lackOfDuty == false}">
+		<form  action = "#" th:action="@{/doctor/visits}" method="post">
+			<div id = "div-main">
+				<div id= "div1">
+					<button th:if = "${duty.getStartDate() == NULL}"
+						class ="user button-color-green" name = "action" value = "start"
+						th:text = "#{doctor.visit.start}"></button>
+					<button th:if = "${duty.getStartDate() != NULL}"
+						class ="user button-color-red"  name = "action" value = "end"
+						th:text = "#{doctor.visit.end}"></button>
+				</div>
+				
+				<div id = "div2">
+					<div th:if ="${start == false}" class="alert">
+						  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+						  <strong th:text = "#{doctor.visit.alert.startBefore}"></strong>
+					</div>
+					<div id = "div-patient" th:if = "${lackOfNextVisit == false}">
+						<p th:text = "#{doctor.visit.nextPatient}"></p>
+						<p th:text = "${nextPatient.getName() + ' ' + nextPatient.getSurname()}"></p>
+						<p th:text = "#{positionInQueue} + ${' ' + positionInQueue}"></p>
+					</div>
+					<div id = "div-patient" th:if = "${lackOfNextVisit == true}">
+						<p th:text = "#{doctor.visit.lackOfPatients}"></p>
+					</div>
+				</div>
+				
+				<div id = "div3">
+					<button th:if = "${duty.getStartDate() != NULL and duty.getEndDate() == NULL 
+							and lackOfNextVisit == false}"
+						class ="user button-color-red" style = "float: left; margin-left:10vw;" name = "action" 
+						value = "absent" th:text = "#{absent}"></button>
+					<button th:if = "${duty.getStartDate() != NULL and duty.getEndDate() == NULL 
+							and lackOfNextVisit == false}"
+						class ="user button-color-green"  style = "float: right;"  name = "action"
+					 	value = "present" th:text = "#{present}"></button>	
+				</div>
+			</div>
+			<input type = "hidden" name = "dutyID" th:value = "${duty.getID()}">
+		</form>
+		
+		<div id = "div-patient-list">
+			<table class = "user">
+				<thead>
+				<tr>
+					<th th:utext = "${#strings.substring(duty.getDate(),0,16) 
+					 + '&lt;br /&gt;' } + #{table.room} + ${': ' + duty.getRoom()}"></th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:each = "visit : ${visitList}">
+					<td th:class ="${visit.getPresence()}" th:text="${visit.getPositionInQueue()}">
+					</td>
+				</tr>
+				</tbody>
+			</table>
+			
 		</div>
 		
-		<div id = "div2">
-		</div>
-		
-		<div id = "div3">
 		</div>
 	</div>
 	
-	<div id = "div-patient-list">
-		<table class = "user">
-			<thead>
-			<tr>
-				<th th:utext = "${#strings.substring(dutyList.get(0).getDate(),0,16) 
-				 + '&lt;br /&gt;' } + #{table.room} + ${': ' + dutyList.get(0).getRoom()}"></th>
-			</tr>
-			</thead>
-			<tbody>
-			<tr th:each = "visit : ${visitList}">
-				<td th:text="${visit.getPositionInQueue()}" ></td>
-			</tr>
-			</tbody>
-		</table>
+	<script type="text/javascript">
+		$('.0').css('background-color', '#66ff66');	//present
+		$('.1').css('background-color', '#ff4d4d');	//absent
+		$('.2').css('background-color', '#33adff');	//current
+		$('.3').css('background-color', '#ffff66');	//inQueue
+		$('.4').css('background-color', '#ff8c1a');	//firstAbsent
+	</script>
 	
-	</div>
-	
-	</div>
-	
-
 </body>
 </html>

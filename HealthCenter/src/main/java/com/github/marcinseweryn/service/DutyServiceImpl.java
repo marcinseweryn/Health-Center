@@ -165,4 +165,20 @@ public class DutyServiceImpl implements DutyService {
 	
 		return dutyDAO.findDutyForDoctorVisitsByDoctorID(pesel);
 	}
+
+
+
+	@Override
+	public void updateStartDateByID(Integer dutyID) {
+		
+		dutyDAO.updateStartDateByID(dutyID);
+	}
+
+
+
+	@Override
+	public void updateEndDateByID(Integer dutyID) {
+		
+		dutyDAO.updateEndDateByID(dutyID);
+	}
 }

@@ -9,12 +9,16 @@ public interface VisitDAO {
 
 	public void addVisit(Visit visit);
 	
-	public List<Visit> findVisitForDoctorAndDate(Integer dutyID);
+	public List<Visit> findVisitForDoctorByDutyID(Integer dutyID);
 	
 	public List<UserVisitDetails> findVisitDetailsForUser(String pesel);
 	
 	public void deleteVisitByID(Integer ID);
 	
 	public List<Visit> findVisitForQueue(Integer dutyID);
+	
+	public List<Visit> getCurrentQueueByDutyID(Integer dutyID);
+	
+	public void updatePresence(Integer presenceValue, Integer visitID);
 	
 }

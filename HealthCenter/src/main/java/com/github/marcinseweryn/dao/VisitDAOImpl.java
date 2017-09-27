@@ -28,7 +28,7 @@ public class VisitDAOImpl implements VisitDAO {
 	}
 
 	@Override
-	public List<Visit> findVisitForDoctorAndDate(Integer dutyID) {
+	public List<Visit> findVisitForDoctorByDutyID(Integer dutyID) {
 
 		Query query = entityManager.createQuery("FROM Visit v WHERE v.dutyID=" + dutyID
 				+ " ORDER BY v.positionInQueue ASC");
@@ -85,11 +85,33 @@ public class VisitDAOImpl implements VisitDAO {
 	public List<Visit> findVisitForQueue(Integer dutyID) {
 		
 		Query query = entityManager.createQuery("FROM Visit v WHERE v.dutyID =" + dutyID
-				+ " ORDER BY v.presence DESC, v.positionInQueue ASC");
+				+ " ORDER BY v.presence ASC, v.positionInQueue ASC");
 		
 		List<Visit> list = query.getResultList();
 		
 		return list;
+	}
+
+	@Override
+	public List<Visit> getCurrentQueueByDutyID(Integer dutyID) {
+
+		Query query = entityManager.createQuery("FROM Visit "
+				+ "WHERE dutyID = " + dutyID + " and presence IN(3,4) "
+				+ "ORDER BY presence ASC, positionInQueue ASC");
+		
+		List<Visit> list = query.getResultList();
+		
+		return list;
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void updatePresence(Integer presenceValue, Integer visitID) {
+
+		Query query = entityManager.createQuery("UPDATE Visit v SET presence =" + presenceValue
+				+ " WHERE v.ID =" + visitID);
+		query.executeUpdate();
+		
 	}
 
 }

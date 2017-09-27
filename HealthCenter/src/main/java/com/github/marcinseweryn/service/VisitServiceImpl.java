@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.github.marcinseweryn.dao.DutyDAO;
 import com.github.marcinseweryn.dao.VisitDAO;
 import com.github.marcinseweryn.model.Visit;
+import com.github.marcinseweryn.pojo.Presence;
 import com.github.marcinseweryn.pojo.UserVisitDetails;
 
 @Service
@@ -26,7 +27,7 @@ public class VisitServiceImpl implements VisitService {
 		visit.setDutyID(dutyID);
 		visit.setPatientPesel(pesel);
 		visit.setPositionInQueue(positionInQueue);
-		visit.setPresence(1);
+		visit.setPresence(Presence.inQueue.getValue());
 		
 		dutyDAO.decreaseDutyFreeSlots(dutyID);
 		visitDAO.addVisit(visit);
@@ -35,7 +36,7 @@ public class VisitServiceImpl implements VisitService {
 	@Override
 	public List<Visit> findVisitForDoctorByDutyID(Integer dutyID) {
 			
-		return visitDAO.findVisitForDoctorAndDate(dutyID);
+		return visitDAO.findVisitForDoctorByDutyID(dutyID);
 	}
 
 	@Override
@@ -54,6 +55,18 @@ public class VisitServiceImpl implements VisitService {
 	public List<Visit> findVisitForQueue(Integer dutyID) {
 		
 		return visitDAO.findVisitForQueue(dutyID);
+	}
+
+	@Override
+	public List<Visit> getCurrentQueueByDutyID(Integer dutyID) {
+		
+		return visitDAO.getCurrentQueueByDutyID(dutyID);
+	}
+
+	@Override
+	public void updatePresence(Integer presenceValue, Integer visitID) {
+		
+		visitDAO.updatePresence(presenceValue, visitID);
 	}
 
 }

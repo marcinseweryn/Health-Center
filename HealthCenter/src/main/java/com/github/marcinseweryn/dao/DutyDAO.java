@@ -15,5 +15,9 @@ public interface DutyDAO {
 	public Duty findDutyByID(Integer dutyID);
 	
 	public List<Duty> findDutyForDoctorVisitsByDoctorID(String pesel);
+	
+	public void updateStartDateByID(Integer dutyID);
+	
+	public void updateEndDateByID(Integer dutyID);
 
 }

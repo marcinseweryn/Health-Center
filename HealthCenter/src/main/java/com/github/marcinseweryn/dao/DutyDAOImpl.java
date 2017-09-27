@@ -1,5 +1,6 @@
 package com.github.marcinseweryn.dao;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -44,9 +45,8 @@ public class DutyDAOImpl implements DutyDAO{
 
 	@Override
 	public Duty findDutyByID(Integer dutyID) {
-		Query query = entityManager.createQuery("FROM Duty d WHERE d.ID ="+dutyID);
-		List<Duty> list = query.getResultList();
-		Duty duty = list.get(0);
+		
+		Duty duty = entityManager.find(Duty.class, dutyID);
 		
 		return duty;
 	}
@@ -54,13 +54,29 @@ public class DutyDAOImpl implements DutyDAO{
 	@Override
 	public List<Duty> findDutyForDoctorVisitsByDoctorID(String pesel) {
 		
-		Query query = entityManager.createQuery("FROM Duty d WHERE d.startDate IS NULL and "
-				+ "d.date >= CURRENT_DATE and d.doctorID =" + pesel + " ORDER BY d.date ASC");
+		Query query = entityManager.createQuery("FROM Duty d WHERE d.endDate IS NULL and"
+				+ " d.date >= CURRENT_DATE and d.doctorID =" + pesel + " ORDER BY d.date ASC");
 		List<Duty> list  = query.getResultList();
 		
 		return list;
 	}
 
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void updateStartDateByID(Integer dutyID) {
+		
+		Query query = entityManager.createQuery("UPDATE Duty d SET d.startDate = CURRENT_TIMESTAMP"
+				+ " WHERE d.ID =" + dutyID);
+		query.executeUpdate();
+	}
 
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void updateEndDateByID(Integer dutyID) {
+	
+		Query query = entityManager.createQuery("UPDATE Duty d SET d.endDate = CURRENT_TIMESTAMP" 
+				+ " WHERE d.ID =" + dutyID);
+		query.executeUpdate();
+	}
 
 }
