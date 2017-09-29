@@ -1,6 +1,7 @@
 package com.github.marcinseweryn.dao;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.github.marcinseweryn.model.Duty;
 import com.github.marcinseweryn.model.WorkSchedule;
+import com.github.marcinseweryn.pojo.DutyDetailsForUserQueue;
+import com.github.marcinseweryn.pojo.Presence;
 
 @Repository
 public class DutyDAOImpl implements DutyDAO{
@@ -77,6 +80,44 @@ public class DutyDAOImpl implements DutyDAO{
 		Query query = entityManager.createQuery("UPDATE Duty d SET d.endDate = CURRENT_TIMESTAMP" 
 				+ " WHERE d.ID =" + dutyID);
 		query.executeUpdate();
+	}
+
+	@Override
+	public List<DutyDetailsForUserQueue> findDutyDetailsForCurrentDayByUserID(String pesel){
+		
+		Query query = entityManager.createQuery("SELECT d.ID, d.date, d.room, d.startDate, d.endDate,"
+			+ " u.name, u.surname, doc.specialization_1, doc.specialization_2, doc.specialization_3"
+				+ " FROM Duty d, Visit v, Doctor doc, User u "
+						+ "WHERE d.ID = v.dutyID and "
+						+ " doc.pesel = d.doctorID and "
+						+ " u.pesel = doc.pesel and "
+							+ " date(d.date) = current_date() and v.patientPesel =" + pesel
+							+ " and d.endDate IS NULL and"
+							+ " v.presence IN("+Presence.inQueue.getValue()+","+Presence.firstAbsent.getValue()+")" 
+							+ " GROUP BY d.ID "
+							+ " ORDER BY d.date ASC");
+		
+		List<Object[]> objectList = query.getResultList();
+		List<DutyDetailsForUserQueue> list = new ArrayList<>();
+		
+		for(Object[] object : objectList){
+			DutyDetailsForUserQueue detailsForUserQueue = new DutyDetailsForUserQueue();
+			
+			detailsForUserQueue.setDutyID((Integer)object[0]);
+			detailsForUserQueue.setDate((Timestamp) object[1]);
+			detailsForUserQueue.setRoom((String) object[2]);
+			detailsForUserQueue.setStartDate((Timestamp) object[3]);
+			detailsForUserQueue.setEndDate((Timestamp) object[4]);
+			detailsForUserQueue.setName((String) object[5]);
+			detailsForUserQueue.setSurname((String) object[6]);
+			detailsForUserQueue.setSpecialization_1((String) object[7]);
+			detailsForUserQueue.setSpecialization_2((String) object[8]);
+			detailsForUserQueue.setSpecialization_3((String) object[9]);
+			
+			list.add(detailsForUserQueue);
+		}
+		
+		return list;
 	}
 
 }

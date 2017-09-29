@@ -1,0 +1,50 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+	  style="margin:0px">
+<head>
+	<title> Queue</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/body.css}" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body style="margin: 0px;">
+
+	<div th:include = "fragments/userHeader" th:with="username = ${username}"></div>
+	<div th:include = "fragments/userMenu"></div>
+	
+	<div id ="body">
+		<div class = "queue" th:if ="${lackOfDuty == false}">
+			
+			<strong th:text ="#{table.date} + ${': ' + dutyDetails.getDate()}"></strong><br/>
+			<strong th:text ="#{table.doctor} + ${': ' + dutyDetails.getName() + ' ' + dutyDetails.getSurname()}"></strong><br/>
+			<strong th:text ="#{table.specialization} + ${': ' + dutyDetails.getSpecialization_1()}"></strong><br/>
+			<strong th:text ="#{table.room} + ${': ' + dutyDetails.getRoom()}"></strong><br/>
+			<strong th:text ="#{startDate} + ${': ' + dutyDetails.getStartDate()}"></strong><br/>
+			<strong th:text ="#{finishDate} + ${': ' + dutyDetails.getEndDate()}"></strong><br/>
+			
+			<table>
+				<tr th:each = "visit : ${visitsList}">
+					<td th:class = "${visit.getPresence()}" th:text = "${visit.getPositionInQueue()}"></td>
+				</tr>
+			</table>
+			
+		</div>
+		
+		<div th:if = "${lackOfDuty == true}">
+			<strong th:text = "#{lackOfVisitsInCurrentDay}"></strong>
+		</div>
+		
+	</div>
+	
+	<script type="text/javascript">
+		$('.0').css('background-color', '#66ff66');	//present
+		$('.1').css('background-color', '#ff4d4d');	//absent
+		$('.2').css('background-color', '#33adff');	//current
+		$('.3').css('background-color', '#ffff66');	//inQueue
+		$('.4').css('background-color', '#ff8c1a');	//firstAbsent
+	</script>
+	
+</body>
+</html>

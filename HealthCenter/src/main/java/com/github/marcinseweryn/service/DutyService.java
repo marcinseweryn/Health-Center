@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.github.marcinseweryn.model.Duty;
 import com.github.marcinseweryn.model.WorkSchedule;
+import com.github.marcinseweryn.pojo.DutyDetailsForUserQueue;
 
 public interface DutyService {
 
@@ -18,5 +19,7 @@ public interface DutyService {
 	public void updateStartDateByID(Integer dutyID);
 	
 	public void updateEndDateByID(Integer dutyID);
+	
+	public List<DutyDetailsForUserQueue> findDutyDetailsForCurrentDayByUserID(String pesel);
 
 }

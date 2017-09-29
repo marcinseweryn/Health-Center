@@ -3,6 +3,7 @@ package com.github.marcinseweryn.dao;
 import java.util.List;
 
 import com.github.marcinseweryn.model.Duty;
+import com.github.marcinseweryn.pojo.DutyDetailsForUserQueue;
 
 public interface DutyDAO {
 
@@ -19,5 +20,7 @@ public interface DutyDAO {
 	public void updateStartDateByID(Integer dutyID);
 	
 	public void updateEndDateByID(Integer dutyID);
+	
+	public List<DutyDetailsForUserQueue> findDutyDetailsForCurrentDayByUserID(String pesel);
 
 }

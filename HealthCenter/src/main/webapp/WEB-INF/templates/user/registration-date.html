@@ -29,7 +29,7 @@
 				 + '&lt;br /&gt;' } + #{table.room} + ${': ' + dutyList.get(0).getRoom()} + '&lt;br /&gt;'
 				 + #{table.freeSlots} + ${dutyList.get(0).getFreeSlots()}"></th>
 			</tr>
-			<tr th:each = "visit : ${visitList1}">
+			<tr th:each = "visit : ${visitList}">
 				<td th:text="${visit.getPositionInQueue()}" ></td>
 			</tr>
 			<tr>

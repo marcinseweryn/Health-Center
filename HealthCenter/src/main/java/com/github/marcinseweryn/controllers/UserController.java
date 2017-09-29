@@ -20,6 +20,7 @@ import com.github.marcinseweryn.model.Duty;
 import com.github.marcinseweryn.model.User;
 import com.github.marcinseweryn.model.Visit;
 import com.github.marcinseweryn.model.WorkSchedule;
+import com.github.marcinseweryn.pojo.DutyDetailsForUserQueue;
 import com.github.marcinseweryn.pojo.UserVisitDetails;
 import com.github.marcinseweryn.service.DoctorService;
 import com.github.marcinseweryn.service.DutyService;
@@ -192,6 +193,7 @@ public class UserController {
 		return "user/registration-completed";
 	}
 	
+	
 	@RequestMapping(value = "/user/visits", method = RequestMethod.GET)
 	public String visits(Model model, Principal principal){
 		String pesel = principal.getName();
@@ -199,8 +201,9 @@ public class UserController {
 		
 		model.addAttribute("userVisitDetailsList", userVisitDetailsList);
 		
-		return "/user/visits";
+		return "user/visits";
 	}
+	
 	
 	@RequestMapping(value = "/user/visits", method = RequestMethod.POST)
 	public String visitsPost(@RequestParam("visitID") Integer visitID){
@@ -208,6 +211,27 @@ public class UserController {
 		visitService.deleteVisitByID(visitID);
 		
 		return "redirect:/user/visits";
+	}
+	
+	@RequestMapping(value = "/user/queue", method = RequestMethod.GET)
+	public String queue(Model model, Principal principal){
+		String pesel = principal.getName();
+		DutyDetailsForUserQueue dutyDetails = null;
+		boolean lackOfDuty = false;
+		
+		try{
+			dutyDetails =  dutyService.findDutyDetailsForCurrentDayByUserID(pesel).get(0);
+		}catch(IndexOutOfBoundsException e){
+			lackOfDuty = true;
+			return "user/queue";		
+		}finally {
+			model.addAttribute("lackOfDuty",lackOfDuty);
+		}
+		
+		model.addAttribute("dutyDetails",dutyDetails);
+		model.addAttribute("visitsList", visitService.findVisitForQueue(dutyDetails.getDutyID()));
+		
+		return "user/queue";
 	}
 	
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.github.marcinseweryn.dao.DutyDAO;
 import com.github.marcinseweryn.model.Duty;
 import com.github.marcinseweryn.model.WorkSchedule;
+import com.github.marcinseweryn.pojo.DutyDetailsForUserQueue;
 
 @Service
 public class DutyServiceImpl implements DutyService {
@@ -180,5 +181,12 @@ public class DutyServiceImpl implements DutyService {
 	public void updateEndDateByID(Integer dutyID) {
 		
 		dutyDAO.updateEndDateByID(dutyID);
+	}
+
+
+	@Override
+	public List<DutyDetailsForUserQueue> findDutyDetailsForCurrentDayByUserID(String pesel) {
+		
+		return dutyDAO.findDutyDetailsForCurrentDayByUserID(pesel);
 	}
 }
