@@ -19,7 +19,7 @@
 			<tr>
 				<th style ="max-width: 8vw; min-width: 8vw;" th:text = "#{table.specialization}"></th>
 				<th colspan="2" style ="max-width: 13.16vw; min-width: 13.16vw;" th:text = "#{table.doctor}"></th>
-				<th th:text = "#{table.date}"></th>
+				<th style ="max-width: 7vw; min-width: 7vw;" th:text = "#{table.date}"></th>
 				<th th:text = "#{table.room}"></th>
 				<th style ="max-width: 8vw; min-width: 8vw;" th:text = "#{positionInQueue}"></th>
 				<th th:text = "#{cancel}"></th>
@@ -30,7 +30,7 @@
 				<td style ="max-width: 8vw; min-width: 8vw;" th:text = "${visit.getSpecialization()}"></td>
 				<td th:text = "${visit.getDoctorName()}"></td>
 				<td th:text = "${visit.getDoctorSurname()}"></td>
-				<td th:text = "${#strings.substring(visit.getDate(),0,16)}"></td>
+				<td style ="max-width: 7vw; min-width: 7vw;" th:text = "${#strings.substring(visit.getDate(),0,16)}"></td>
 				<td th:text = "${visit.getRoom()}"></td>
 				<td style ="max-width: 8vw; min-width: 8vw;" th:text = "${visit.getPositionInQueue()}"></td>
 				<td style ="padding: 0vw 0vw; min-width: 8.5vw; max-width: 8.5vw;">

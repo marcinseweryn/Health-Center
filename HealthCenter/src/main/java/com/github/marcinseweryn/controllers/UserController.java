@@ -230,7 +230,7 @@ public class UserController {
 		
 		model.addAttribute("dutyDetails",dutyDetails);
 		model.addAttribute("visitsList", visitService.findVisitForQueue(dutyDetails.getDutyID()));
-		
+		model.addAttribute("positionInQueue", visitService.findVisitDetailsForUser(pesel).get(0).getPositionInQueue());
 		return "user/queue";
 	}
 	

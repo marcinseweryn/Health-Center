@@ -47,7 +47,7 @@ public class VisitDAOImpl implements VisitDAO {
 						+ " WHERE v.patientPesel ="+ pesel +" and"
 						   + " v.dutyID = d.ID and"
 						   + " d.doctorID = doc.pesel and"
-						   + " doc.pesel = u.pesel");
+						   + " doc.pesel = u.pesel ORDER BY d.date ASC");
 		
 		List<Object[]> objetctList = query.getResultList();
 		List<UserVisitDetails> userVisitDetailsList = new ArrayList<>();

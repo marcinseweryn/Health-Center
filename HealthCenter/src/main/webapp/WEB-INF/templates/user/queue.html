@@ -6,6 +6,7 @@
 	<title> Queue</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/body.css}" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/queue.css}" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
@@ -15,15 +16,17 @@
 	<div th:include = "fragments/userMenu"></div>
 	
 	<div id ="body">
-		<div class = "queue" th:if ="${lackOfDuty == false}">
+		<div id = "queue" th:if ="${lackOfDuty == false}">
+		
+			<h1 id = "title" th:text ="#{menu.queue}"></h1>
 			
-			<strong th:text ="#{table.date} + ${': ' + dutyDetails.getDate()}"></strong><br/>
-			<strong th:text ="#{table.doctor} + ${': ' + dutyDetails.getName() + ' ' + dutyDetails.getSurname()}"></strong><br/>
-			<strong th:text ="#{table.specialization} + ${': ' + dutyDetails.getSpecialization_1()}"></strong><br/>
-			<strong th:text ="#{table.room} + ${': ' + dutyDetails.getRoom()}"></strong><br/>
-			<strong th:text ="#{startDate} + ${': ' + dutyDetails.getStartDate()}"></strong><br/>
-			<strong th:text ="#{finishDate} + ${': ' + dutyDetails.getEndDate()}"></strong><br/>
-			
+			<p th:text ="#{table.date} + ${': ' +  #strings.substring(dutyDetails.getDate(),0,16)}"></p><br/>
+			<p th:text ="#{table.doctor} + ${': ' + dutyDetails.getName() + ' ' + dutyDetails.getSurname()}"></p><br/>
+			<p th:text ="#{table.specialization} + ${': ' + dutyDetails.getSpecialization_1()}"></p><br/>
+			<p th:text ="#{table.room} + ${': ' + dutyDetails.getRoom()}"></p><br/>
+			<p th:text ="#{startDate} + ${': ' + #strings.substring(dutyDetails.getStartDate(),0,16)}"></p><br/>
+			<p th:text ="#{finishDate} + ${': ' + #strings.substring(dutyDetails.getEndDate(),0,16)}"></p><br/>
+		
 			<table>
 				<tr th:each = "visit : ${visitsList}">
 					<td th:class = "${visit.getPresence()}" th:text = "${visit.getPositionInQueue()}"></td>
@@ -32,9 +35,39 @@
 			
 		</div>
 		
-		<div th:if = "${lackOfDuty == true}">
-			<strong th:text = "#{lackOfVisitsInCurrentDay}"></strong>
+		<div id = "lack-of-visit" th:if = "${lackOfDuty == true}">
+			<p style = "padding-top: 2.5vh;" th:text = "#{lackOfVisitsInCurrentDay}"></p>
 		</div>
+		
+		<div id = "legend" th:if = "${lackOfDuty == false}">
+			<h1 th:text = "#{legend}"></h1>
+			<table>
+				<tr>
+					<td id = "present"> </td>
+					<td th:text = "#{queue.legend.present}"></td>
+				</tr>
+				<tr>
+					<td id = "inQueue"> </td>
+					<td th:text = #{queue.legend.inQueue}></td>
+				</tr>
+				<tr>
+					<td id = "current"> </td>
+					<td th:text = "#{queue.legend.current}"></td>
+				</tr>
+				<tr>
+					<td id = "firstAbsent"> </td>
+					<td th:text = "#{queue.legend.firstAbsent}"></td>
+				</tr>
+				<tr>
+					<td id = "absent"> </td>
+					<td th:text = "#{queue.legend.absent}"></td>
+				</tr>
+			</table>
+		</div>
+		
+		<div id = "position" th:if = "${lackOfDuty == false}">
+			<h1 th:text = "#{positionInQueue} + ${' ' + positionInQueue}"></h1>
+		</div> 
 		
 	</div>
 	
