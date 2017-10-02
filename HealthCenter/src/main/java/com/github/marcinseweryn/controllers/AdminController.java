@@ -62,21 +62,19 @@ public class AdminController {
 
 		if(action.equals("create")){
 			
-			userService.addUser(user);
-			
 			if(user.getRole().equals("ROLE_DOCTOR")){
-				Doctor doctor = new Doctor();
-				doctor.setPesel(user.getPesel());
-				doctor.setSpecialization_1("");
-				doctor.setSpecialization_2("");
-				doctor.setSpecialization_3("");
-				doctor.setInformation("");
+				Doctor doc = new Doctor();
+				Doctor doctor = doc.downcastUser(user);
+
 				doctorService.addDoctor(doctor);
+			}else{
+				userService.addUser(user);
 			}
 			
 		}else if(action.equals("delete")){
 			
 			userService.deleteUsers(IDsList);
+			doctorService.deleteDoctorsByID(IDsList);
 			
 		}else if(action.equals("update")){
 			

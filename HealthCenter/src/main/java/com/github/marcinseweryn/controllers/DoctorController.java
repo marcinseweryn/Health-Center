@@ -76,11 +76,11 @@ public class DoctorController {
 	public String myAccountUpdate(User user,@RequestParam String spec1, @RequestParam String spec2, 
 			@RequestParam String spec3,	@RequestParam String information,Principal principal){
 		
-		List<Integer> userID = new ArrayList<>();
+		List<Integer> userIDs = new ArrayList<>();
 		Integer pesel = Integer.parseInt(principal.getName());
 
-		userID.add(pesel);	
-		userService.updateUsers(userID, user);
+		userIDs.add(pesel);	
+		userService.updateUsers(userIDs, user);
 		
 		Doctor doctor =  new Doctor();
 		doctor.setSpecialization_1(spec1);

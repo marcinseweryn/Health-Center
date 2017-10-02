@@ -3,6 +3,7 @@ package com.github.marcinseweryn.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.github.marcinseweryn.dao.DoctorDAO;
@@ -26,46 +27,72 @@ public class DoctorServiceImpl implements DoctorService {
 		
 		if(doctor.getPesel() != null){
 			if(!doctor.getPesel().equals("")){
-				where += " and u.pesel = '" + doctor.getPesel() + "'"; 
+				where += " d.pesel = '" + doctor.getPesel() + "' and "; 
 			}
 		}
 		if(doctor.getName() != null){
 			if(!doctor.getName().equals("")){
-				where += " and u.name = '" + doctor.getName() + "'";
+				where += " d.name = '" + doctor.getName() + "' and ";
 			}
 		}
 		if(doctor.getSurname() != null){
 			if(!doctor.getSurname().equals("")){
-				where += " and u.surname = '" + doctor.getSurname() + "'";
+				where += " d.surname = '" + doctor.getSurname() + "' and ";
+			}
+		}
+		if(doctor.getGender() != null){
+			if(!doctor.getGender().equals("")){
+				where += " d.gender = '" + doctor.getGender() + "' and ";
+			}
+		}
+		if(doctor.getCity() != null){
+			if(!doctor.getCity().equals("")){
+				where += " d.city = '" + doctor.getCity() + "' and ";
 			}
 		}
 		if(doctor.getSpecialization_1() != null){
 			if(!doctor.getSpecialization_1().equals("")){
-				where += " and d.specialization_1 = '" + doctor.getSpecialization_1() + "'";
+				where += " d.specialization_1 = '" + doctor.getSpecialization_1() + "' and ";
 			}
 		}
 		if(doctor.getSpecialization_2() != null){
 			if(!doctor.getSpecialization_2().equals("")){
-				where += " and d.specialization_2 = '" + doctor.getSpecialization_2() + "'";
+				where += " d.specialization_2 = '" + doctor.getSpecialization_2() + "' and ";
 			}
 		}
 		if(doctor.getSpecialization_3() != null){
 			if(!doctor.getSpecialization_3().equals("")){
-				where += " and d.specialization_3 = '" + doctor.getSpecialization_3() + "'";
+				where += " and d.specialization_3 = '" + doctor.getSpecialization_3() + "' and ";
 			}
 		}
 		if(doctor.getInformation() != null){
 			if(!doctor.getInformation().equals("")){
-				where += " and d.information = '" + doctor.getInformation() + "'";
+				where += " and d.information = '" + doctor.getInformation() + "' and ";
 			}
 		}
+		
+		if(where.length() > 0){
+			String temp = "WHERE";
+			temp += where;
+			where = temp;
+			where = where.substring(0, where.length() - 4);
+		}
+		
 		return doctorDAO.findDoctors(where);
 	}
 
 	@Override
 	public void addDoctor(Doctor doctor) {
 		
-		doctorDAO.addDoctor(doctor);
+		if(!doctor.getPesel().equals("")){
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			String hashedPassword = passwordEncoder.encode(doctor.getPassword());
+			
+			doctor.setEnabled("1");
+			doctor.setPassword(hashedPassword);
+			doctorDAO.addDoctor(doctor);
+		}
+
 	}
 
 	@Override
@@ -102,6 +129,14 @@ public class DoctorServiceImpl implements DoctorService {
 			doctorDAO.updateDoctorByID(columns, pesel);
 		}
 		
+	}
+	
+	
+	public void deleteDoctorsByID(List<Integer> usersIDs) {
+
+		if(usersIDs.size() != 0){
+			doctorDAO.deleteDoctorsByID(usersIDs);	
+		}
 	}
 
 }

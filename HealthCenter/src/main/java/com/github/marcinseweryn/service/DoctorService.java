@@ -13,4 +13,6 @@ public interface DoctorService {
 	public List<Doctor> findDoctors(Doctor doctor);
 
 	public List<Integer> findDoctorsIDsBySpecialization(String specialization);
+	
+	public void deleteDoctorsByID(List<Integer> usersIDs);
 }

@@ -1,50 +1,18 @@
 package com.github.marcinseweryn.model;
 
-import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-import javax.persistence.Id;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "doctors")
-@SecondaryTable(name = "users",
-	pkJoinColumns = @PrimaryKeyJoinColumn(name = "pesel", referencedColumnName = "pesel"))
-
-public class Doctor {
+@DiscriminatorValue(value = "Doctor")
+public class Doctor extends User {
 	
-	@Id
-	private String pesel;
-	@Column(table = "users")
-	private String name, surname;
 	
 	private String specialization_1, specialization_2, specialization_3, information;
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getSurname() {
-		return surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
-	public String getPesel() {
-		return pesel;
-	}
-
-	public void setPesel(String pesel) {
-		this.pesel = pesel;
-	}
 
 	public String getSpecialization_1() {
 		return specialization_1;
@@ -77,7 +45,28 @@ public class Doctor {
 	public void setInformation(String information) {
 		this.information = information;
 	}
-	
+
+	public Doctor downcastUser(User user) {
+		
+		Doctor doctor = new Doctor();
+		
+		doctor.setName(user.getName());
+		doctor.setSurname(user.getSurname());
+		doctor.setGender(user.getGender());
+		doctor.setPesel(user.getPesel());
+		doctor.setPassword(user.getPassword());
+		doctor.setBirthDate(user.getBirthDate());
+		doctor.setCity(user.getCity());
+		doctor.setStreetAddress(user.getStreetAddress());
+		doctor.setPostalCode(user.getPostalCode());
+		doctor.setPhone(user.getPhone());
+		doctor.setEmail(user.getEmail());
+		doctor.setRole(user.getRole());
+		doctor.setEnabled(user.getEnabled());
+		
+		return doctor;
+	}
+
 	
 
 }

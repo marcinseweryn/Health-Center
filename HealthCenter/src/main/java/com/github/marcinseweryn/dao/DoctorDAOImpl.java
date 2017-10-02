@@ -1,6 +1,5 @@
 package com.github.marcinseweryn.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -32,24 +31,9 @@ public class DoctorDAOImpl implements DoctorDAO{
 
 	@Override
 	public List<Doctor> findDoctors(String where) {
-		Query query = entityManager.createQuery("SELECT u.pesel, u.name, u.surname, d.specialization_1, "
-				+ "d.specialization_2, d.specialization_3, d.information  "
-				+ "FROM User as u, Doctor as d WHERE u.pesel=d.pesel"+ where);
-		List<Object[]> objectList = query.getResultList();
+		Query query = entityManager.createQuery("FROM Doctor as d "+ where);
 
-		List<Doctor> doctors = new ArrayList<Doctor>();
-		
-		for(Object[] list : objectList) {
-			Doctor doctor = new Doctor();
-			doctor.setPesel(list[0].toString());
-		    doctor.setName(list[1].toString());
-		    doctor.setSurname(list[2].toString());
-		    doctor.setSpecialization_1(list[3].toString());
-		    doctor.setSpecialization_2(list[4].toString());
-		    doctor.setSpecialization_3(list[5].toString());
-		    doctor.setInformation(list[6].toString());
-		    doctors.add(doctor);
-		}
+		List<Doctor> doctors = query.getResultList();
 		
 		return doctors;
 	}
@@ -69,4 +53,16 @@ public class DoctorDAOImpl implements DoctorDAO{
 				+ " WHERE d.pesel =" + pesel);
 		query.executeUpdate();
 	}
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void deleteDoctorsByID(List<Integer> usersIDs) {
+		String IDs = usersIDs.toString().substring(1, usersIDs.toString().length() - 1);
+
+		Query query = entityManager.createQuery("DELETE FROM Doctor d"
+				+ " WHERE d.pesel IN(" + IDs + ")");
+		query.executeUpdate();
+		
+	}
+	
 }

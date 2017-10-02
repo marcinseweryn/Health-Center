@@ -13,5 +13,7 @@ public interface DoctorDAO {
 	public List<Doctor> findDoctors(String where);
 	
 	public List<Integer>  findDoctorsIDsBySpecialization(String specialization);
+	
+	public void deleteDoctorsByID(List<Integer> doctorIDs);
 
 }
