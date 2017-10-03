@@ -147,6 +147,8 @@ public class UserController {
 					for(Visit visit : visitList){
 						if(visit.getPatientPesel().equals(pesel)){
 							alreadyRegistered = true;
+							model.addAttribute("registrationDate",duty1.getDate());
+							model.addAttribute("position",visit.getPositionInQueue());
 							break;
 						}
 					}

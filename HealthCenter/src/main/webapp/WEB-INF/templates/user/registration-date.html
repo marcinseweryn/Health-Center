@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
 	  style="margin:0px">
 <head>
-	<title> HOME</title>
+	<title th:text = "#{menu.registration}"></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/body.css}" />
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/registration.css}" />
@@ -19,7 +19,8 @@
 	
 	<div th:if ="${alreadyRegistered == true}" class="alert">
 	  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-	  <strong th:text = "#{alreadyRegistered}"></strong>
+	  <strong th:text = "#{alreadyRegistered} + ' ' + #{table.date} + 
+	  ${'   ' + #strings.substring(registrationDate,0,16) + '   '} + #{positionInQueue} +  ${position}"></strong>
 	</div>
 	
 		
@@ -29,7 +30,7 @@
 				 + '&lt;br /&gt;' } + #{table.room} + ${': ' + dutyList.get(0).getRoom()} + '&lt;br /&gt;'
 				 + #{table.freeSlots} + ${dutyList.get(0).getFreeSlots()}"></th>
 			</tr>
-			<tr th:each = "visit : ${visitList}">
+			<tr th:each = "visit : ${visitList1}">
 				<td th:text="${visit.getPositionInQueue()}" ></td>
 			</tr>
 			<tr>

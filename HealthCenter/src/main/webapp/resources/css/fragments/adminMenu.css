@@ -4,7 +4,7 @@
 	height: 90vh;
 	height-max: auto;
 	width: 16vw;
-	background-color: #000080;
+	background-color: #00009b;
 	color: white;
 }
 #admin-menu-table{
@@ -24,7 +24,7 @@
 	
 }
 .admin-menu-td:HOVER {
-	background-color: #00cc00;
+	background-color: #6974fc;
 	cursor: pointer;
 }
 
