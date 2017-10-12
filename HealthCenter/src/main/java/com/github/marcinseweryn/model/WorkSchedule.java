@@ -1,5 +1,6 @@
 package com.github.marcinseweryn.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,9 +15,12 @@ public class WorkSchedule {
 	@GeneratedValue(strategy =  GenerationType.AUTO)
 	private Integer ID;
 	
-	private String pesel, room, day;
+	private String room, day;
 	
 	private Integer start, end;
+	
+	@Column(name = "doctor_ID")
+	private Integer doctorID;
 	
 	
 	public String getDay() {
@@ -35,12 +39,12 @@ public class WorkSchedule {
 		ID = iD;
 	}
 
-	public String getPesel() {
-		return pesel;
+	public Integer getDoctorID() {
+		return doctorID;
 	}
 
-	public void setPesel(String pesel) {
-		this.pesel = pesel;
+	public void setDoctorID(Integer doctorID) {
+		this.doctorID = doctorID;
 	}
 
 	public String getRoom() {

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.github.marcinseweryn.dao.DutyDAO;
 import com.github.marcinseweryn.model.Duty;
 import com.github.marcinseweryn.model.WorkSchedule;
-import com.github.marcinseweryn.pojo.DutyDetailsForUserQueue;
+import com.github.marcinseweryn.pojo.DutyDetailsForPatientQueue;
 
 @Service
 public class DutyServiceImpl implements DutyService {
@@ -24,8 +24,8 @@ public class DutyServiceImpl implements DutyService {
 		Timestamp maxDate = new Timestamp(System.currentTimeMillis());
 		Integer day = 1, saveDayMax = 10, saveDayMin = 10, saveDay;
 		Integer startMax = null, startMin = null, start, endMax = null, endMin = null, end;
-		Integer lastDay, numberOfPatients;
-		String room = null, roomMax = null, roomMin = null, doctorID = null;
+		Integer lastDay, numberOfPatients, doctorID = null;
+		String room = null, roomMax = null, roomMin = null;
 		Boolean next = true;	//loop state
 		Boolean max = false;	//to determine if next duty day was bigger than last
 		
@@ -71,7 +71,7 @@ public class DutyServiceImpl implements DutyService {
 							endMin = schedule.getEnd();
 						}	
 					}
-					doctorID = schedule.getPesel();
+					doctorID = schedule.getDoctorID();
 					next = false;
 				}		
 				nextDay++;
@@ -162,9 +162,9 @@ public class DutyServiceImpl implements DutyService {
 
 	
 	@Override
-	public List<Duty> findDutyForDoctorVisitsByDoctorID(String pesel) {
+	public List<Duty> findDutyForDoctorVisitsByDoctorID(Integer ID) {
 	
-		return dutyDAO.findDutyForDoctorVisitsByDoctorID(pesel);
+		return dutyDAO.findDutyForDoctorVisitsByDoctorID(ID);
 	}
 
 
@@ -185,8 +185,9 @@ public class DutyServiceImpl implements DutyService {
 
 
 	@Override
-	public List<DutyDetailsForUserQueue> findDutyDetailsForCurrentDayByUserID(String pesel) {
+	public List<DutyDetailsForPatientQueue> findDutyDetailsForCurrentDayByPatientID(Integer ID) {
 		
-		return dutyDAO.findDutyDetailsForCurrentDayByUserID(pesel);
+		return dutyDAO.findDutyDetailsForCurrentDayByPatientID(ID);
 	}
+
 }

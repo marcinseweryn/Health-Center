@@ -10,7 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.github.marcinseweryn.model.User;
+import com.github.marcinseweryn.model.Patient;
 import com.github.marcinseweryn.service.UserService;
 
 
@@ -34,7 +34,7 @@ public class HomeController {
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String registration(Model model){
 		
-		model.addAttribute("user", new User());
+		model.addAttribute("patient", new Patient());
 
 		return "main/registration";
 	}
@@ -43,10 +43,10 @@ public class HomeController {
 	private UserService userService;
 	
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public String register(@Valid User user, BindingResult  bindingResult){
+	public String register(@Valid Patient patient, BindingResult  bindingResult){
 		
-		user.setRole("ROLE_USER");
-		userService.addUser(user);
+		patient.setRole("ROLE_PATIENT");
+		userService.addUser(patient);
 		
 		return "redirect:/login";
 	}

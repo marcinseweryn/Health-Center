@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.github.marcinseweryn.model.Duty;
 import com.github.marcinseweryn.model.WorkSchedule;
-import com.github.marcinseweryn.pojo.DutyDetailsForUserQueue;
+import com.github.marcinseweryn.pojo.DutyDetailsForPatientQueue;
 
 public interface DutyService {
 
@@ -14,12 +14,12 @@ public interface DutyService {
 	
 	public Duty findDutyByID(Integer dutyID);
 	
-	public List<Duty> findDutyForDoctorVisitsByDoctorID(String pesel);
+	public List<Duty> findDutyForDoctorVisitsByDoctorID(Integer ID);
 	
 	public void updateStartDateByID(Integer dutyID);
 	
 	public void updateEndDateByID(Integer dutyID);
 	
-	public List<DutyDetailsForUserQueue> findDutyDetailsForCurrentDayByUserID(String pesel);
+	public List<DutyDetailsForPatientQueue> findDutyDetailsForCurrentDayByPatientID(Integer ID);
 
 }

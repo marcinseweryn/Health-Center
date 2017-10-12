@@ -21,7 +21,7 @@ public class DoctorDAOImpl implements DoctorDAO{
 	@Override
 	public List<Integer> findDoctorsIDsBySpecialization(String specialization) {
 			
-		Query query = entityManager.createQuery("SELECT pesel FROM Doctor "
+		Query query = entityManager.createQuery("SELECT ID FROM Doctor "
 				+ "WHERE specialization_1 ='" + specialization + "'"
 				+ "or specialization_2 = '" + specialization + "' or specialization_3 = '" + specialization + "'");
 		List<Integer> list = query.getResultList();
@@ -47,22 +47,18 @@ public class DoctorDAOImpl implements DoctorDAO{
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public void updateDoctorByID(String columns, String pesel) {
+	public void updateDoctorByID(String columns, Integer ID) {
 		
 		Query query = entityManager.createQuery("UPDATE Doctor d SET " + columns
-				+ " WHERE d.pesel =" + pesel);
+				+ " WHERE d.ID =" + ID);
 		query.executeUpdate();
 	}
-	
-	@Override
-	@Transactional(propagation = Propagation.REQUIRED)
-	public void deleteDoctorsByID(List<Integer> usersIDs) {
-		String IDs = usersIDs.toString().substring(1, usersIDs.toString().length() - 1);
 
-		Query query = entityManager.createQuery("DELETE FROM Doctor d"
-				+ " WHERE d.pesel IN(" + IDs + ")");
-		query.executeUpdate();
+
+	@Override
+	public Doctor findDoctorByID(Integer ID) {
 		
+		return entityManager.find(Doctor.class, ID);
 	}
 	
 }

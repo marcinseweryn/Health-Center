@@ -26,7 +26,7 @@
 			</tr>
 		</table>
 		<table class = "user" id = "visits-table">
-			<tr th:each = "visit, iterStat : ${userVisitDetailsList}" th:class = "${iterStat.odd}? 'odd' : 'even'">
+			<tr th:each = "visit, iterStat : ${patientVisitDetailsList}" th:class = "${iterStat.odd}? 'odd' : 'even'">
 				<td style ="max-width: 8vw; min-width: 8vw;" th:text = "${visit.getSpecialization()}"></td>
 				<td th:text = "${visit.getDoctorName()}"></td>
 				<td th:text = "${visit.getDoctorSurname()}"></td>
@@ -35,6 +35,7 @@
 				<td style ="max-width: 8vw; min-width: 8vw;" th:text = "${visit.getPositionInQueue()}"></td>
 				<td style ="padding: 0vw 0vw; min-width: 8.5vw; max-width: 8.5vw;">
 				<form action = "#" th:action="@{/user/visits}" method="post">
+					<input type = "hidden" name = "dutyID" th:value = "${visit.getDutyID()}"/>
 					<button name = "visitID" class = "user" th:text = "#{cancel}" th:value="${visit.getID()}"></button>
 				</form>
 				</td>

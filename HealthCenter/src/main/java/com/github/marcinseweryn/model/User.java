@@ -13,22 +13,25 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
-	private String gender, name, surname, password,
+	private String pesel, gender, name, surname, password,
 		streetAddress, city, postalCode, phone, email, role, enabled;
-	
-	
-	@GeneratedValue(strategy = GenerationType.AUTO) 
-	private Integer ID;
 
 	@Id
-	private String pesel;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer ID;
 	
 	private Date birthDate;
 	
 	
+	public Integer getID() {
+		return ID;
+	}
+	public void setID(Integer iD) {
+		ID = iD;
+	}
 	public String getGender() {
 		return gender;
 	}

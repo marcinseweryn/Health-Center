@@ -8,12 +8,12 @@ public interface DoctorDAO {
 	
 	public void addDoctor(Doctor doctor);
 	
-	public void updateDoctorByID(String columns, String pesel);
+	public void updateDoctorByID(String columns, Integer ID);
 	
 	public List<Doctor> findDoctors(String where);
 	
-	public List<Integer>  findDoctorsIDsBySpecialization(String specialization);
+	public Doctor findDoctorByID(Integer ID);
 	
-	public void deleteDoctorsByID(List<Integer> doctorIDs);
+	public List<Integer>  findDoctorsIDsBySpecialization(String specialization);
 
 }

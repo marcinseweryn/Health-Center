@@ -20,7 +20,10 @@ public class Duty {
 	@Column(name = "free_slots")
 	private Integer freeSlots;
 	
-	private String doctorID, room;
+	@Column(name = "doctor_ID")
+	private Integer doctorID;
+	
+	private String room;
 	
 	private Timestamp date;
 	
@@ -55,20 +58,20 @@ public class Duty {
 		ID = iD;
 	}
 
-	public String getDoctorID() {
+	public Integer getDoctorID() {
 		return doctorID;
 	}
 
+	public void setDoctorID(Integer doctorID) {
+		this.doctorID = doctorID;
+	}
+	
 	public Integer getFreeSlots() {
 		return freeSlots;
 	}
 
 	public void setFreeSlots(Integer freeSlots) {
 		this.freeSlots = freeSlots;
-	}
-
-	public void setDoctorID(String doctorID) {
-		this.doctorID = doctorID;
 	}
 
 	public String getRoom() {

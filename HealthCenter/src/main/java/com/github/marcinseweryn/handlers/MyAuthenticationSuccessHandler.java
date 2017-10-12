@@ -16,7 +16,7 @@ public class MyAuthenticationSuccessHandler extends  SavedRequestAwareAuthentica
 	       String role = authentication.getAuthorities().toString();
 	       String targetUrl = "";
 	       
-	       if(role.contains("ROLE_USER")) {
+	       if(role.contains("ROLE_PATIENT")) {
 	           targetUrl = "/user/home";
 	       } else if(role.contains("ROLE_ADMIN")) {
 	           targetUrl = "/admin/home";

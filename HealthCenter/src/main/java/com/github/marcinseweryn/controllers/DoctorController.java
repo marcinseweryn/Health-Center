@@ -44,9 +44,9 @@ public class DoctorController {
 	
 	@ModelAttribute("username")
 	public String getUsername(Principal principal){
-		String pesel = principal.getName();
+		Integer ID = Integer.parseInt(principal.getName());
 		
-		User user = userService.findUser(pesel);
+		User user = userService.findUserByID(ID);
 	    
 		String username = user.getName() + " " + user.getSurname();
 	    return username;
@@ -60,35 +60,25 @@ public class DoctorController {
 	
 	@RequestMapping(value = "/doctor/myAccount", method = RequestMethod.GET)
 	public String myAccount(Model model, Principal principal) {
-		String pesel = principal.getName();
-	
-		model.addAttribute("user",userService.findUser(pesel));
+		Integer ID = Integer.parseInt(principal.getName());
 		
 		Doctor doctor = new Doctor();
-		doctor.setPesel(pesel);
-		doctor = doctorService.findDoctors(doctor).get(0);
+		doctor = doctorService.findDoctorByID(ID);
 		model.addAttribute("doctor", doctor);
 		
 		return "doctor/myAccount";
 	}
 	
 	@RequestMapping(value = "/doctor/myAccount", method = RequestMethod.POST)
-	public String myAccountUpdate(User user,@RequestParam String spec1, @RequestParam String spec2, 
-			@RequestParam String spec3,	@RequestParam String information,Principal principal){
+	public String myAccountUpdate(Doctor doctor, Principal principal){
 		
 		List<Integer> userIDs = new ArrayList<>();
-		Integer pesel = Integer.parseInt(principal.getName());
+		Integer doctorID = Integer.parseInt(principal.getName());
 
-		userIDs.add(pesel);	
-		userService.updateUsers(userIDs, user);
+		userIDs.add(doctorID);	
+		userService.updateUsers(userIDs, doctor);
 		
-		Doctor doctor =  new Doctor();
-		doctor.setSpecialization_1(spec1);
-		doctor.setSpecialization_2(spec2);
-		doctor.setSpecialization_3(spec3);
-		doctor.setInformation(information);
-		
-		doctorService.updateDoctorByID(doctor, pesel.toString());
+		doctorService.updateDoctorByID(doctor, doctorID);
 		
 		return "redirect:/doctor/myAccount";
 	}
@@ -96,14 +86,14 @@ public class DoctorController {
 	
 	@RequestMapping(value = "/doctor/visits", method = RequestMethod.GET)
 	public String visits(Model model, Principal principal){
-		String pesel = principal.getName();
+		Integer ID = Integer.parseInt(principal.getName());
 		Boolean lackOfDuty = false, lackOfNextVisit = false, start = true;
 		Timestamp currentTime =  new Timestamp(System.currentTimeMillis());
 		Duty duty;
 		Visit nextVisit;
 				
 		try{				
-			duty = dutyService.findDutyForDoctorVisitsByDoctorID(pesel).get(0);
+			duty = dutyService.findDutyForDoctorVisitsByDoctorID(ID).get(0);
 		}catch(IndexOutOfBoundsException e){	// if lack of duty
 			lackOfDuty = true;
 			return "doctor/visits";
@@ -126,10 +116,10 @@ public class DoctorController {
 			model.addAttribute("lackOfNextVisit", lackOfNextVisit);
 			
 			model.addAttribute("duty", duty);
-			model.addAttribute("visitList", visitService.findVisitForQueue(duty.getID()));
+			model.addAttribute("visitList", visitService.findVisitForQueueByDutyID(duty.getID()));
 		}
 
-		User nextPatient = userService.findUser(nextVisit.getPatientPesel());
+		User nextPatient = userService.findUserByID(nextVisit.getPatientID());
 		model.addAttribute("nextPatient", nextPatient);
 		model.addAttribute("positionInQueue", nextVisit.getPositionInQueue());
 		

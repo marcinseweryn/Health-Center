@@ -9,5 +9,6 @@
     	<class>com.github.marcinseweryn.model.WorkSchedule</class>
     	<class>com.github.marcinseweryn.model.Duty</class>
     	<class>com.github.marcinseweryn.model.Visit</class>
+    	<class>com.github.marcinseweryn.model.Patient</class>
     </persistence-unit>
 </persistence>

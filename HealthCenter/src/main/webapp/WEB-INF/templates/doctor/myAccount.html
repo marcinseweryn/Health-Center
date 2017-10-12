@@ -20,7 +20,7 @@
 			<p th:text = "#{myAccount}"></p>
 		</div>
 	
-		<form id = "firstForm" action = "#" th:action="@{/doctor/myAccount}" th:object="${user}" method="post">
+		<form id = "firstForm" action = "#" th:action="@{/doctor/myAccount}" th:object="${doctor}" method="post">
 
 			<table class = "myAccount-table doctor">
 				<tr>
@@ -97,7 +97,7 @@
 						<label class ="user" th:text = "#{table.specialization} + ' 1:'"></label>
 					</td>
 					<td>
-						<select class = "user" name ="spec1">
+						<select class = "user" th:field = "*{specialization_1}">
 							<option selected="selected" th:value = "${doctor.getSpecialization_1()}" 
 								th:text = "${doctor.getSpecialization_1()}"></option>
 							<option value = "Primary Care Physician" th:text = "#{doctor.primaryCarePhysician}"></option>
@@ -110,7 +110,7 @@
 						<label class ="user" th:text = "#{table.specialization} + ' 2:'"></label>
 					</td>
 					<td>
-						<select class = "user" name = "spec2">
+						<select class = "user" th:field = "*{specialization_2}">
 							<option selected="selected" th:value = "${doctor.getSpecialization_2()}"
 								th:text = "${doctor.getSpecialization_2()}"></option>
 							<option value = "Primary Care Physician" th:text = "#{doctor.primaryCarePhysician}"></option>
@@ -123,7 +123,7 @@
 						<label class ="user" th:text = "#{table.specialization} + ' 3:'"></label>
 					</td>
 					<td>
-						<select class = "user" name = "spec3">
+						<select class = "user" th:field = "*{specialization_3}">
 							<option selected="selected" th:value = "${doctor.getSpecialization_3()}"
 								th:text = "${doctor.getSpecialization_3()}"></option>
 							<option value = "Primary Care Physician" th:text = "#{doctor.primaryCarePhysician}"></option>
@@ -136,8 +136,8 @@
 			<label style = "float: left; text-shadow: none; margin-top: 3.4vw; margin-left: 4vw;" 
 				class ="user" th:text = "#{information} + ':'"></label>
 				
-			<textarea rows="6" cols="60" style = "margin-left: 4vw" name ="information" maxlength="1000"
-				th:text = "${doctor.getInformation()}"></textarea>
+			<textarea rows="6" cols="60" style = "margin-left: 4vw" maxlength="1000"
+				th:field = "*{information}" th:text = "${doctor.getInformation()}"></textarea>
 			
 			<button style ="margin-left: 19vw;" id = "myAccount-save" class ="user" type="submit"  th:text="#{save}"></button>
 		</form>

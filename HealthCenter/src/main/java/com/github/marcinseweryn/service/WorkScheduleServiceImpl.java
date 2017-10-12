@@ -55,9 +55,9 @@ public class WorkScheduleServiceImpl implements WorkScheduleService{
 				columns += "ws.end = '" + schedule.getEnd() + "' ,";
 			}
 		}
-		if(schedule.getPesel() != null){
-			if(!schedule.getPesel().equals("")){
-				columns += "ws.pesel = '" + schedule.getPesel() + "' ,";
+		if(schedule.getDoctorID() != null){
+			if(!schedule.getDoctorID().equals("")){
+				columns += "ws.doctorID = '" + schedule.getDoctorID() + "' ,";
 			}
 		}
 		
@@ -95,9 +95,9 @@ public class WorkScheduleServiceImpl implements WorkScheduleService{
 				columns += "ws.end = '" + schedule.getEnd() + "' and ";
 			}
 		}
-		if(schedule.getPesel() != null){
-			if(!schedule.getPesel().equals("")){
-				columns += "ws.pesel = '" + schedule.getPesel() + "' and ";
+		if(schedule.getDoctorID() != null){
+			if(!schedule.getDoctorID().equals("")){
+				columns += "ws.doctorID = '" + schedule.getDoctorID() + "' and ";
 			}
 		}
 		
@@ -116,7 +116,11 @@ public class WorkScheduleServiceImpl implements WorkScheduleService{
 
 	@Override
 	public List<WeekWorkSchedule> findWeekWorkScheduleByIDs(List<Integer> IDsList) {
-		return workScheduleDAO.findWeekWorkScheduleByIDs(IDsList);
+		if(IDsList.size() != 0){
+			return workScheduleDAO.findWeekWorkScheduleByIDs(IDsList);
+		}else{
+			return null;
+		}
 	}
 
 }

@@ -53,7 +53,7 @@ public class WorkScheduleDAOImpl implements WorkScheduleDAO {
 		String IDs = IDsList.toString().substring(1, IDsList.toString().length() - 1);
 		
 		Query query = entityManager.createQuery("UPDATE WorkSchedule ws SET " + columns
-				+ " WHERE ID IN(" + IDs + ")");
+				+ " WHERE ws.ID IN(" + IDs + ")");
 		query.executeUpdate();
 	}
 
@@ -70,7 +70,7 @@ public class WorkScheduleDAOImpl implements WorkScheduleDAO {
 	public List<WeekWorkSchedule> findWeekWorkScheduleByIDs(List<Integer> IDsList) {
 		String IDs = IDsList.toString().substring(1, IDsList.toString().length() - 1);
 		
-		Query query = entityManager.createQuery("SELECT u.name, u.surname, ws.pesel, "+
+		Query query = entityManager.createQuery("SELECT u.name, u.surname, ws.doctorID, "+
 
 			"min(case when ws.day like 'Monday' then ws.start end) as MondayStart, " +
 			"min(case when ws.day like 'Monday' then ws.end end) as MondayEnd, " +
@@ -90,8 +90,8 @@ public class WorkScheduleDAOImpl implements WorkScheduleDAO {
 			"min(case when ws.day like 'Saturday' then ws.start end) as SaturdayStart, " +
 			"min(case when ws.day like 'Saturday' then ws.end end) as SaturdayEnd " +
 			
-			"FROM WorkSchedule as ws, User as u WHERE ws.pesel=u.pesel "
-			+ "and ws.pesel IN(" + IDs + ") GROUP BY u.pesel");
+			"FROM WorkSchedule as ws, User as u WHERE u.ID = ws.doctorID and "
+			+ " ws.doctorID IN(" + IDs + ") GROUP BY u.ID");
 		
 		List<Object[]> objectList = query.getResultList();
 		
@@ -101,9 +101,9 @@ public class WorkScheduleDAOImpl implements WorkScheduleDAO {
 		String empty ="--------";
 		for(Object[] list : objectList) {
 			WeekWorkSchedule schedule = new WeekWorkSchedule();
-			schedule.setName(list[0].toString());
-			schedule.setSurname(list[1].toString());
-			schedule.setPesel(list[2].toString());
+			schedule.setName((String) list[0]);
+			schedule.setSurname((String) list[1]);
+			schedule.setDoctorID((Integer) list[2]);
 			
 			if(list[3] != null){
 				schedule.setMonday(list[3].toString()+to+list[4].toString());

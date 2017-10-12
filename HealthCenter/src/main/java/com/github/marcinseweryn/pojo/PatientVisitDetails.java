@@ -2,10 +2,10 @@ package com.github.marcinseweryn.pojo;
 
 import java.sql.Timestamp;
 
-public class UserVisitDetails {
+public class PatientVisitDetails {
 	
 	private String specialization, doctorName, doctorSurname, room;
-	private Integer positionInQueue, ID;
+	private Integer positionInQueue, ID, dutyID;
 	private Timestamp date;
 	
 	
@@ -14,6 +14,12 @@ public class UserVisitDetails {
 	}
 	public void setID(Integer iD) {
 		ID = iD;
+	}
+	public Integer getDutyID() {
+		return dutyID;
+	}
+	public void setDutyID(Integer dutyID) {
+		this.dutyID = dutyID;
 	}
 	public String getSpecialization() {
 		return specialization;

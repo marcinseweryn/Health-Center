@@ -8,11 +8,12 @@ public interface DoctorService {
 	
 	public void addDoctor(Doctor doctor);
 	
-	public void updateDoctorByID(Doctor doctor, String pesel);
+	public void updateDoctorByID(Doctor doctor, Integer ID);
 	
 	public List<Doctor> findDoctors(Doctor doctor);
+	
+	public Doctor findDoctorByID(Integer ID);
 
 	public List<Integer> findDoctorsIDsBySpecialization(String specialization);
-	
-	public void deleteDoctorsByID(List<Integer> usersIDs);
+
 }

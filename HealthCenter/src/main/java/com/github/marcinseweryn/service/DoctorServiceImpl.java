@@ -25,9 +25,9 @@ public class DoctorServiceImpl implements DoctorService {
 	public List<Doctor> findDoctors(Doctor doctor) {
 		String where = "";
 		
-		if(doctor.getPesel() != null){
-			if(!doctor.getPesel().equals("")){
-				where += " d.pesel = '" + doctor.getPesel() + "' and "; 
+		if(doctor.getID() != null){
+			if(!doctor.getID().equals("")){
+				where += " d.ID = '" + doctor.getID() + "' and "; 
 			}
 		}
 		if(doctor.getName() != null){
@@ -96,7 +96,7 @@ public class DoctorServiceImpl implements DoctorService {
 	}
 
 	@Override
-	public void updateDoctorByID(Doctor doctor, String pesel) {
+	public void updateDoctorByID(Doctor doctor, Integer ID) {
 		String columns = "";
 		
 		if(doctor.getSpecialization_1() != null){
@@ -126,17 +126,16 @@ public class DoctorServiceImpl implements DoctorService {
 		}
 		
 		if(!columns.equals("")){
-			doctorDAO.updateDoctorByID(columns, pesel);
+			doctorDAO.updateDoctorByID(columns, ID);
 		}
 		
 	}
-	
-	
-	public void deleteDoctorsByID(List<Integer> usersIDs) {
 
-		if(usersIDs.size() != 0){
-			doctorDAO.deleteDoctorsByID(usersIDs);	
-		}
+
+	@Override
+	public Doctor findDoctorByID(Integer ID) {
+		
+		return doctorDAO.findDoctorByID(ID);
 	}
 
 }

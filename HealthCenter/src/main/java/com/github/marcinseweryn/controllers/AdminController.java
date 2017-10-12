@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.marcinseweryn.model.Doctor;
+import com.github.marcinseweryn.model.Patient;
 import com.github.marcinseweryn.model.User;
 import com.github.marcinseweryn.model.WorkSchedule;
 import com.github.marcinseweryn.pojo.IDsList;
@@ -66,7 +67,12 @@ public class AdminController {
 				Doctor doc = new Doctor();
 				Doctor doctor = doc.downcastUser(user);
 
-				doctorService.addDoctor(doctor);
+				userService.addUser(doctor);
+			}else if(user.getRole().equals("ROLE_PATIENT")){
+				Patient p = new Patient();
+				Patient patient = p.downcastUser(user);
+				
+				userService.addUser(patient);
 			}else{
 				userService.addUser(user);
 			}
@@ -74,7 +80,6 @@ public class AdminController {
 		}else if(action.equals("delete")){
 			
 			userService.deleteUsers(IDsList);
-			doctorService.deleteDoctorsByID(IDsList);
 			
 		}else if(action.equals("update")){
 			

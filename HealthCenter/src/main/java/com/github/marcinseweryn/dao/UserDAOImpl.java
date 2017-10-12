@@ -42,7 +42,7 @@ public class UserDAOImpl implements UserDAO {
 		String IDs = usersIDs.toString().substring(1, usersIDs.toString().length() - 1);
 
 		Query query = entityManager.createQuery("delete from User u"
-				+ " WHERE u.pesel IN(" + IDs + ")");
+				+ " WHERE u.ID IN(" + IDs + ")");
 		query.executeUpdate();
 		
 	}
@@ -53,7 +53,7 @@ public class UserDAOImpl implements UserDAO {
 		String IDs = usersIDs.toString().substring(1, usersIDs.toString().length() - 1);
 		
 		Query query = entityManager.createQuery("UPDATE User SET " + columns
-				+ " WHERE pesel IN(" + IDs + ")");
+				+ " WHERE ID IN(" + IDs + ")");
 		query.executeUpdate();
 	}
 
@@ -67,8 +67,9 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public User findUser(String pesel) {
-		return entityManager.find(User.class, pesel);
+	public User findUserByID(Integer ID) {
+
+		return entityManager.find(User.class, ID);
 	}
 
 	@Override
@@ -76,7 +77,7 @@ public class UserDAOImpl implements UserDAO {
 		
 		String IDs = usersIDs.toString().substring(1, usersIDs.toString().length() - 1);
 		
-		Query query = entityManager.createQuery("FROM User WHERE pesel IN(" + IDs + ")");
+		Query query = entityManager.createQuery("FROM User WHERE ID IN(" + IDs + ")");
 		List<User> list = query.getResultList();
 		
 		return list;

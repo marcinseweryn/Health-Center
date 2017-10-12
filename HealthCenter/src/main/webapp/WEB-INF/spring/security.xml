@@ -9,7 +9,7 @@
 	
 	<http auto-config="true" >
 		<intercept-url pattern="/**" requires-channel="https" />
-		<intercept-url pattern="/user/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/user/**" access="hasRole('ROLE_PATIENT')" />
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/doctor/**" access="hasRole('ROLE_DOCTOR')" />
 		<!-- access denied page -->
@@ -19,7 +19,7 @@
 		    login-page="/login"
 		    authentication-success-handler-ref="authSuccessHandler"
 			authentication-failure-url="/login?error"
-			username-parameter="pesel"
+			username-parameter="ID"
 			password-parameter="password" 
 		/>
 		<logout
@@ -36,9 +36,9 @@
 			
 			<jdbc-user-service data-source-ref="dataSource"
 				  users-by-username-query= 
-				  "select pesel,password, enabled from users where pesel=?"
+				  "select ID,password, enabled from user where ID=?"
 				  authorities-by-username-query= 
-				  "select pesel, role from users where pesel =?" />
+				  "select ID, role from user where ID =?" />
 		</authentication-provider>
 	</authentication-manager>
 	

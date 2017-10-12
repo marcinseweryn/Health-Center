@@ -14,7 +14,9 @@
   
   <script>
   $(document).ready(function() {
-    $("#datepicker").datepicker();
+    $("#datepicker").datepicker(
+		{dateFormat: 'mm/dd/yy', changeMonth: true, changeYear: true, yearRange: '-110:+0'} 
+    	);
   });
   </script>
 </head>
@@ -30,7 +32,7 @@
 				
 			</div>
 			
-			<form action = "#" th:action="@{/registration}" th:object="${user}"  method="post">	
+			<form action = "#" th:action="@{/registration}" th:object="${patient}"  method="post">	
 			<h2 th:text="#{registration.personalDetails}"></h2>
 			<table style ="padding-left: 3.5vw;" class = "registration-table">
 				<tr>
@@ -135,7 +137,6 @@
 					</td>
 				</tr>
 			</table>
-			 <input type = "hidden" name = "*{role}" th:value = "${user.role}" value = "ROLE_USER"/>
 			 <button type="submit"  th:text="#{send}"></button>
 			</form>
 		</div>	

@@ -2,7 +2,7 @@ package com.github.marcinseweryn.pojo;
 
 import java.sql.Timestamp;
 
-public class DutyDetailsForUserQueue {
+public class DutyDetailsForPatientQueue {
 
 	private String pesel, name ,surname, specialization_1, specialization_2, specialization_3, room;
 	private Timestamp date, startDate, endDate;

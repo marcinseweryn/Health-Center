@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "doctors")
+@Table(name = "doctor")
 @DiscriminatorValue(value = "Doctor")
 public class Doctor extends User {
 	

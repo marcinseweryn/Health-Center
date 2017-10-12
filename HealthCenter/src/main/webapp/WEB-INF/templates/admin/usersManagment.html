@@ -48,7 +48,7 @@
 				<td th:text = "${user.getEmail()}"></td>
 				<td th:text = "${user.getRole()}" style ="max-width: 7vw;min-width: 7vw;"></td>
 				<td style = "max-width: 4vw;min-width: 4vw;">
-				<input id="select" name = "select" type ="checkbox" onclick="sub()" th:value = "${user.getPesel()}"></td>
+				<input id="select" name = "select" type ="checkbox" onclick="sub()" th:value = "${user.getID()}"></td>
 			</tr>
 			</tbody>
 		</table>
@@ -66,7 +66,9 @@
 			}
 			
 			$(document).ready(function() {
-				    $("#datepicker").datepicker();
+				    $("#datepicker").datepicker(
+				    	{dateFormat: 'mm/dd/yy', changeMonth: true, changeYear: true, yearRange: '-110:+0'} 
+				    );
 			});		
 		</script>
 		
@@ -158,7 +160,7 @@
 					<td>
 						<select class = "admin" th:field = "*{role}">
 							<option selected="selected" value = ""></option>
-							<option th:value = "ROLE_USER" th:text = "ROLE_USER"></option>
+							<option th:value = "ROLE_PATIENT" th:text = "ROLE_PATIENT"></option>
 							<option th:value = "ROLE_ADMIN" th:text = "ROLE_ADMIN"></option>
 							<option th:value = "ROLE_DOCTOR"  th:text = "ROLE_DOCTOR"></option>
 						</select>

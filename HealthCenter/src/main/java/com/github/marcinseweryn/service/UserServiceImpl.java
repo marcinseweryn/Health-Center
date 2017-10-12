@@ -123,6 +123,9 @@ public class UserServiceImpl implements UserService{
 	public List<User> findUsers(User user) {
 		String columns = "";
 
+		if(user.getID() != null){
+			columns += "ID = '" + user.getID() + "' and "; 
+		}
 		if(user.getPesel() != null){
 			if(!user.getPesel().equals("")){
 				columns += "pesel = '" + user.getPesel() + "' and "; 
@@ -198,8 +201,8 @@ public class UserServiceImpl implements UserService{
 
 
 	@Override
-	public User findUser(String pesel) {
-		return userDAO.findUser(pesel);
+	public User findUserByID(Integer ID) {
+		return userDAO.findUserByID(ID);
 	}
 
 

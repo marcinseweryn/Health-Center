@@ -9,7 +9,7 @@ import com.github.marcinseweryn.dao.DutyDAO;
 import com.github.marcinseweryn.dao.VisitDAO;
 import com.github.marcinseweryn.model.Visit;
 import com.github.marcinseweryn.pojo.Presence;
-import com.github.marcinseweryn.pojo.UserVisitDetails;
+import com.github.marcinseweryn.pojo.PatientVisitDetails;
 
 @Service
 public class VisitServiceImpl implements VisitService {
@@ -21,11 +21,11 @@ public class VisitServiceImpl implements VisitService {
 	private DutyDAO dutyDAO;
 	
 	@Override
-	public void addVisit(Integer dutyID, String pesel, Integer positionInQueue) {
+	public void addVisit(Integer dutyID, Integer patientID, Integer positionInQueue) {
 		Visit visit = new Visit();
 		
 		visit.setDutyID(dutyID);
-		visit.setPatientPesel(pesel);
+		visit.setPatientID(patientID);
 		visit.setPositionInQueue(positionInQueue);
 		visit.setPresence(Presence.inQueue.getValue());
 		
@@ -40,21 +40,22 @@ public class VisitServiceImpl implements VisitService {
 	}
 
 	@Override
-	public List<UserVisitDetails> findVisitDetailsForUser(String pesel) {
+	public List<PatientVisitDetails> findVisitDetailsForPatientByPatientID(Integer ID) {
 		
-		return visitDAO.findVisitDetailsForUser(pesel);
+		return visitDAO.findVisitDetailsForPatientByPatientID(ID);
 	}
 
 	@Override
-	public void deleteVisitByID(Integer ID) {
+	public void deleteVisitByID(Integer visitID, Integer dutyID) {
 		
-		visitDAO.deleteVisitByID(ID);
+		visitDAO.deleteVisitByID(visitID);
+		dutyDAO.increaseDutyFreeSlots(dutyID);
 	}
 
 	@Override
-	public List<Visit> findVisitForQueue(Integer dutyID) {
+	public List<Visit> findVisitForQueueByDutyID(Integer dutyID) {
 		
-		return visitDAO.findVisitForQueue(dutyID);
+		return visitDAO.findVisitForQueueByDutyID(dutyID);
 	}
 
 	@Override

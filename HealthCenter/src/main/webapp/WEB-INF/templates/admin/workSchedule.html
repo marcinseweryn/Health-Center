@@ -36,7 +36,7 @@
 					<td th:text = "${schedule.getDay()}"></td>
 					<td th:text = "${schedule.getStart()}"></td>
 					<td th:text = "${schedule.getEnd()}"></td>
-					<td th:text = "${schedule.getPesel()}"></td>
+					<td th:text = "${schedule.getDoctorID()}"></td>
 					<td style = "max-width: 4vw;min-width: 4vw;">
 					<input id="select" name = "select" type ="checkbox" onclick="sub()" th:value = "${schedule.getID()}"></td>
 				</tr>
@@ -63,7 +63,7 @@
 							<label class = "admin" th:text = "#{form.doctorID}"></label>
 						</td>
 						<td>
-							<input class = "admin" th:field = "*{pesel}" type = "text"/>
+							<input class = "admin" th:field = "*{doctorID}" type = "text"/>
 						</td>
 						<td>
 							<label class = "admin" th:text = "#{form.room}">:</label>
@@ -126,7 +126,7 @@
 				</thead>
 				<tbody>
 				<tr th:each="doctor, iterStat : ${allDoctors}" th:class = "${iterStat.odd}? 'odd' : 'even'">
-					<td th:text = "${doctor.getPesel()}"></td>
+					<td th:text = "${doctor.getID()}"></td>
 					<td th:text = "${doctor.getName()}"></td>
 					<td th:text = "${doctor.getSurname()}"></td>
 					<td th:text = "${doctor.getSpecialization_1()}"></td>
@@ -152,7 +152,7 @@
 							<label class = "admin" th:text = "#{form.doctorID}">></label>
 						</td>
 						<td>
-							<input class = "admin" th:field="*{pesel}" type = "text"/>
+							<input class = "admin" th:field="*{ID}" type = "text"/>
 						</td>
 					</tr>
 					<tr>

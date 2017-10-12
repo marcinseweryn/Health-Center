@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,8 +21,8 @@ import com.github.marcinseweryn.model.Duty;
 import com.github.marcinseweryn.model.User;
 import com.github.marcinseweryn.model.Visit;
 import com.github.marcinseweryn.model.WorkSchedule;
-import com.github.marcinseweryn.pojo.DutyDetailsForUserQueue;
-import com.github.marcinseweryn.pojo.UserVisitDetails;
+import com.github.marcinseweryn.pojo.DutyDetailsForPatientQueue;
+import com.github.marcinseweryn.pojo.PatientVisitDetails;
 import com.github.marcinseweryn.service.DoctorService;
 import com.github.marcinseweryn.service.DutyService;
 import com.github.marcinseweryn.service.UserService;
@@ -48,9 +49,9 @@ public class UserController {
 	
 	@ModelAttribute("username")
 	public String getUsername(Principal principal){
-		String pesel = principal.getName();
+		Integer ID = Integer.parseInt(principal.getName());
 		
-		User user = userService.findUser(pesel);
+		User user = userService.findUserByID(ID);
 	    
 		String username = user.getName() + " " + user.getSurname();
 	    return username;
@@ -65,9 +66,9 @@ public class UserController {
 	
 	@RequestMapping(value = "/user/myAccount", method = RequestMethod.GET)
 	public String myAccount(Model model, Principal principal) {
-		String pesel = principal.getName();
+		Integer ID = Integer.parseInt(principal.getName());
 	
-		model.addAttribute("user",userService.findUser(pesel));
+		model.addAttribute("user",userService.findUserByID(ID));
 		
 		return "user/myAccount";
 	}
@@ -75,9 +76,9 @@ public class UserController {
 	@RequestMapping(value = "/user/myAccount", method = RequestMethod.POST)
 	public String myAccountUpdate(User user, Principal principal, BindingResult bindingResult){
 		List<Integer> userID = new ArrayList<>();
-		Integer pesel = Integer.parseInt(principal.getName());
+		Integer ID = Integer.parseInt(principal.getName());
 
-		userID.add(pesel);	
+		userID.add(ID);	
 		userService.updateUsers(userID, user);
 		
 		return "redirect:/user/myAccount";
@@ -119,15 +120,15 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/user/registration-date", method = RequestMethod.GET)
-	public String registrationDate(@ModelAttribute("doctorID") String doctorID, Model model, Principal principal){
+	public String registrationDate(@ModelAttribute("doctorID") Integer doctorID, Model model, Principal principal){
 		Timestamp currentDate = new Timestamp(System.currentTimeMillis());
-		String pesel = principal.getName();
+		Integer patientID = Integer.parseInt(principal.getName());
 		Boolean alreadyRegistered = false;
 		
 		if(!doctorID.equals("")){
 			WorkSchedule schedule = new WorkSchedule();
 			Duty duty = new Duty();
-			schedule.setPesel(doctorID);
+			schedule.setDoctorID(doctorID);
 			duty.setDoctorID(doctorID);
 			duty.setDate(currentDate);
 			List<Duty> dutyList =  dutyService.findDutyForAdd(duty);
@@ -145,7 +146,7 @@ public class UserController {
 				List<Visit> visitList = visitService.findVisitForDoctorByDutyID(duty1.getID());
 				if(alreadyRegistered == false){
 					for(Visit visit : visitList){
-						if(visit.getPatientPesel().equals(pesel)){
+						if(visit.getPatientID() == patientID){
 							alreadyRegistered = true;
 							model.addAttribute("registrationDate",duty1.getDate());
 							model.addAttribute("position",visit.getPositionInQueue());
@@ -165,10 +166,10 @@ public class UserController {
 	
 	@RequestMapping(value = "/user/registration-date", method = RequestMethod.POST)
 	public String registerDate(Principal principal, @RequestParam Integer dutyID,  RedirectAttributes redirectAttributes){
-		String pesel = principal.getName();
+		Integer patientID = Integer.parseInt(principal.getName());
 		Integer positionInQueue = visitService.findVisitForDoctorByDutyID(dutyID).size() + 1;
 		
-		visitService.addVisit(dutyID, pesel, positionInQueue);
+		visitService.addVisit(dutyID, patientID, positionInQueue);
 		
 		redirectAttributes.addFlashAttribute("positionInQueue",positionInQueue);
 		redirectAttributes.addFlashAttribute("dutyID", dutyID);
@@ -181,7 +182,7 @@ public class UserController {
 		Duty duty = dutyService.findDutyByID(dutyID);
 		
 		Doctor doctor = new Doctor();
-		doctor.setPesel(duty.getDoctorID());
+		doctor.setID(duty.getDoctorID());
 		List<Doctor> doctorList = doctorService.findDoctors(doctor);
 		
 		String doctorName = doctorList.get(0).getName();
@@ -198,31 +199,30 @@ public class UserController {
 	
 	@RequestMapping(value = "/user/visits", method = RequestMethod.GET)
 	public String visits(Model model, Principal principal){
-		String pesel = principal.getName();
-		List<UserVisitDetails> userVisitDetailsList = visitService.findVisitDetailsForUser(pesel);
+		Integer ID = Integer.parseInt(principal.getName());
+		List<PatientVisitDetails> patientVisitDetailsList = visitService.findVisitDetailsForPatientByPatientID(ID);
 		
-		model.addAttribute("userVisitDetailsList", userVisitDetailsList);
+		model.addAttribute("patientVisitDetailsList", patientVisitDetailsList);
 		
 		return "user/visits";
 	}
 	
 	
 	@RequestMapping(value = "/user/visits", method = RequestMethod.POST)
-	public String visitsPost(@RequestParam("visitID") Integer visitID){
+	public String visitsPost(@RequestParam("visitID") Integer visitID, @RequestParam("dutyID") Integer dutyID){
 
-		visitService.deleteVisitByID(visitID);
-		
+		visitService.deleteVisitByID(visitID, dutyID);
 		return "redirect:/user/visits";
 	}
 	
 	@RequestMapping(value = "/user/queue", method = RequestMethod.GET)
 	public String queue(Model model, Principal principal){
-		String pesel = principal.getName();
-		DutyDetailsForUserQueue dutyDetails = null;
+		Integer ID = Integer.parseInt(principal.getName());
+		DutyDetailsForPatientQueue dutyDetails = null;
 		boolean lackOfDuty = false;
 		
 		try{
-			dutyDetails =  dutyService.findDutyDetailsForCurrentDayByUserID(pesel).get(0);
+			dutyDetails =  dutyService.findDutyDetailsForCurrentDayByPatientID(ID).get(0);
 		}catch(IndexOutOfBoundsException e){
 			lackOfDuty = true;
 			return "user/queue";		
@@ -231,8 +231,8 @@ public class UserController {
 		}
 		
 		model.addAttribute("dutyDetails",dutyDetails);
-		model.addAttribute("visitsList", visitService.findVisitForQueue(dutyDetails.getDutyID()));
-		model.addAttribute("positionInQueue", visitService.findVisitDetailsForUser(pesel).get(0).getPositionInQueue());
+		model.addAttribute("visitsList", visitService.findVisitForQueueByDutyID(dutyDetails.getDutyID()));
+		model.addAttribute("positionInQueue", visitService.findVisitDetailsForPatientByPatientID(ID).get(0).getPositionInQueue());
 		return "user/queue";
 	}
 	

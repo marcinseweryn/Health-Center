@@ -8,18 +8,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "visits")
+@Table(name = "visit")
 public class Visit {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer ID;
 	
-	@Column(name = "duty_id")
+	@Column(name = "duty_ID")
 	private Integer dutyID;
 	
-	@Column(name = "patient_pesel")
-	private String patientPesel;
+	@Column(name = "patient_ID")
+	private Integer patientID;
 	
 	private Integer presence;
 	
@@ -42,12 +42,12 @@ public class Visit {
 		this.dutyID = dutyID;
 	}
 
-	public String getPatientPesel() {
-		return patientPesel;
+	public Integer getPatientID() {
+		return patientID;
 	}
 
-	public void setPatientPesel(String patientPesel) {
-		this.patientPesel = patientPesel;
+	public void setPatientID(Integer patientID) {
+		this.patientID = patientID;
 	}
 
 	public Integer getPresence() {

@@ -3,7 +3,7 @@ package com.github.marcinseweryn.dao;
 import java.util.List;
 
 import com.github.marcinseweryn.model.Visit;
-import com.github.marcinseweryn.pojo.UserVisitDetails;
+import com.github.marcinseweryn.pojo.PatientVisitDetails;
 
 public interface VisitDAO {
 
@@ -11,11 +11,11 @@ public interface VisitDAO {
 	
 	public List<Visit> findVisitForDoctorByDutyID(Integer dutyID);
 	
-	public List<UserVisitDetails> findVisitDetailsForUser(String pesel);
+	public List<PatientVisitDetails> findVisitDetailsForPatientByPatientID(Integer ID);
 	
 	public void deleteVisitByID(Integer ID);
 	
-	public List<Visit> findVisitForQueue(Integer dutyID);
+	public List<Visit> findVisitForQueueByDutyID(Integer dutyID);
 	
 	public List<Visit> getCurrentQueueByDutyID(Integer dutyID);
 	

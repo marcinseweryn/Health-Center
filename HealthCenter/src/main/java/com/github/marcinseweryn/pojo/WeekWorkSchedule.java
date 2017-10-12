@@ -2,10 +2,19 @@ package com.github.marcinseweryn.pojo;
 
 public class WeekWorkSchedule {
 
-	String name, surname, pesel;
+	Integer doctorID;
+	String name, surname;
 	String Monday, Tuesday, Wednesday, Thursday, Friday, Saturday;
 	
 	
+	public Integer getDoctorID() {
+		return doctorID;
+	}
+
+	public void setDoctorID(Integer doctorID) {
+		this.doctorID = doctorID;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -20,14 +29,6 @@ public class WeekWorkSchedule {
 
 	public void setSurname(String surname) {
 		this.surname = surname;
-	}
-
-	public String getPesel() {
-		return pesel;
-	}
-
-	public void setPesel(String pesel) {
-		this.pesel = pesel;
 	}
 
 	public String getMonday() {
