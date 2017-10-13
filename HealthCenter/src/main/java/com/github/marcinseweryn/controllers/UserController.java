@@ -120,12 +120,13 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/user/registration-date", method = RequestMethod.GET)
-	public String registrationDate(@ModelAttribute("doctorID") Integer doctorID, Model model, Principal principal){
+	public String registrationDate(@ModelAttribute("doctorID") String docID, Model model, Principal principal){
 		Timestamp currentDate = new Timestamp(System.currentTimeMillis());
 		Integer patientID = Integer.parseInt(principal.getName());
 		Boolean alreadyRegistered = false;
 		
-		if(!doctorID.equals("")){
+		if(!docID.equals("")){
+			Integer doctorID = Integer.parseInt(docID);
 			WorkSchedule schedule = new WorkSchedule();
 			Duty duty = new Duty();
 			schedule.setDoctorID(doctorID);

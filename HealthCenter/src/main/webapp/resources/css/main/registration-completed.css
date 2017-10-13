@@ -1,0 +1,30 @@
+
+#registration-completed{
+	margin-top: 10vh;
+	margin-left: 20vw;;
+	width: 50vw;
+	height: 40vh;
+	background-color: #0063c6;
+	border-radius: 0.5vw;	
+	color: white;
+}
+
+#registration-completed h2{
+	padding: 1.5vh 1vw;
+	text-align: center;
+	padding-bottom: 0vh;
+	font-family: 'Arial', sans-serif;
+	font-size: 2.8vw;
+	font-weight: bolder;
+	letter-spacing: 0.4vw;
+	text-shadow: 2px 2px 4px black;
+}
+
+#registration-completed strong{
+	font-size: 1.5vw;
+	padding-left: 1vw;
+	padding-right: 1vw;
+	letter-spacing: 0.2vw;
+	font-family: 'Arial', sans-serif;
+	text-shadow: 1px 1px 2px black;
+}

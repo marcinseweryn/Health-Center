@@ -62,7 +62,7 @@ public class UserDAOImpl implements UserDAO {
 		
 		Query query = entityManager.createQuery("FROM User WHERE " + columns);	
 		List<User> list = query.getResultList();
-		
+
 		return list;
 	}
 

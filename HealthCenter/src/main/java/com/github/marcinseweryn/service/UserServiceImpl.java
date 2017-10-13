@@ -149,13 +149,6 @@ public class UserServiceImpl implements UserService{
 		if(user.getBirthDate() != null){
 			columns += "birthDate = '" + df.format(user.getBirthDate()) + "' and ";
 		}
-		if(user.getPassword() != null){
-			if(!user.getPassword().equals("")){
-				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-				String hashedPassword = passwordEncoder.encode(user.getPassword());
-				columns += "password = '" + hashedPassword + "' and ";
-			}
-		}
 		if(user.getStreetAddress() != null){
 			if(!user.getStreetAddress().equals("")){
 				columns += "streetAddress = '" + user.getStreetAddress() + "' and ";
