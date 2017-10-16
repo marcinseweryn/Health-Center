@@ -20,7 +20,7 @@
 			<p th:text = "#{myAccount}"></p>
 		</div>
 	
-		<form action = "#" th:action="@{/user/myAccount}" th:object="${user}" method="post">
+		<form action = "#" th:action="@{/user/myAccount}" th:object="${patient}" method="post">
 
 			<table class = "myAccount-table">
 				<tr>
@@ -89,10 +89,33 @@
 						<input class ="user" type = "text" th:field="*{email}"/>
 					</td>
 				</tr>
+		</table>
+		
+		<table class = "myAccount-table-bottom" style = "padding-top: 1vh;">
+		<tr>
+		<td>
+			<label class ="user" th:text = "#{patient.sensitizations} + ':'"></label>
+			<textarea rows="4" cols="60" maxlength="400"
+				th:field = "*{sensitizations}"></textarea>
+		</td>
+		<td>	
+			<label class ="user" th:text = "#{patient.chronicDiseases} + ':'"></label>
+			<textarea rows="4" cols="60" maxlength="300"
+				th:field = "*{chronicDiseases}"></textarea>
+		</td>	
+		</tr>
+		<tr>	
+		<td>
+			<label class ="user" th:text = "#{patient.solidDrugs} + ':'"></label>
+			<textarea rows="4" cols="60" maxlength="500"
+				th:field = "*{solidDrugs}"></textarea>
+			
+		</td>
+		<td>	
+			<button id = "myAccount-save" class ="user" type="submit"  th:text="#{save}"></button>
+		</td>
+		</tr>
 			</table>
-		
-			 <button id = "myAccount-save" class ="user" type="submit"  th:text="#{save}"></button>
-		
 		</form>
 	
 	</div>

@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.marcinseweryn.model.Doctor;
 import com.github.marcinseweryn.model.Duty;
+import com.github.marcinseweryn.model.Patient;
 import com.github.marcinseweryn.model.User;
 import com.github.marcinseweryn.model.Visit;
 import com.github.marcinseweryn.model.WorkSchedule;
@@ -25,6 +26,7 @@ import com.github.marcinseweryn.pojo.DutyDetailsForPatientQueue;
 import com.github.marcinseweryn.pojo.PatientVisitDetails;
 import com.github.marcinseweryn.service.DoctorService;
 import com.github.marcinseweryn.service.DutyService;
+import com.github.marcinseweryn.service.PatientService;
 import com.github.marcinseweryn.service.UserService;
 import com.github.marcinseweryn.service.VisitService;
 import com.github.marcinseweryn.service.WorkScheduleService;
@@ -47,6 +49,10 @@ public class UserController {
 	@Autowired
 	private VisitService visitService;
 	
+	@Autowired
+	private PatientService patientService;
+	
+	
 	@ModelAttribute("username")
 	public String getUsername(Principal principal){
 		Integer ID = Integer.parseInt(principal.getName());
@@ -68,18 +74,16 @@ public class UserController {
 	public String myAccount(Model model, Principal principal) {
 		Integer ID = Integer.parseInt(principal.getName());
 	
-		model.addAttribute("user",userService.findUserByID(ID));
+		model.addAttribute("patient",userService.findUserByID(ID));
 		
 		return "user/myAccount";
 	}
 	
 	@RequestMapping(value = "/user/myAccount", method = RequestMethod.POST)
-	public String myAccountUpdate(User user, Principal principal, BindingResult bindingResult){
-		List<Integer> userID = new ArrayList<>();
+	public String myAccountUpdate(Patient patient, Principal principal, BindingResult bindingResult){
 		Integer ID = Integer.parseInt(principal.getName());
-
-		userID.add(ID);	
-		userService.updateUsers(userID, user);
+	
+		patientService.updatePatient(ID, patient);
 		
 		return "redirect:/user/myAccount";
 	}

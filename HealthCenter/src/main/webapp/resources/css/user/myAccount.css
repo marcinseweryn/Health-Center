@@ -42,6 +42,14 @@
 	box-shadow: 0.2vw 0.2vw 0.1vw gray;
 }
 
+.myAccount-table-bottom td{
+	padding: 0vh 2vw;
+}
+
+.myAccount-table-bottom label{
+	text-shadow: none;
+}
+
 #myAccount-save{
 	background-color: #008ae6; 
 	padding: 0.7vw 7vw;
