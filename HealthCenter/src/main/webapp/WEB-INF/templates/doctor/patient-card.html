@@ -6,6 +6,7 @@
 	<title>Patient Card</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/body.css}" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/doctor/patientCard.css}" />
 </head>
 
 <body  style="margin: 0px;">
@@ -14,9 +15,90 @@
 	<div th:include = "fragments/userDoctorMenu"></div>
 	
 	<div id = "body">
-		<form  action = "#" th:action="@{/doctor/patient-card}" method="post">
-			<button class ="user" name = "visitID" th:value = "${visitID}">save</button>
+	
+		<div id = "patient-informations-div">
+		
+			<div id = "patient-name">
+				<h2 th:utext = "${patient.getName() + ' ' + patient.getSurname()}"></h2>
+			</div>
+			
+			<label class = "user" th:utext = "#{form.birthDate} + 
+				${' ' + #strings.substring(patient.getBirthDate(),0,10)}"></label><br/>
+			<label class = "user" th:utext = "#{personalIdentificationNumber} + ${' ' + patient.getPesel()}"></label>
+			
+			<form  action = "#" th:action="@{/doctor/patient-card}" th:object="${patient}" method="post">
+			
+			<table>
+			<tr>
+				<td>
+					<label class ="user" th:text = "#{patient.sensitizations} + ':'"></label><br/>
+					<textarea rows="4" cols="50" maxlength="400" th:field = "*{sensitizations}"></textarea>
+				<td>
+			</tr>
+			<tr>
+				<td>
+					<label class ="user" th:text = "#{patient.solidDrugs} + ':'"></label><br/>
+					<textarea rows="4" cols="50" maxlength="500" th:field = "*{solidDrugs}"></textarea>
+				<td>
+			</tr>
+			<tr>
+				<td>
+					<label class ="user" th:text = "#{patient.chronicDiseases} + ':'"></label>
+					<textarea rows="4" cols="50" maxlength="300" th:field = "*{chronicDiseases}"></textarea>
+				<td>
+			</tr>
+			</table>		
+			
+			<input type = "hidden" th:field = "*{ID}"/>
+			<input type = "hidden" name = "visitID" th:value = "${visitID}"/>
+				
+			<button id = "save-button" class ="user button-color-green" th:text = "#{save}"
+				name = "action" th:value = "save"></button>
+			<button id = "history-button" class ="user button-color-blue" th:text = "#{history}"
+				name = "action" th:value = "history"></button>
+				
+			</form>
+		</div>
+		
+		<div id = "doctor-comments-div" >
+		
+		<form  action = "#" th:action="@{/doctor/patient-card}" th:object="${patientCard}" method="post">
+		
+			<table>
+			<tr>
+				<td>
+					<label class ="user" th:text = "#{patientCard.comments} + ':'"></label><br/>
+					<textarea rows="4" cols="65" maxlength="1000" th:field = "*{comments}"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label class ="user" th:text = "#{patientCard.diagnosis} + ':'"></label><br/>
+					<textarea rows="4" cols="65" maxlength="200" th:field = "*{diagnosis}"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label class ="user" th:text = "#{patientCard.prescribedMedicines} + ':'"></label><br/>
+					<textarea rows="4" cols="65" maxlength="400" th:field = "*{prescribedMedicines}"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label class ="user" th:text = "#{patientCard.recommendations} + ':'"></label>
+					<textarea rows="4" cols="65" maxlength="400" th:field = "*{recommendations}"></textarea>
+				</td>
+			</tr>
+			</table>
+			
+			<input type = "hidden" name = "patientID" th:value = "${patient.getID()}"/>
+			<input type = "hidden" name = "visitID" th:value = "${visitID}"/>
+			
+			<button id ="patient-served-button" class ="user button-color-green"  name = "action"
+				 th:value = "patient-served" th:text = "#{patientCard.patientServed}"></button>
 		</form>
+			
+		</div>
 	</div>
 	
 

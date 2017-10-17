@@ -5,25 +5,27 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.ejb.criteria.expression.function.CurrentTimestampFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.marcinseweryn.model.Doctor;
 import com.github.marcinseweryn.model.Duty;
+import com.github.marcinseweryn.model.Patient;
+import com.github.marcinseweryn.model.PatientCard;
 import com.github.marcinseweryn.model.User;
 import com.github.marcinseweryn.model.Visit;
 import com.github.marcinseweryn.pojo.Presence;
 import com.github.marcinseweryn.service.DoctorService;
 import com.github.marcinseweryn.service.DutyService;
+import com.github.marcinseweryn.service.PatientCardService;
+import com.github.marcinseweryn.service.PatientService;
 import com.github.marcinseweryn.service.UserService;
 import com.github.marcinseweryn.service.VisitService;
 
@@ -41,6 +43,12 @@ public class DoctorController {
 	
 	@Autowired
 	private DutyService dutyService;
+	
+	@Autowired
+	private PatientCardService patientCardService;
+	
+	@Autowired 
+	private PatientService patientService;
 	
 	@ModelAttribute("username")
 	public String getUsername(Principal principal){
@@ -166,16 +174,33 @@ public class DoctorController {
 	@RequestMapping(value = "/doctor/patient-card", method = RequestMethod.GET)
 	public String patientCard(@ModelAttribute("visitID") Integer visitID, Model model){
 		
-		model.addAttribute("visitID", visitID);
+		Visit visit = visitService.findVisitByID(visitID);
+		Patient patient = (Patient) userService.findUserByID(visit.getPatientID());
+		
+		model.addAttribute("visitID", visit.getID());
+		model.addAttribute("patient", patient);
+		model.addAttribute("patientCard", new PatientCard());
 		
 		return "doctor/patient-card";
 	}
 	
 	@RequestMapping(value = "/doctor/patient-card", method = RequestMethod.POST)
-	public String patientCardPost(@RequestParam Integer visitID){
+	public String patientCardPost(@RequestParam String action, @RequestParam Integer visitID, 
+			Patient patient, PatientCard patientCard, RedirectAttributes redirectAttributes){
 		
-		visitService.updatePresence(Presence.present.getValue(), visitID);
-		
+		if(action.equals("patient-served")){
+			visitService.updatePresence(Presence.present.getValue(), visitID);
+			patientCardService.addPatientCard(patientCard);
+			
+		}else if(action.equals("save")){			
+			patientService.updatePatient(patient.getID(), patient);
+			redirectAttributes.addFlashAttribute("visitID", visitID);
+			return "redirect:/doctor/patient-card";
+			
+		}else if(action.equals("history")){
+			
+			
+		}	
 		return "redirect:/doctor/visits";
 	}
 		

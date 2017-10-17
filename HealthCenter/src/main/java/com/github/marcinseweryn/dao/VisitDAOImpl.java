@@ -116,4 +116,10 @@ public class VisitDAOImpl implements VisitDAO {
 		
 	}
 
+	@Override
+	public Visit findVisitByID(Integer ID) {
+		
+		return entityManager.find(Visit.class, ID);
+	}
+
 }

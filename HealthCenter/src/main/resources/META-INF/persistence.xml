@@ -10,5 +10,6 @@
     	<class>com.github.marcinseweryn.model.Duty</class>
     	<class>com.github.marcinseweryn.model.Visit</class>
     	<class>com.github.marcinseweryn.model.Patient</class>
+    	<class>com.github.marcinseweryn.model.PatientCard</class>
     </persistence-unit>
 </persistence>

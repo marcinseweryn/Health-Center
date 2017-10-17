@@ -1,0 +1,57 @@
+#patient-informations-div{
+	width: 38.6%;
+	height: 100%;
+	float:left;
+	padding-left: 1%;
+	color:;
+	font-size: 2vw;
+	font-weight: bolder;
+	font-family: Arial, Helvetica, sans-serif;
+	text-shadow: 2px 2px 3px gray;
+}
+
+#body td{
+	padding-top: 3%;
+	padding-bottom: 2%;
+}
+
+#body textarea{
+	resize: none;
+	background-color: #f7f7f7;
+	font-size: 1vw;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#patient-name{
+	padding-left: 5%;
+	margin-top:-5%;
+	width: 95%;
+	height: 10%;
+	border-bottom: 0.3vw solid black
+}
+
+
+#doctor-comments-div{
+	width: 58%;
+	height: 100%;
+	padding-left: 2%;
+	border-left: 0.3vw solid black;
+	float: left;
+}
+
+#patient-served-button{
+	width: 25vw;
+	margin-left: 7vw;
+}
+
+#history-button{
+	width: 12vw;
+	margin-left: 5vw;;
+}
+
+#save-button{
+	width: 12vw;
+	margin-top: 1.5vh;
+	margin-left: 0.5vw;
+}

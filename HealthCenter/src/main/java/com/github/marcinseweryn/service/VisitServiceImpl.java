@@ -70,4 +70,10 @@ public class VisitServiceImpl implements VisitService {
 		visitDAO.updatePresence(presenceValue, visitID);
 	}
 
+	@Override
+	public Visit findVisitByID(Integer ID) {
+	
+		return visitDAO.findVisitByID(ID);
+	}
+
 }

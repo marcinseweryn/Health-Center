@@ -9,6 +9,8 @@ public interface VisitDAO {
 
 	public void addVisit(Visit visit);
 	
+	public Visit findVisitByID(Integer ID);
+	
 	public List<Visit> findVisitForDoctorByDutyID(Integer dutyID);
 	
 	public List<PatientVisitDetails> findVisitDetailsForPatientByPatientID(Integer ID);

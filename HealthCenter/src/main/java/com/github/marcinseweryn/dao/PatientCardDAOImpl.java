@@ -2,29 +2,24 @@ package com.github.marcinseweryn.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.marcinseweryn.model.PatientCard;
 
 @Repository
-public class PatientDAOImpl implements PatientDAO {
+public class PatientCardDAOImpl implements PatientCardDAO {
 
 	@PersistenceContext
-	EntityManager entityManager;
-
+	private EntityManager entityManager;
+	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public void updatePatient(Integer ID, String columns) {
+	public void addPatientCard(PatientCard patientCard) {
 		
-		Query query = entityManager.createQuery("UPDATE Patient SET " + columns +
-				" WHERE ID = " + ID);
-		
-		query.executeUpdate();
-		
+		entityManager.persist(patientCard);
 	}
-	
 
 }

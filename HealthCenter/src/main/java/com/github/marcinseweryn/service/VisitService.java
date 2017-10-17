@@ -9,6 +9,8 @@ public interface VisitService {
 
 	public void addVisit(Integer dutyID, Integer patientID, Integer positionInQueue);
 	
+	public Visit findVisitByID(Integer ID);
+	
 	public List<Visit> findVisitForDoctorByDutyID(Integer dutyID);
 	
 	public List<PatientVisitDetails> findVisitDetailsForPatientByPatientID(Integer ID);

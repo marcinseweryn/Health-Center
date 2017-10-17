@@ -108,6 +108,12 @@ button.user:HOVER {
 	background-color: #29a329;
 }
 
+.button-color-blue{
+	background-color: #008AE6;
+}
+.button-color-blue:HOVER{
+	background-color: #0066FF;
+}
 input[type="checkbox"] {
     cursor: pointer;
 }
