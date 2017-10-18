@@ -1,0 +1,43 @@
+#diagnosis{
+	max-width: 10vw;
+	min-width: 10vw;
+	text-align: left;
+}
+
+#comments{
+	max-width: 22vw;
+	min-width: 22vw;
+	text-align: left;
+}
+
+#prescribed-medicines{
+	max-width: 15vw;
+	min-width: 15vw;
+	text-align: left;
+}
+
+#doctor-name{
+	max-width: 7.5vw;
+	min-width: 7.5vw;
+	text-align: left;
+}
+
+#patient-card-button{
+	margin-left: 2vw;
+	margin-top: 2vh;
+	padding: 1.5vh 3vw;
+}
+
+.user thead{
+	position: relative;
+	display: block;
+}
+
+.user tbody{
+	display: block;
+	overflow-y: scroll;
+	max-height: 70vh;  
+	vertical-align: top;
+}
+
+

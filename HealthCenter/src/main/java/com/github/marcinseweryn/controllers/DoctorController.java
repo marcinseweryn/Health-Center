@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,12 +18,14 @@ import com.github.marcinseweryn.model.Doctor;
 import com.github.marcinseweryn.model.Duty;
 import com.github.marcinseweryn.model.Patient;
 import com.github.marcinseweryn.model.PatientCard;
+import com.github.marcinseweryn.model.PatientHistory;
 import com.github.marcinseweryn.model.User;
 import com.github.marcinseweryn.model.Visit;
 import com.github.marcinseweryn.pojo.Presence;
 import com.github.marcinseweryn.service.DoctorService;
 import com.github.marcinseweryn.service.DutyService;
 import com.github.marcinseweryn.service.PatientCardService;
+import com.github.marcinseweryn.service.PatientHistoryService;
 import com.github.marcinseweryn.service.PatientService;
 import com.github.marcinseweryn.service.UserService;
 import com.github.marcinseweryn.service.VisitService;
@@ -50,6 +51,9 @@ public class DoctorController {
 	@Autowired 
 	private PatientService patientService;
 	
+	@Autowired
+	private PatientHistoryService patientHistoryService;
+	
 	@ModelAttribute("username")
 	public String getUsername(Principal principal){
 		Integer ID = Integer.parseInt(principal.getName());
@@ -57,6 +61,7 @@ public class DoctorController {
 		User user = userService.findUserByID(ID);
 	    
 		String username = user.getName() + " " + user.getSurname();
+		
 	    return username;
 	}
 	
@@ -198,10 +203,34 @@ public class DoctorController {
 			return "redirect:/doctor/patient-card";
 			
 		}else if(action.equals("history")){
-			
-			
+			redirectAttributes.addFlashAttribute("visitID", visitID);
+			return "redirect:/doctor/patient-history";
 		}	
 		return "redirect:/doctor/visits";
+	}
+	
+	@RequestMapping(value = "/doctor/patient-history", method = RequestMethod.GET)
+	public String patientHistory(@ModelAttribute("visitID") Integer visitID, Model model){
+		
+		if(visitID == null){
+			return "doctor/visits";
+		}	
+		Visit visit = visitService.findVisitByID(visitID);
+		List<PatientHistory> list = patientHistoryService.findPatientHistoryForDoctor(visit.getPatientID());
+		
+		model.addAttribute("patientHistoryList", list);
+		model.addAttribute("visitID", visitID);
+		
+		return "doctor/patient-history";
+	}
+	
+	
+	@RequestMapping(value = "/doctor/patient-history", method = RequestMethod.POST)
+	public String patientHistoryPost(@RequestParam Integer visitID, RedirectAttributes redirectAttributes){
+		
+		redirectAttributes.addFlashAttribute("visitID", visitID);
+		
+		return "redirect:/doctor/patient-card";
 	}
 		
 

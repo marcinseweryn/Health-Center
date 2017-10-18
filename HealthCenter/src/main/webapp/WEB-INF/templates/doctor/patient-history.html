@@ -1,0 +1,47 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+	  style="margin:0px">
+<head>
+	<title th:text="#{home.login}"></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/body.css}" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/doctor/patientHistory.css}" />
+</head>
+
+<body  style="margin: 0px;">
+
+	<div th:include = "fragments/userDoctorHeader" th:with="username = ${username}"></div>
+	<div th:include = "fragments/userDoctorMenu"></div>
+	
+	<div id = "body">
+		<table class = "user">
+		<thead>
+			<tr>
+				<th th:text = "#{table.date}">
+				<th id = "doctor-name" th:text = "#{table.doctor}">
+				<th id = "diagnosis" th:text = "#{patientCard.diagnosis}">
+				<th id = "comments" th:text = "#{patientCard.comments}">
+				<th id = "prescribed-medicines" th:text = "#{patientCard.prescribedMedicines}">	
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each = "patientHistory, iterStat : ${patientHistoryList}" th:class = "${iterStat.odd}? 'odd' : 'even'">
+				<td th:text = "${#strings.substring(patientHistory.getDate(),0,10)}"/>
+				<td id = "doctor-name" th:text = "${patientHistory.getDoctor()}"/>
+				<td id = "diagnosis" th:text = "${patientHistory.getDiagnosis()}"/>
+				<td id = "comments" th:text = "${patientHistory.getComments()}"/>
+				<td id = "prescribed-medicines" th:text = "${patientHistory.getPrescribedMedicines()}"/>
+			</tr>
+		</tbody>
+		</table>
+		
+		<form action = "#" th:action="@{/doctor/patient-history}" method="post">
+			<button id = "patient-card-button" th:text = "#{doctor.patientCard}" 
+				class = "user button-color-blue" th:value = "${visitID}" name = "visitID"></button>
+		</form>
+	</div>
+	
+
+</body>
+</html>
