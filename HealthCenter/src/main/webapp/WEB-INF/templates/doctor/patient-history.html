@@ -3,11 +3,26 @@
       xmlns:th="http://www.thymeleaf.org"
 	  style="margin:0px">
 <head>
-	<title th:text="#{home.login}"></title>
+	<title th:text="#{history}"></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/body.css}" />
-	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/doctor/patientHistory.css}" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/patientHistory.css}" />
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 </head>
+
+<script>
+  $(document).ready(function() {
+    $("#datepicker1").datepicker(
+		{dateFormat: 'dd/mm/yy', changeMonth: true, changeYear: true, yearRange: '-20:+0'} 
+    	);
+    $("#datepicker2").datepicker(
+    		{dateFormat: 'dd/mm/yy', changeMonth: true, changeYear: true, yearRange: '-20:+0'} 
+        	);
+  });
+</script>
 
 <body  style="margin: 0px;">
 
@@ -36,10 +51,37 @@
 		</tbody>
 		</table>
 		
-		<form action = "#" th:action="@{/doctor/patient-history}" method="post">
-			<button id = "patient-card-button" th:text = "#{doctor.patientCard}" 
-				class = "user button-color-blue" th:value = "${visitID}" name = "visitID"></button>
+		<form action = "#" th:action="@{/doctor/patient-history-back}" method="post">
+			<button th:text = "#{doctor.patientCard}" th:value = "${visitID}" name = "visitID" 
+				class = "patient-card-button user button-color-blue" ></button>
 		</form>
+		
+		<form action = "#" th:action="@{/doctor/patient-history}" th:object="${dateFromTo}" method="post">	
+			
+			<button style="float:left;" th:text = "#{search}" class = "patient-card-button user button-color-blue"></button>	
+			
+			<table style="float: left; margin-top:2vh; padding-left:1.5vw;">
+				<tr>
+					<td>
+						<label class ="user" th:utext = "#{table.date} + ' ' + #{from}"></label>		 
+					</td>
+					<td>
+						<input id = "datepicker1" class ="user" th:field = "*{from}"/>
+					</td>
+					<td>
+						<label class ="user" th:text = "#{to}"></label>
+					</td>
+					<td>
+						<input id = "datepicker2" class = "user" th:field = "*{to}"/>
+					</td>
+					<td>
+						<input class ="user" type = "hidden" th:value = "${visitID}" name = "visitID" />
+					</td>
+				</tr>
+			</table>
+		</form>
+		
+
 	</div>
 	
 

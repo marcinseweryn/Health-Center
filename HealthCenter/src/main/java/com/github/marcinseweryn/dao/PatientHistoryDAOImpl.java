@@ -1,6 +1,8 @@
 package com.github.marcinseweryn.dao;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import com.github.marcinseweryn.model.PatientHistory;
+import com.github.marcinseweryn.pojo.DateFromTo;
 
 @Repository
 public class PatientHistoryDAOImpl implements PatientHistoryDAO{
@@ -18,14 +21,16 @@ public class PatientHistoryDAOImpl implements PatientHistoryDAO{
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	public List<PatientHistory> findPatientHistoryForDoctor(Integer PatientID){
+	public List<PatientHistory> findPatientHistoryByDateAndPatientID(DateFromTo date, Integer PatientID){
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");	
 		
 		Query query = entityManager.createQuery("SELECT  d.date, u.name, u.surname, pc.diagnosis, "
 				+ "pc.comments, pc.prescribedMedicines "
 					+ "FROM  Visit v, PatientCard pc, Duty d, User u "
 						+ "WHERE v.ID = pc.visitID and "
 							+ " v.dutyID = d.ID and "
-							+ " d.doctorID = u.ID and v.patientID = " + PatientID
+							+ " d.doctorID = u.ID and v.patientID = " + PatientID + " and "
+							+ " d.date between '" + df.format(date.getFrom()) + "' and '" + df.format(date.getTo()) + "' "
 						+ " ORDER BY d.date DESC");
 		
 		List<Object[]> objectList = query.getResultList();

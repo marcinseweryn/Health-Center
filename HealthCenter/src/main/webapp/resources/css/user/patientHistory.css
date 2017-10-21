@@ -22,10 +22,11 @@
 	text-align: left;
 }
 
-#patient-card-button{
+.patient-card-button{
 	margin-left: 2vw;
 	margin-top: 2vh;
 	padding: 1.5vh 3vw;
+	float: left;
 }
 
 .user thead{

@@ -21,6 +21,7 @@ import com.github.marcinseweryn.model.PatientCard;
 import com.github.marcinseweryn.model.PatientHistory;
 import com.github.marcinseweryn.model.User;
 import com.github.marcinseweryn.model.Visit;
+import com.github.marcinseweryn.pojo.DateFromTo;
 import com.github.marcinseweryn.pojo.Presence;
 import com.github.marcinseweryn.service.DoctorService;
 import com.github.marcinseweryn.service.DutyService;
@@ -64,6 +65,7 @@ public class DoctorController {
 		
 	    return username;
 	}
+	
 	
 	@RequestMapping(value = "/doctor/home", method = RequestMethod.GET)
 	public String home() {	
@@ -210,22 +212,36 @@ public class DoctorController {
 	}
 	
 	@RequestMapping(value = "/doctor/patient-history", method = RequestMethod.GET)
-	public String patientHistory(@ModelAttribute("visitID") Integer visitID, Model model){
+	public String patientHistory(@ModelAttribute("visitID") Integer visitID, Model model,
+			@ModelAttribute("dateFromTo") DateFromTo dateFromTo){
 		
 		if(visitID == null){
 			return "doctor/visits";
 		}	
 		Visit visit = visitService.findVisitByID(visitID);
-		List<PatientHistory> list = patientHistoryService.findPatientHistoryForDoctor(visit.getPatientID());
+		List<PatientHistory> list = patientHistoryService.findPatientHistoryByDateAndPatientID(dateFromTo, visit.getPatientID());
 		
 		model.addAttribute("patientHistoryList", list);
 		model.addAttribute("visitID", visitID);
+		model.addAttribute("dateFromTo", dateFromTo);
 		
 		return "doctor/patient-history";
 	}
 	
 	
 	@RequestMapping(value = "/doctor/patient-history", method = RequestMethod.POST)
+	public String patientHistoryPost(@RequestParam Integer visitID, DateFromTo dateFromTo,
+			RedirectAttributes redirectAttributes){
+			
+		
+		redirectAttributes.addFlashAttribute("visitID", visitID);
+		redirectAttributes.addFlashAttribute("dateFromTo", dateFromTo);
+		
+		
+		return "redirect:/doctor/patient-history";
+	}
+	
+	@RequestMapping(value = "/doctor/patient-history-back", method = RequestMethod.POST)
 	public String patientHistoryPost(@RequestParam Integer visitID, RedirectAttributes redirectAttributes){
 		
 		redirectAttributes.addFlashAttribute("visitID", visitID);
