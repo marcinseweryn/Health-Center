@@ -1,0 +1,81 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+	  style="margin:0px">
+<head>
+	<title th:text="#{history}"></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/body.css}" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/patientHistory.css}" />
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+</head>
+
+<script>
+  $(document).ready(function() {
+    $("#datepicker1").datepicker(
+		{dateFormat: 'dd/mm/yy', changeMonth: true, changeYear: true, yearRange: '-20:+0'} 
+    	);
+    $("#datepicker2").datepicker(
+    		{dateFormat: 'dd/mm/yy', changeMonth: true, changeYear: true, yearRange: '-20:+0'} 
+        	);
+  });
+</script>
+
+<body  style="margin: 0px;">
+
+	<div th:include = "fragments/userHeader" th:with="username = ${username}"></div>
+	<div th:include = "fragments/userMenu"></div>
+	
+	<div id = "body">
+		<table class = "user">
+		<thead>
+			<tr>
+				<th th:text = "#{table.date}">
+				<th id = "doctor-name" th:text = "#{table.doctor}">
+				<th id = "diagnosis" th:text = "#{patientCard.diagnosis}">
+				<th id = "comments" th:text = "#{patientCard.recommendations}">
+				<th id = "prescribed-medicines" th:text = "#{patientCard.prescribedMedicines}">	
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each = "patientHistory, iterStat : ${patientHistoryList}" th:class = "${iterStat.odd}? 'odd' : 'even'">
+				<td th:text = "${#strings.substring(patientHistory.getDate(),0,10)}"/>
+				<td id = "doctor-name" th:text = "${patientHistory.getDoctor()}"/>
+				<td id = "diagnosis" th:text = "${patientHistory.getDiagnosis()}"/>
+				<td id = "comments" th:text = "${patientHistory.getRecommendations()}"/>
+				<td id = "prescribed-medicines" th:text = "${patientHistory.getPrescribedMedicines()}"/>
+			</tr>
+		</tbody>
+		</table>
+		
+		<form action = "#" th:action="@{/user/history}" th:object="${dateFromTo}" method="post">	
+			
+			<button style="float:left;" th:text = "#{search}" class = "patient-card-button user button-color-blue"></button>	
+			
+			<table style="float: left; margin-top:2vh; padding-left:1.5vw;">
+				<tr>
+					<td>
+						<label class ="user" th:utext = "#{table.date} + ' ' + #{from}"></label>		 
+					</td>
+					<td>
+						<input id = "datepicker1" class ="user" th:field = "*{from}"/>
+					</td>
+					<td>
+						<label class ="user" th:text = "#{to}"></label>
+					</td>
+					<td>
+						<input id = "datepicker2" class = "user" th:field = "*{to}"/>
+					</td>
+				</tr>
+			</table>
+		</form>
+		
+
+	</div>
+	
+
+</body>
+</html>

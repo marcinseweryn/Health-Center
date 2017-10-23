@@ -25,7 +25,7 @@ public class PatientHistoryDAOImpl implements PatientHistoryDAO{
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");	
 		
 		Query query = entityManager.createQuery("SELECT  d.date, u.name, u.surname, pc.diagnosis, "
-				+ "pc.comments, pc.prescribedMedicines "
+				+ "pc.comments, pc.prescribedMedicines, pc.recommendations "
 					+ "FROM  Visit v, PatientCard pc, Duty d, User u "
 						+ "WHERE v.ID = pc.visitID and "
 							+ " v.dutyID = d.ID and "
@@ -44,6 +44,7 @@ public class PatientHistoryDAOImpl implements PatientHistoryDAO{
 			patientHistory.setDiagnosis((String) object[3]);
 			patientHistory.setComments((String) object[4]);
 			patientHistory.setPrescribedMedicines((String) object[5]);
+			patientHistory.setRecommendations((String) object[6]);
 			
 			patientHistoryList.add(patientHistory);
 		}

@@ -19,13 +19,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.github.marcinseweryn.model.Doctor;
 import com.github.marcinseweryn.model.Duty;
 import com.github.marcinseweryn.model.Patient;
+import com.github.marcinseweryn.model.PatientHistory;
 import com.github.marcinseweryn.model.User;
 import com.github.marcinseweryn.model.Visit;
 import com.github.marcinseweryn.model.WorkSchedule;
+import com.github.marcinseweryn.pojo.DateFromTo;
 import com.github.marcinseweryn.pojo.DutyDetailsForPatientQueue;
 import com.github.marcinseweryn.pojo.PatientVisitDetails;
 import com.github.marcinseweryn.service.DoctorService;
 import com.github.marcinseweryn.service.DutyService;
+import com.github.marcinseweryn.service.PatientHistoryService;
 import com.github.marcinseweryn.service.PatientService;
 import com.github.marcinseweryn.service.UserService;
 import com.github.marcinseweryn.service.VisitService;
@@ -51,6 +54,9 @@ public class UserController {
 	
 	@Autowired
 	private PatientService patientService;
+	
+	@Autowired
+	private PatientHistoryService patientHistoryService;
 	
 	
 	@ModelAttribute("username")
@@ -239,6 +245,28 @@ public class UserController {
 		model.addAttribute("visitsList", visitService.findVisitForQueueByDutyID(dutyDetails.getDutyID()));
 		model.addAttribute("positionInQueue", visitService.findVisitDetailsForPatientByPatientID(ID).get(0).getPositionInQueue());
 		return "user/queue";
+	}
+	
+	
+	@RequestMapping(value = "/user/history", method = RequestMethod.GET)
+	public String historyGet( Model model, @ModelAttribute("dateFromTo") DateFromTo dateFromTo, Principal principal){
+		
+		Integer patientID = Integer.parseInt(principal.getName());
+		
+		List<PatientHistory> list = patientHistoryService.findPatientHistoryByDateAndPatientID(dateFromTo, patientID);
+		
+		model.addAttribute("patientHistoryList", list);
+		model.addAttribute("dateFromTo", dateFromTo);
+		
+		return "user/history";
+	}
+	
+	@RequestMapping(value = "/user/history", method = RequestMethod.POST)
+	public String patientHistoryPost(DateFromTo dateFromTo, RedirectAttributes redirectAttributes){
+				
+		redirectAttributes.addFlashAttribute("dateFromTo", dateFromTo);
+	
+		return "redirect:/user/history";
 	}
 	
 }
