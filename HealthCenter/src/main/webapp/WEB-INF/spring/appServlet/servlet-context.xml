@@ -80,4 +80,24 @@
 	</beans:bean>
 	<!-- ****************************************************************** -->	
 	
+	
+	<!-- **************************** E-mail ******************************** -->
+	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <beans:property name="host" value="smtp.gmail.com"/>
+        <beans:property name="port" value="587"/>
+        <beans:property name="username" value="healthcenter1111@gmail.com"/>
+        <beans:property name="password" value="h1e2a3l4t5h6"/>
+        <beans:property name="javaMailProperties">
+            <beans:props>
+                <beans:prop key="mail.transport.protocol">smtp</beans:prop>
+                <beans:prop key="mail.smtp.ssl.trust">smtp.gmail.com</beans:prop>
+                <beans:prop key="mail.smtp.auth">true</beans:prop>
+                <beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+                <beans:prop key="mail.debug">true</beans:prop>
+            </beans:props>
+        </beans:property>
+    </beans:bean>
+	
+	<!-- ******************************************************************** -->
+	
 </beans:beans>

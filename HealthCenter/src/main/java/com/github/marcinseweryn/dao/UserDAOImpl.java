@@ -3,6 +3,7 @@ package com.github.marcinseweryn.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -81,6 +82,19 @@ public class UserDAOImpl implements UserDAO {
 		List<User> list = query.getResultList();
 		
 		return list;
+	}
+
+	@Override
+	public User findUserByEmail(String email) {
+		
+		Query query = entityManager.createQuery("FROM User u WHERE u.email = '" + email +"'");		
+		
+		try{
+		User user = (User) query.getSingleResult();
+			return user;
+		}catch(NoResultException e){
+			return null;
+		}	
 	}
 
 

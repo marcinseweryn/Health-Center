@@ -19,19 +19,12 @@
 				<h1 id = "login-title" th:text = "#{login.title}"></h1>		
 			</div>
 			
-			<form th:action="@{/login}"  method="post">
+			<form th:action="@{/forgot-account}"  method="post">
 				<p style = "color: red;" th:if = "${param.error}" th:text="#{login.error}"/>
 				<table>
 					<tr>
 						<td>
-							<input type = "text" class = "login-input" id = "ID" name = "ID" th:placeholder = "#{accountNumber}"/>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type = "password" class = "login-input" id = "password" name = "password" th:placeholder = "#{password}"/>
-							<br>
-							<a href="https://localhost:8443/HealthCenter/forgot-account" th:text = "#{forgotAccount}"></a>
+							<input type = "text" class = "login-input" id = "email" name = "email" th:placeholder = "#{table.email}"/>
 						</td>
 					</tr>
 				</table>
