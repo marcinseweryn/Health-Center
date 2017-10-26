@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
 	  style="margin:0px">
 <head>
-	<title th:text="#{home.registrationCompleted}"></title>
+	<title th:text="#{home.information}"></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/main/mainBody.css}" />
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/main/registration-completed.css}" />
@@ -15,10 +15,19 @@
 	
 	<div id = "body">
 	
-		<div id = "registration-completed">
-
+		<div th:if = "${status == 'incorrectEmail'}" id = "registration-completed" style ="height: 22vh;">
+			<h2 th:text = "#{error.email}"></h2>
+			<p style = "font-size: 1.3vw;" th:text = "#{forgotAccount.information.incorrectEmail}"></p>		
 		</div>
 		
+		<div th:if = "${status == 'incorrectCode'}" id = "registration-completed" style ="height: 22vh;">
+			<h2 th:text = "#{error.securityCode}"></h2>	
+		</div>
+		
+		<div th:if = "${status == 'correctCode'}" id = "registration-completed" style ="height: 22vh;">
+			<h2 th:text = "#{forgotAccount.information.passwordChanged}"></h2>
+			<p style = "font-size: 1.3vw;" th:text = "#{forgotAccount.information.newPassword}"></p>		
+		</div>
 	
 	</div>	
 	

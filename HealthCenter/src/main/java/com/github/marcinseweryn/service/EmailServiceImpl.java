@@ -86,7 +86,7 @@ public class EmailServiceImpl implements EmailService {
 			return code;
 		}else{
 			
-			return "incorrect";
+			return "incorrectEmail";
 		}
 		
 	}

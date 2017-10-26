@@ -51,10 +51,11 @@ public class HomeController {
 	public String forgotPasswordFirstStepPost(@RequestParam String email, RedirectAttributes redirectAttributes){	
 		
 		String code = emailService.forgottenLoginDataFirstStep(email);
-		System.out.println(code);
+
+		redirectAttributes.addFlashAttribute("status", code);
 		
-		if(!code.equals("incorrect")){
-			redirectAttributes.addFlashAttribute("code", code);
+		if(!code.equals("incorrectEmail")){
+			
 			redirectAttributes.addFlashAttribute("email", email);
 			
 			return "redirect:/forgot-account-2";
@@ -64,7 +65,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/forgot-account-2", method = RequestMethod.GET)
-	public String forgotPasswordSecondStepGet(@ModelAttribute("code") String code, Model model,
+	public String forgotPasswordSecondStepGet(@ModelAttribute("status") String code, Model model,
 			@ModelAttribute("email") String email,  RedirectAttributes redirectAttributes){
 	
 		if(code.equals("")){ // block refresh
