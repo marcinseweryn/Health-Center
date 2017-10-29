@@ -9,23 +9,64 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.github.marcinseweryn.annotation.PeselControlNumber;
 
 @Entity
 @Table(name = "user")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
-	private String pesel, gender, name, surname, password,
-		streetAddress, city, postalCode, phone, email, role, enabled;
+	
+	private String role, enabled;
+	
+	@NotNull(message = "{error.gender}")
+	private String gender;
+	
+	@PeselControlNumber(message = "{error.pesel.controlNumber}")
+	@Pattern(regexp = "^[0-9]{11}$", message = "{error.pesel.size}")
+	private String pesel;
+	
+	@Pattern(regexp ="(^[a-zA-Z\\s]{2,35}$)", message = "{error.name}")
+	private String name, surname;
+	
+	@Size(min = 5, max = 20, message = "{error.password}")
+	private String password;
+	
+	@Size(min = 2, max = 35, message = "{error.streetAddress.size}")
+	@Pattern(regexp = "(^[a-zA-Z0-9\\s\\/]{2,35}$)", message = "{error.streetAddress}")
+	private String streetAddress; 
+	
+	@Pattern(regexp ="(^[a-zA-Z\\s]{2,35}$)", message = "{error.city}")
+	private String city;
+	
+	@Pattern(regexp = "\\d{2}-\\d{3}", message = "{error.postalCode}")
+	private String postalCode;
+	
+	@Pattern(regexp = "^[0-9]{9}$", message = "{error.phone}")
+	private String phone;
+	
+	@Size(min = 6, max = 254, message = "{error.email}")
+	@Email(message = "{error.email}")
+	private String email;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer ID;
 	
-	private Date birthDate;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@NotNull(message = "{error.birthDate}")
+	@Past(message = "{error.birthDate}")
+	private Date birthDate; 
 	
-	
+	 
 	public Integer getID() {
 		return ID;
 	}

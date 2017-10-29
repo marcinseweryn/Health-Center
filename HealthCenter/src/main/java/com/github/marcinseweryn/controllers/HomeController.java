@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -121,14 +122,18 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public String register(@Valid Patient patient, RedirectAttributes redirectAttributes){
+	public String register(@Valid Patient patient, Errors errors, RedirectAttributes redirectAttributes){
 		
-		patient.setRole("ROLE_PATIENT");
-		userService.addUser(patient);
+		if(errors.hasErrors()){
+			return "main/registration";
+		}
 		
-		User user = userService.findUsers(patient).get(0);
-		String ID = user.getID().toString();
-		redirectAttributes.addFlashAttribute("accountNumber", ID);
+//		patient.setRole("ROLE_PATIENT");
+//		userService.addUser(patient);
+//		
+//		User user = userService.findUsers(patient).get(0);
+//		String ID = user.getID().toString();
+//		redirectAttributes.addFlashAttribute("accountNumber", ID);
 		
 		return "redirect:/registration-completed";
 	}

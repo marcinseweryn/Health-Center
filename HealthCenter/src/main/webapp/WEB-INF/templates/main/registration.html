@@ -15,7 +15,7 @@
   <script>
   $(document).ready(function() {
     $("#datepicker").datepicker(
-		{dateFormat: 'mm/dd/yy', changeMonth: true, changeYear: true, yearRange: '-110:+0'} 
+		{dateFormat: 'dd/mm/yy', changeMonth: true, changeYear: true, yearRange: '-110:+0'} 
     	);
   });
   </script>
@@ -32,7 +32,12 @@
 				
 			</div>
 			
-			<form action = "#" th:action="@{/registration}" th:object="${patient}"  method="post">	
+			<form action = "#" th:action="@{/registration}" th:object="${patient}"  method="post">
+			
+			<div th:if="${#fields.hasAnyErrors()}">
+			  	<p th:each="err : ${#fields.allErrors()}" th:text="${err}" style ="color: red;"></p>
+			</div>
+				
 			<h2 th:text="#{registration.personalDetails}"></h2>
 			<table style ="padding-left: 3.5vw;" class = "registration-table">
 				<tr>
@@ -52,7 +57,7 @@
 						<label class = "registration-label" th:text = "#{form.name}"></label>
 					</td>
 					<td class = "registration-table-column-2">
-						<input type = "text" th:field="*{name}"  class = "registration-input"/>
+						<input type = "text" th:field="*{name}"  class = "registration-input" th:errorclass = "error"/>
 					</td>
 				</tr>
 				<tr>
@@ -60,7 +65,7 @@
 						<label class = "registration-label" th:text = "#{form.surname}"></label>
 					</td>
 					<td class = "registration-table-column-2">
-						<input type = "text" th:field="*{surname}"  class = "registration-input"/>
+						<input type = "text" th:field="*{surname}"  class = "registration-input" th:errorclass = "error"/>
 					</td>
 				</tr>
 				<tr>
@@ -68,7 +73,7 @@
 						<label class = "registration-label" th:text = "#{form.birthDate}"></label>
 					</td>
 					<td class = "registration-table-column-2">
-						<input id = "datepicker" th:field="*{birthDate}" class = "registration-input"/>
+						<input id = "datepicker" th:field="*{birthDate}" class = "registration-input" th:errorclass = "error"/>
 						
 					</td>
 				</tr>
@@ -77,7 +82,7 @@
 						<label class = "registration-label" th:text = "#{personalIdentificationNumber}"></label>
 					</td>
 					<td class = "registration-table-column-2">
-						<input type = "text" th:field="*{pesel}"  class = "registration-input"/>
+						<input type = "text" th:field="*{pesel}"  class = "registration-input" th:errorclass = "error"/>
 					</td>
 				</tr>
 				<tr>
@@ -85,7 +90,7 @@
 						<label class = "registration-label" th:text = "#{password}"></label>
 					</td>
 					<td class = "registration-table-column-2">
-						<input type = "password" th:field="*{password}"  class = "registration-input"/>
+						<input type = "password" th:field="*{password}"  class = "registration-input" th:errorclass = "error"/>
 					</td>
 				</tr>			
 			</table>
@@ -97,7 +102,7 @@
 						<label class = "registration-label" th:text = "#{form.streetAddress}"></label>
 					</td>
 					<td class = "registration-table-column-2">
-						<input type = "text" th:field="*{streetAddress}"  class = "registration-input"/>
+						<input type = "text" th:field="*{streetAddress}"  class = "registration-input" th:errorclass = "error"/>
 					</td>
 				</tr>
 				<tr>
@@ -105,7 +110,7 @@
 						<label class = "registration-label" th:text = "#{form.city}"></label>
 					</td>
 					<td class = "registration-table-column-2">
-						<input type = "text" th:field="*{city}"  class = "registration-input"/>
+						<input type = "text" th:field="*{city}"  class = "registration-input" th:errorclass = "error"/>
 					</td>
 				</tr>
 				<tr>
@@ -113,7 +118,7 @@
 						<label class = "registration-label" th:text = "#{form.postalCode}"></label>
 					</td>
 					<td class = "registration-table-column-2">
-						<input type = "text" th:field="*{postalCode}" class = "registration-input"/>
+						<input type = "text" th:field="*{postalCode}" class = "registration-input" th:errorclass = "error"/>
 					</td>
 				</tr>
 			</table>
@@ -125,7 +130,7 @@
 						<label class = "registration-label" th:text = "#{form.phone}"></label>
 					</td>
 					<td class = "registration-table-column-2">
-						<input type = "text" th:field="*{phone}"  class = "registration-input"/>
+						<input type = "text" th:field="*{phone}"  class = "registration-input" th:errorclass = "error"/>
 					</td>
 				</tr>
 				<tr>
@@ -133,7 +138,7 @@
 						<label class = "registration-label" th:text = "#{form.email}"></label>
 					</td>
 					<td class = "registration-table-column-2">
-						<input type = "text" th:field="*{email}"  class = "registration-input"/>
+						<input type = "text" th:field="*{email}"  class = "registration-input" th:errorclass = "error"/>
 					</td>
 				</tr>
 			</table>
