@@ -19,6 +19,8 @@ import org.hibernate.validator.constraints.Email;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.github.marcinseweryn.annotation.PeselControlNumber;
+import com.github.marcinseweryn.annotation.UniqueEmail;
+import com.github.marcinseweryn.annotation.UniquePesel;
 
 @Entity
 @Table(name = "user")
@@ -30,8 +32,9 @@ public class User {
 	@NotNull(message = "{error.gender}")
 	private String gender;
 	
-	@PeselControlNumber(message = "{error.pesel.controlNumber}")
+	@UniquePesel(message = "{error.pesel.unique}")
 	@Pattern(regexp = "^[0-9]{11}$", message = "{error.pesel.size}")
+	@PeselControlNumber(message = "{error.pesel.controlNumber}")
 	private String pesel;
 	
 	@Pattern(regexp ="(^[a-zA-Z\\s]{2,35}$)", message = "{error.name}")
@@ -53,6 +56,7 @@ public class User {
 	@Pattern(regexp = "^[0-9]{9}$", message = "{error.phone}")
 	private String phone;
 	
+	@UniqueEmail(message = "{error.email.unique}")
 	@Size(min = 6, max = 254, message = "{error.email}")
 	@Email(message = "{error.email}")
 	private String email;

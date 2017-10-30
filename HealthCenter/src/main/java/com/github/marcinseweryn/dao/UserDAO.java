@@ -21,5 +21,7 @@ public interface UserDAO {
 	public List<User> findUsersByIDs(List<Integer> usersIDs);
 	
 	public User findUserByEmail(String email);
+	
+	public User findUserByPesel(String pesel);
 
 }

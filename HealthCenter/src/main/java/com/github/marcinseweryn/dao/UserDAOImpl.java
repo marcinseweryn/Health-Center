@@ -97,6 +97,19 @@ public class UserDAOImpl implements UserDAO {
 		}	
 	}
 
+	@Override
+	public User findUserByPesel(String pesel) {
+		
+		Query query = entityManager.createQuery("FROM User u WHERE u.pesel = '" + pesel +"'");		
+		
+		try{
+		User user = (User) query.getSingleResult();
+			return user;
+		}catch(NoResultException e){
+			return null;
+		}	
+	}
+
 
 
 }

@@ -12,6 +12,8 @@ public class PeselControlNumberValidator implements ConstraintValidator<PeselCon
 	@Override
 	public boolean isValid(String pesel, ConstraintValidatorContext context) {
 		
+		if(pesel.length() != 11) return false;
+		
 		Integer weight = 1;
 		Integer sum = 0;
 		for(int i = 0; i < 10; i++){
