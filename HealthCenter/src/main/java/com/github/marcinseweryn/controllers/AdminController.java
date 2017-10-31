@@ -131,6 +131,8 @@ public class AdminController {
 	@RequestMapping(value = "/admin/workSchedule/search", method = RequestMethod.POST)
 	public String workScheduleSearch(Doctor doctor, Model model,RedirectAttributes redirectAttributes) {	
 		
+		doctor.setSpecialization_2(doctor.getSpecialization_1());
+		doctor.setSpecialization_3(doctor.getSpecialization_1());
 		redirectAttributes.addFlashAttribute("searchDoctor", doctor);
 		
 		return "redirect:/admin/workSchedule";

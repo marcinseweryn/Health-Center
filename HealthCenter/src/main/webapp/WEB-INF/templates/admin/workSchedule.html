@@ -129,7 +129,8 @@
 					<td th:text = "${doctor.getID()}"></td>
 					<td th:text = "${doctor.getName()}"></td>
 					<td th:text = "${doctor.getSurname()}"></td>
-					<td th:text = "${doctor.getSpecialization_1()}"></td>
+					<td th:text = "${doctor.getSpecialization_1() + ' ' + doctor.getSpecialization_2()
+						+ ' ' + doctor.getSpecialization_3()}"></td>
 				</tr>
 				</tbody>
 			</table>	
@@ -141,7 +142,21 @@
 							<label class = "admin" th:text = "#{form.specialization}"></label>
 						</td>
 						<td>
-							<input class = "admin" th:field="*{specialization_1}" type = "text"/>
+							<select class = "admin" style = "width: 8vw;" th:field = "*{specialization_1}">
+								<option value = " "></option>
+								<option value = "Primary Care Physician" th:text = "#{doctor.primaryCarePhysician}"></option>
+								<option value = "Surgeon" th:text = "#{doctor.surgeon}"></option>
+								<option value = "Dermatologist" th:text = "#{doctor.dermatologist}"></option>
+								<option value = "Endocrinologist" th:text = "#{doctor.endocrinologist}"></option>
+								<option value = "Gastroenterologist" th:text = "#{doctor.gastroenterologist}"></option>
+								<option value = "Cardiologist" th:text = "#{doctor.cardiologist}"></option>
+								<option value = "Neurologist" th:text = "#{doctor.neurologist}"></option>
+								<option value = "Ophthalmologist" th:text = "#{doctor.ophthalmologist}"></option>
+								<option value = "Oncologist" th:text = "#{doctor.oncologist}"></option>
+								<option value = "Pediatrician" th:text = "#{doctor.pediatrician}"></option>
+								<option value = "Urologist" th:text = "#{doctor.urologist}"></option>
+								<option value = "Occupational medicine" th:text = "#{doctor.occupationalMedicine}"></option>
+							</select>
 						</td>
 						<td colspan="2" style = "text-align: center;">
 							<button id = "button-search-doctor" class = "button-search" name = "action" form = "searchDoctors" type="submit" th:text = "#{search}"></button>		

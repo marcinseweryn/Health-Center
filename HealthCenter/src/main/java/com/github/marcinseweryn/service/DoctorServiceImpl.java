@@ -50,24 +50,24 @@ public class DoctorServiceImpl implements DoctorService {
 				where += " d.city = '" + doctor.getCity() + "' and ";
 			}
 		}
+		if(doctor.getInformation() != null){
+			if(!doctor.getInformation().equals("")){
+				where += " d.information = '" + doctor.getInformation() + "' and ";
+			}
+		}
 		if(doctor.getSpecialization_1() != null){
 			if(!doctor.getSpecialization_1().equals("")){
-				where += " d.specialization_1 = '" + doctor.getSpecialization_1() + "' and ";
+				where += " d.specialization_1 = '" + doctor.getSpecialization_1() + "' or ";
 			}
 		}
 		if(doctor.getSpecialization_2() != null){
 			if(!doctor.getSpecialization_2().equals("")){
-				where += " d.specialization_2 = '" + doctor.getSpecialization_2() + "' and ";
+				where += " d.specialization_2 = '" + doctor.getSpecialization_2() + "' or ";
 			}
 		}
 		if(doctor.getSpecialization_3() != null){
 			if(!doctor.getSpecialization_3().equals("")){
-				where += " and d.specialization_3 = '" + doctor.getSpecialization_3() + "' and ";
-			}
-		}
-		if(doctor.getInformation() != null){
-			if(!doctor.getInformation().equals("")){
-				where += " and d.information = '" + doctor.getInformation() + "' and ";
+				where += " d.specialization_3 = '" + doctor.getSpecialization_3() + "' or ";
 			}
 		}
 		
