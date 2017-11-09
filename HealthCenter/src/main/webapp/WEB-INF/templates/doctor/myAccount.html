@@ -15,12 +15,26 @@
 	<div th:include = "fragments/userDoctorMenu"></div>
 	
 	<div id ="body">
-	
+		
 		<div id = "myAccount-title">
 			<p th:text = "#{myAccount}"></p>
 		</div>
-	
-		<form id = "firstForm" action = "#" th:action="@{/doctor/myAccount}" th:object="${doctor}" method="post">
+		<div style = "float: left;">
+			<div id = "avatar"> 	
+				<img src="/HealthCenter/profile-picture">
+			</div>
+		
+			<div style ="margin-top: 1vh; margin-left: 6vw;">
+				<form action = "#" th:action="@{'/uploadProfilePicture' +'?' + ${_csrf.parameterName} + '=' + ${_csrf.token}}" method="post" enctype="multipart/form-data">
+					<label class = "select-file" for = "image" th:text = "#{upload.selectImage}"></label>
+					<input id = "image" class = "user"  style="width:0vw; visibility:hidden;" type = "file" name = "file" th:placeholder="#{load}">
+					<button class= "user button-color-blue" th:text = "#{load}"></button>
+				</form>
+			</div>
+		</div>
+		
+		
+		<form id = "firstForm" action = "#" th:action="@{doctor/myAccount}" th:object="${doctor}" method="post">
 
 			<table class = "myAccount-table doctor">
 				<tr>
@@ -164,18 +178,27 @@
 						</select>
 					</td>
 				</tr>
+				<tr>
+					<td>
+						<label class ="user" th:text = "#{doctor.medicalTitle} + ':'"></label>
+					</td>
+					<td>
+						<select class = "user">
+							<option value = " "></option>
+						</select>
+					</td>
+				</tr>
+				
 			</table>
 			
-			<label style = "float: left; text-shadow: none; margin-top: 3.4vw; margin-left: 4vw;" 
-				class ="user" th:text = "#{information} + ':'"></label>
+			<label style = "text-shadow: none; margin-left: 4vw;" 
+				class ="user" th:text = "#{information} + ':'"></label><br>
 				
-			<textarea rows="6" cols="60" style = "margin-left: 4vw" maxlength="1000"
+			<textarea rows="6" cols="60" style = "margin-left: 4vw;" maxlength="1000"
 				th:field = "*{information}" th:text = "${doctor.getInformation()}"></textarea>
 			
-			<button style ="margin-left: 19vw;" id = "myAccount-save" class ="user" type="submit"  th:text="#{save}"></button>
+			<button style ="margin-right: 10vw; margin-top:5vh; float:right;" id = "myAccount-save" class ="user" type="submit"  th:text="#{save}"></button>
 		</form>
-		
-	
 	
 	</div>
 	

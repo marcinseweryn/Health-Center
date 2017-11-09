@@ -5,6 +5,7 @@
 	background-color: #0066ff;
 	border-bottom: 0.35vw solid  #0000a0;
 	color: white;
+	position: fixed;
 }
 
 #user-header-title{

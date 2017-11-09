@@ -5,6 +5,9 @@
 	height-max: auto;
 	width: 82.65vw;
 	background-color: white;
+	
+	margin-top: 10vh;
+	margin-left: 16vw;
 }
 
 label.user{
@@ -90,6 +93,7 @@ button.user{
 	box-shadow: 0.2vw 0.2vw 0.1vw grey;
 	
 }
+
 button.user:HOVER {
 	cursor: pointer;
 }

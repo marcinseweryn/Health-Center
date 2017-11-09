@@ -6,6 +6,9 @@
 	width: 16vw;
 	background-color: #008ae6;
 	color: white;
+	
+	margin-top: 10.4vh;
+	position: fixed;
 }
 #user-menu table{
 	width: 100%;

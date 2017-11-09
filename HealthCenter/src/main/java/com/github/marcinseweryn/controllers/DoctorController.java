@@ -85,7 +85,7 @@ public class DoctorController {
 	}
 	
 	@RequestMapping(value = "/doctor/myAccount", method = RequestMethod.POST)
-	public String myAccountUpdate(Doctor doctor, Principal principal){
+	public String myAccountUpdate( Doctor doctor, Principal principal){
 		
 		List<Integer> userIDs = new ArrayList<>();
 		Integer doctorID = Integer.parseInt(principal.getName());
@@ -97,7 +97,6 @@ public class DoctorController {
 		
 		return "redirect:/doctor/myAccount";
 	}
-	
 	
 	@RequestMapping(value = "/doctor/visits", method = RequestMethod.GET)
 	public String visits(Model model, Principal principal){
