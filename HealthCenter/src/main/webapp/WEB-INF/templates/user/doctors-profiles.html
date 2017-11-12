@@ -1,0 +1,100 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+	  style="margin:0px">
+<head>
+	<title> HOME</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/body.css}" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/doctorsProfiles.css}" />
+	
+</head>
+
+<body style="margin: 0px;">
+
+	<div th:include = "fragments/userHeader" th:with="username = ${username}"></div>
+	<div th:include = "fragments/userMenu"></div>
+	
+	<div id ="body">
+	
+		<form id ="searchDoctors" action = "#" th:action="@{/user/doctors-profiles}" th:object="${doctor}" method="post">
+			<table id = "input-table" style = "margin-left: 8vw;">
+				<tr>
+					<td>
+						<label class = "user" th:text = "#{form.specialization}"></label>
+					</td>
+					<td>
+						<select class = "user" style = "width: 8vw;" th:field = "*{specialization_1}">
+							<option value = ""></option>
+							<option value = "Primary Care Physician" th:text = "#{doctor.primaryCarePhysician}"></option>
+							<option value = "Surgeon" th:text = "#{doctor.surgeon}"></option>
+							<option value = "Dermatologist" th:text = "#{doctor.dermatologist}"></option>
+							<option value = "Endocrinologist" th:text = "#{doctor.endocrinologist}"></option>
+							<option value = "Gastroenterologist" th:text = "#{doctor.gastroenterologist}"></option>
+							<option value = "Cardiologist" th:text = "#{doctor.cardiologist}"></option>
+							<option value = "Neurologist" th:text = "#{doctor.neurologist}"></option>
+							<option value = "Ophthalmologist" th:text = "#{doctor.ophthalmologist}"></option>
+							<option value = "Oncologist" th:text = "#{doctor.oncologist}"></option>
+							<option value = "Pediatrician" th:text = "#{doctor.pediatrician}"></option>
+							<option value = "Urologist" th:text = "#{doctor.urologist}"></option>
+							<option value = "Occupational medicine" th:text = "#{doctor.occupationalMedicine}"></option>
+						</select>
+					</td>
+					<td>
+						<label class = "user" th:text = "#{doctor.medicalTitle}"></label>
+					</td>
+					<td>
+						<input class = "user" th:field="*{medicalTitle}" type = "text"/>
+					</td>
+					<td style = "text-align: center;">
+						<button name = "action" class = "user button-color-blue" th:value = "${0}" 
+							form = "searchDoctors" type="submit" th:text = "#{search}"></button>		
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class = "user" th:text = "#{form.surname}"></label>
+					</td>
+					<td>
+						<input class = "user" th:field="*{surname}" type = "text"/>
+					</td>
+
+					<td>
+						<label class = "user" th:text = "#{form.name}"></label>
+					</td>
+					<td>
+						<input class = "user" th:field="*{name}" type = "text"/>
+					</td>
+				</tr>
+			</table>
+		</form>		
+	
+		<table style = "margin-left: 8vw;" class = "user">
+			<thead>
+				<tr>
+					<th th:text = "#{table.name}">
+					<th  th:text = "#{table.surname}">
+					<th id = "medical-title" th:text = "#{doctor.medicalTitle}">
+					<th id = "specialization" th:text = "#{table.specialization}">	
+					<th id = "select" th:text = "#{table.select}">
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each = "doctor, iterStat : ${doctorList}" th:class = "${iterStat.odd}? 'odd' : 'even'">
+					<td th:text = "${doctor.getName()}"/>
+					<td th:text = "${doctor.getSurname()}"/>
+					<td id = "medical-title" th:text = "${doctor.getMedicalTitle()}"/>
+					<td id = "specialization" th:text = "${doctor.getSpecialization_1() + ' ' + doctor.getSpecialization_2()
+							+ ' ' + doctor.getSpecialization_3()}"/>
+					<td>
+						<button name = "action" class = "user button-color-green" th:value="${doctor.getID()}" 
+							form = "searchDoctors" th:text = "#{table.select}"></button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	
+	</div>
+	
+</body>
+</html>

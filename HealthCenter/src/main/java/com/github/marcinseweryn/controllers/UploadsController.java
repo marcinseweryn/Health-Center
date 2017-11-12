@@ -25,15 +25,13 @@ public class UploadsController {
 	
 	@RequestMapping(value = "/uploadProfilePicture", method = RequestMethod.POST)
 	public String myAccountUploadProfilePicture(@RequestParam("file") MultipartFile file,Principal principal){
-		
-		System.out.println("xd"+file.getOriginalFilename());
 
         byte[] bytes;
 		try {
 			bytes = file.getBytes();
 			uploadsService.save("profile_picture_" + principal.getName(), bytes);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 		return "redirect:/doctor/myAccount";

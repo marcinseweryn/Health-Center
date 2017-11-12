@@ -26,9 +26,7 @@ public class DoctorServiceImpl implements DoctorService {
 		String where = "";
 		
 		if(doctor.getID() != null){
-			if(!doctor.getID().equals("")){
-				where += " d.ID = '" + doctor.getID() + "' and "; 
-			}
+			where += " d.ID = '" + doctor.getID() + "' and "; 
 		}
 		if(doctor.getName() != null){
 			if(!doctor.getName().equals("")){

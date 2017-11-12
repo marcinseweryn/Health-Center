@@ -12,5 +12,6 @@
     	<class>com.github.marcinseweryn.model.Patient</class>
     	<class>com.github.marcinseweryn.model.PatientCard</class>
     	<class>com.github.marcinseweryn.model.Uploads</class>
+    	<class>com.github.marcinseweryn.model.DoctorRating</class>
     </persistence-unit>
 </persistence>

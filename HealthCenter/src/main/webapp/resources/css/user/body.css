@@ -98,6 +98,18 @@ button.user:HOVER {
 	cursor: pointer;
 }
 
+
+select.user{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1.3vw;
+	max-width: 15.7vw;
+	min-width: 15.7vw;
+	height:4vh;
+	border-radius: 0.2vw;
+	padding: 0vw 0.4vw;
+	border: 0.1vw solid black;
+}
+
 .button-color-red{
 	background-color: #ff0000;
 }

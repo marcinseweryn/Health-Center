@@ -15,5 +15,6 @@ public interface DoctorService {
 	public Doctor findDoctorByID(Integer ID);
 
 	public List<Integer> findDoctorsIDsBySpecialization(String specialization);
+	
 
 }

@@ -1,0 +1,21 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+	  style="margin:0px">
+<head>
+	<title> HOME</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/body.css}" />
+</head>
+
+<body style="margin: 0px;">
+
+	<div th:include = "fragments/userHeader" th:with="username = ${username}"></div>
+	<div th:include = "fragments/userMenu"></div>
+	
+	<div id ="body">
+	
+	</div>
+	
+</body>
+</html>

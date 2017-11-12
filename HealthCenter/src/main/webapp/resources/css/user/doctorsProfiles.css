@@ -1,0 +1,24 @@
+
+#specialization{
+	min-width: 20vw;
+	max-width: 20vw;
+}
+
+#medical-title{
+	min-width: 6vw;
+	max-width: 6vw;
+}
+
+#select{
+	min-width: 8vw;
+	max-width: 8vw;
+}
+
+#input-table{
+	padding-top: 2vh;
+}
+
+
+#input-table td{
+	padding: 1vw 1vh;
+}

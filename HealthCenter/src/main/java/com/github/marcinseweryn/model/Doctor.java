@@ -1,5 +1,6 @@
 package com.github.marcinseweryn.model;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -10,6 +11,8 @@ import javax.persistence.Table;
 @DiscriminatorValue(value = "Doctor")
 public class Doctor extends User {
 	
+	@Column(name = "medical_title")
+	private String medicalTitle;
 	
 	private String specialization_1, specialization_2, specialization_3, information;
 
@@ -44,6 +47,14 @@ public class Doctor extends User {
 
 	public void setInformation(String information) {
 		this.information = information;
+	}
+	
+	public String getMedicalTitle() {
+		return medicalTitle;
+	}
+
+	public void setMedicalTitle(String medicalTitle) {
+		this.medicalTitle = medicalTitle;
 	}
 
 	public Doctor downcastUser(User user) {

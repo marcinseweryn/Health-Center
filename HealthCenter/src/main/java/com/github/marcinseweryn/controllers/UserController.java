@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -267,6 +269,38 @@ public class UserController {
 		redirectAttributes.addFlashAttribute("dateFromTo", dateFromTo);
 	
 		return "redirect:/user/history";
+	}
+	
+	@RequestMapping(value = "/user/doctors-profiles", method = RequestMethod.GET)
+	public String doctorProfilesGet(Model model, @ModelAttribute("doctor") Doctor doctor){
+		
+		model.addAttribute("doctor", new Doctor());
+		model.addAttribute("doctorList", doctorService.findDoctors(doctor));
+		
+		return "user/doctors-profiles";
+	}
+	
+	@RequestMapping(value = "/user/doctors-profiles", method = RequestMethod.POST)
+	public String doctorProfilesSearchPost(Model model, Doctor doctor, RedirectAttributes redirectAttributes,
+			@RequestParam("action") Integer action){
+		
+		if(action == 0){
+			doctor.setSpecialization_2(doctor.getSpecialization_1());
+			doctor.setSpecialization_3(doctor.getSpecialization_1());
+			redirectAttributes.addFlashAttribute("doctor", doctor);
+
+			return "redirect:/user/doctors-profiles";
+		}else{
+			
+			return "redirect:/user/doctor-profile/" + action;
+		}
+		
+	}
+	
+	@RequestMapping(value = "/user/doctor-profile/{doctorID}", method = RequestMethod.GET)
+	public String doctorProfileGet(@PathVariable Integer doctorID,Model model){
+
+		return "user/doctor-profile";
 	}
 	
 }
