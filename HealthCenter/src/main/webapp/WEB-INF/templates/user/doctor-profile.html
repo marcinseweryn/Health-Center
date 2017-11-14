@@ -3,9 +3,10 @@
       xmlns:th="http://www.thymeleaf.org"
 	  style="margin:0px">
 <head>
-	<title> HOME</title>
+	<title th:text = "#{doctors}"></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/body.css}" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/doctorProfile.css}" />
 </head>
 
 <body style="margin: 0px;">
@@ -14,6 +15,99 @@
 	<div th:include = "fragments/userMenu"></div>
 	
 	<div id ="body">
+	
+		<div id = "avatar">
+			<img th:src="${'/HealthCenter/profile-picture/' + doctorID}">
+		</div>
+		
+		<table id = "doctor-data-table">
+			<tr>
+				<td>
+					<label class ="user" th:text = "#{form.name}"></label>
+				</td>
+				<td>
+					<label class ="user" th:text = "${doctor.getName()}"></label>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label class ="user" th:text = "#{form.surname}"></label>
+				</td>
+				<td>
+					<label class ="user" th:text = "${doctor.getSurname()}"></label>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label class ="user" th:text = "#{doctor.medicalTitle} + ':'"></label>
+				</td>
+				<td>
+					<label class ="user" th:text = "${doctor.getMedicalTitle()}"></label>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label class ="user" th:text = "#{registration.contact}"></label>
+				</td>
+				<td>
+					<button class ="user button-color-blue" th:text = "#{sendMessage}"
+						style = "padding: 0.7vh 0.7vw;"></button>
+				</td>
+			</tr>
+		</table>
+		
+		<div id = "rating-div">
+			<h1 th:text = "${doctorRating}"></h1><br>
+			<h2 th:text = "#{rating}"></h2>
+		</div>
+		
+		<div id = "specializations">
+			<label class ="user" th:text = "#{table.specialization} + ': '"></label>
+			<label class ="user" th:text = "${doctor.getSpecialization_1() + ' '}"></label>
+			<label class ="user" th:text = "${doctor.getSpecialization_2() + ' '}"></label>
+			<label class ="user" th:text = "${doctor.getSpecialization_3()}"></label>
+		</div>
+		
+		<label style = " margin-left: 2vw;" class ="user" th:text = "#{information} + ':'"></label>
+		<div id = "informations">
+			<p th:text = "${doctor.getInformation()}"></p>
+		</div>
+		
+		<div id ="comments-title-div">
+			<h2 th:text = "#{comments}"></h2>
+		</div>
+		
+		<div id ="comments-div" th:each = "com, iterStat : ${doctorProfileComments}">
+			<label class ="user" th:text = "${com.getUser()} + '     '"></label>
+			<label class ="user" th:text = "#{rating} + ${': ' + com.getRating()}"></label><br/>		
+			<p th:text = "${com.getComment()}"></p>	
+		</div>
+		
+		<form action = "#" th:action="@{/user/doctor-profile}" th:object="${rateDoctor}" method="post">	
+			<div id = "send-comment-div">
+				<label class ="user" th:text = "#{sendComment}"></label>
+				<textarea th:field ="*{comment}" style ="padding: 1vh 1vw; resize: none;" rows="6" cols="123" maxlength="1000"></textarea>	
+			</div>
+			
+			<div id = "send-rating-div">
+				<label class ="user" th:text = "#{rating} + ': '"></label>
+				<label class ="user" style = "margin-left: 2vw;">5</label>
+				<input type = "radio" name = "rating" th:value = "5"/>
+				<label class ="user" style = "margin-left: 2vw;">4</label>
+				<input type = "radio" name = "rating" th:value = "4"/>
+				<label class ="user" style = "margin-left: 2vw;">3</label>
+				<input type = "radio" name = "rating" th:value = "3" checked/>
+				<label class ="user" style = "margin-left: 2vw;">2</label>
+				<input type = "radio" name = "rating" th:value = "2"/>
+				<label class ="user" style = "margin-left: 2vw;">1</label>
+				<input type = "radio" name = "rating" th:value = "1"/>
+			
+				<input type = "hidden" name = "doctorID" th:value = "${doctorID}"/>
+				<input type = "hidden" name = "userID" th:value = "${userID}"/>
+				
+				<button class = "user button-color-green" style = "margin-left: 5vw;" th:text = "#{send}"></button>
+			</div>
+		</form>
 	
 	</div>
 	

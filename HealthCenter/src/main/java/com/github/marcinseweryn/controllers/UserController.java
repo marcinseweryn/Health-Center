@@ -2,23 +2,21 @@ package com.github.marcinseweryn.controllers;
 
 import java.security.Principal;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.marcinseweryn.model.Doctor;
+import com.github.marcinseweryn.model.DoctorRating;
 import com.github.marcinseweryn.model.Duty;
 import com.github.marcinseweryn.model.Patient;
 import com.github.marcinseweryn.model.PatientHistory;
@@ -28,6 +26,7 @@ import com.github.marcinseweryn.model.WorkSchedule;
 import com.github.marcinseweryn.pojo.DateFromTo;
 import com.github.marcinseweryn.pojo.DutyDetailsForPatientQueue;
 import com.github.marcinseweryn.pojo.PatientVisitDetails;
+import com.github.marcinseweryn.service.DoctorRatingService;
 import com.github.marcinseweryn.service.DoctorService;
 import com.github.marcinseweryn.service.DutyService;
 import com.github.marcinseweryn.service.PatientHistoryService;
@@ -59,6 +58,9 @@ public class UserController {
 	
 	@Autowired
 	private PatientHistoryService patientHistoryService;
+	
+	@Autowired
+	private DoctorRatingService doctorRatingService;
 	
 	
 	@ModelAttribute("username")
@@ -298,9 +300,24 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/user/doctor-profile/{doctorID}", method = RequestMethod.GET)
-	public String doctorProfileGet(@PathVariable Integer doctorID,Model model){
+	public String doctorProfileGet(@PathVariable Integer doctorID,Model model,Principal principal){
 
+		model.addAttribute("doctorID", doctorID);
+		model.addAttribute("userID", principal.getName());
+		model.addAttribute("doctor", doctorService.findDoctorByID(doctorID));
+		model.addAttribute("rateDoctor", new DoctorRating());
+		model.addAttribute("doctorRating", doctorRatingService.getDoctorRatingByDoctorID(doctorID));
+		model.addAttribute("doctorProfileComments", doctorRatingService.getDoctorProfileCommentsByDoctorID(doctorID));
+		
 		return "user/doctor-profile";
+	}
+	
+	@RequestMapping(value = "/user/doctor-profile", method = RequestMethod.POST)
+	public String doctorProfilePost(DoctorRating rating){
+
+		doctorRatingService.saveRating(rating);
+		
+		return "redirect:/user/doctor-profile/" + rating.getDoctorID();
 	}
 	
 }
