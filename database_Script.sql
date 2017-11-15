@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `health_center`.`user` (
   `city` VARCHAR(45) NOT NULL,
   `postalCode` VARCHAR(45) NOT NULL,
   `phone` VARCHAR(45) NOT NULL,
-  `email` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(254) NOT NULL,
   `role` VARCHAR(45) NOT NULL DEFAULT 'ROLE_USER',
   `enabled` INT(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`ID`))
@@ -44,6 +44,7 @@ CREATE TABLE IF NOT EXISTS `health_center`.`doctor` (
   `specialization_1` VARCHAR(45) NULL,
   `specialization_2` VARCHAR(45) NULL,
   `specialization_3` VARCHAR(45) NULL,
+  `medical_title` VARCHAR(45) NULL,
   `information` VARCHAR(45) NULL,
   PRIMARY KEY (`ID`),
   CONSTRAINT `fk_doctor_user1`
@@ -159,6 +160,43 @@ CREATE TABLE IF NOT EXISTS `health_center`.`patient_card` (
   CONSTRAINT `fk_patient_card_patient1`
     FOREIGN KEY (`patient_ID`)
     REFERENCES `health_center`.`patient` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `health_center`.`Uploads`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `health_center`.`Uploads` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `file_name` VARCHAR(100) NOT NULL,
+  `file` LONGBLOB NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE INDEX `file_name_UNIQUE` (`file_name` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `health_center`.`doctor_rating`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `health_center`.`doctor_rating` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `doctor_ID` INT NOT NULL,
+  `user_ID` INT NOT NULL,
+  `comment` VARCHAR(1000) NOT NULL,
+  `rating` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `fk_doctor_rating_doctor1_idx` (`doctor_ID` ASC),
+  INDEX `fk_doctor_rating_user1_idx` (`user_ID` ASC),
+  CONSTRAINT `fk_doctor_rating_doctor1`
+    FOREIGN KEY (`doctor_ID`)
+    REFERENCES `health_center`.`doctor` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_doctor_rating_user1`
+    FOREIGN KEY (`user_ID`)
+    REFERENCES `health_center`.`user` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
