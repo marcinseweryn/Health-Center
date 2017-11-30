@@ -1,0 +1,138 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #edeff2;
+  font-family: "Calibri", "Roboto", sans-serif;
+}
+
+.chat_window {
+  position: absolute;
+  width: 65vw;
+  max-width: 65vw;
+  height: 80vh;
+  border-radius: 10px;
+  background-color: #fff;
+  left: 50%;
+  top: 55%;
+  transform: translateX(-50%) translateY(-50%);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  background-color: #f8f8f8;
+
+}
+
+.top_menu {
+  background-color: #fff;
+  width: 100%;
+  padding: 20px 0 15px;
+  box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+}
+
+
+.top_menu .title {
+  text-align: center;
+  color: black;
+  font-weight: bold;
+  font-size: 1.8vw;
+}
+
+.messages {
+  list-style: none;
+  padding: 20px 10px 0 10px;
+  margin: 0;
+  height: 59vh;
+  overflow: scroll;
+  font-weight: bolder;
+  font-size: 1.3vw;
+  color:  #2e2eb8;
+
+}
+
+.messages .message-from{
+	float: left;
+	margin-left: 2vw;
+
+}
+.messages .message-date{
+	float: right;
+  margin-right:6vw;
+}
+
+.messages .message {
+  margin-bottom: 1vh;
+  transition: all 0.5s linear;
+}
+
+.messages .message.left .text_wrapper {
+  background-color: #99ceff;
+  margin-left: 1.4vw;
+}
+
+.messages .message.left .text {
+  color: #004f99;
+}
+
+.messages .message .text_wrapper {
+  display: inline-block;
+  padding: 1vw;
+  border-radius: 0.8vw;
+  width: 90%;
+  min-width: 90%;
+  position: relative;
+}
+
+.messages .message .text_wrapper .text {
+  font-size: 1.2vw;
+  font-weight: 400;
+}
+
+.bottom_wrapper {
+  position: relative;
+  width: 100%;
+  background-color: #fff;
+  padding: 2.5vh 2vw;
+  position: absolute;
+  bottom: 0;
+}
+.bottom_wrapper .message_input_wrapper {
+  display: inline-block;
+  height: 6vh;
+  border-radius: 1vw;
+  border: 1px solid blue;
+  width: 80%;
+  position: relative;
+  padding: 0 1vw;
+}
+.bottom_wrapper .message_input_wrapper .message_input {
+  border: none;
+  height: 100%;
+  box-sizing: border-box;
+  width: 94%;
+  position: absolute;
+  color: gray;
+}
+.bottom_wrapper .send_message {
+  width: 10vw;
+  height: 6vh;
+  display: inline-block;
+  border-radius: 1vw;
+  background-color: #70db70;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s linear;
+  text-align: center;
+  font-size: 1.6vw;
+  font-weight: bolder;
+  letter-spacing: 0.2vw;
+  float: right;
+}
+.bottom_wrapper .send_message:hover {
+  background-color:  #2eb82e;
+}
+.bottom_wrapper .send_message .text {
+  font-size: 2vw;
+  font-weight: bolder;
+  display: inline-block;
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+	  style="margin:0px">
+<head>
+	<title> HOME</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/body.css}" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/user/onlineHelp.css}" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.0.3/sockjs.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+</head>
+<script type="text/javascript">
+
+
+function connect() {
+	var socket = new SockJS('/HealthCenter/chat-messaging');
+	stompClient = Stomp.over(socket);
+	stompClient.connect({}, function(frame) {
+		console.log("connected: " + frame);
+		stompClient.subscribe('/chat/messages', function(response) {
+			var data = JSON.parse(response.body);
+			draw("left", data.message, data.from, data.date);
+			0
+		});
+	});
+}
+
+function draw(side, text, from, date) {	
+	console.log("drawing...");
+    var $message;
+
+    $message = $($('.message_template').clone().html());
+  
+    $message.addClass(side).find('.text').html(text);
+    $message.addClass(side).find('.message-from').html(from);
+    $message.addClass(side).find('.message-date').html(date);
+
+    $('.messages').append($message);
+    return setTimeout(function () {
+        return $message.addClass('appeared');
+    }, 0);
+
+}
+function disconnect(){
+	stompClient.disconnect();
+}
+function sendMessage(){
+	stompClient.send("/app/message", {}, JSON.stringify({'message': $("#message_input_value").val()}));
+}
+
+</script>
+<body style="margin: 0px;">
+
+	<div th:include = "fragments/userHeader" th:with="username = ${username}"></div>
+	<div th:include = "fragments/userMenu"></div>
+	
+	<div id ="body">
+
+	<div class="chat_window">
+		<div class="top_menu">
+			<div class="title">Chat</div>
+		</div>
+		
+		<ul class="messages"></ul>
+		<div class="bottom_wrapper clearfix">
+			<div class="message_input_wrapper">
+				<input id="message_input_value" class="message_input" placeholder="Type your message here..." />
+			</div>
+			
+			<button class = "send_message" onclick="sendMessage()">Send</button>
+			
+			<button onclick="connect()">Connect to chat</button>
+			
+			<button onclick="disconnect()">Disconnect from chat</button>
+		</div>
+	</div>
+	
+	<div id="message_template" class="message_template">
+		<li class="message">
+			<div class = "message-from"></div>
+			<div class = "message-date"></div>
+			<div class="text_wrapper">
+				<div class="text"></div>
+			</div>
+		</li>
+	</div>
+	
+	</div>
+	
+</body>
+</html>

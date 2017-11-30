@@ -320,4 +320,10 @@ public class UserController {
 		return "redirect:/user/doctor-profile/" + rating.getDoctorID();
 	}
 	
+	@RequestMapping(value = "/user/online-help", method = RequestMethod.GET)
+	public String onlineHelpGet(){
+
+		return "user/online-help";
+	}
+	
 }
