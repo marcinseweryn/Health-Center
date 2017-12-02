@@ -1,5 +1,6 @@
 package com.github.marcinseweryn.service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,21 +24,26 @@ public class DoctorRatingServiceImpl implements DoctorRatingService {
 	
 	@Override
 	public void saveRating(DoctorRating rating) {
-		
+		rating.setCommentDate(new Timestamp(System.currentTimeMillis()));
 		doctorRatingDAO.saveRating(rating);
 	}
 
 	@Override
 	public Double getDoctorRatingByDoctorID(Integer doctorID) {
 		
-		Double sum = 0.0;
+		Double rating, sum = 0.0;
 		List<DoctorRating> list = doctorRatingDAO.findDoctorRatingByDoctorID(doctorID);
 		
 		for(DoctorRating dr : list){
 			sum += dr.getRating();
 		}
 		
-		return sum / list.size();
+		rating = sum / list.size();
+		rating = rating*100;
+		rating = (double) Math.round(rating);
+		rating = rating /100;
+		
+		return rating;
 	}
 
 	@Override
@@ -53,6 +59,7 @@ public class DoctorRatingServiceImpl implements DoctorRatingService {
 			doctorProfileComments.setUser(user.getName() + " " + user.getSurname());
 			doctorProfileComments.setComment(dr.getComment());
 			doctorProfileComments.setRating(dr.getRating());
+			doctorProfileComments.setCommentDate(dr.getCommentDate());
 			
 			doctorProfileCommentsList.add(doctorProfileComments);
 		}

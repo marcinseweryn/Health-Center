@@ -1,10 +1,20 @@
 package com.github.marcinseweryn.pojo;
 
+import java.util.Date;
+
+
 public class DoctorProfileComments {
 	
+	private Date commentDate;
 	private String user, comment;
 	private Integer rating;
 	
+	public Date getCommentDate() {
+		return commentDate;
+	}
+	public void setCommentDate(Date commentDate) {
+		this.commentDate = commentDate;
+	}
 	public String getUser() {
 		return user;
 	}

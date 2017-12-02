@@ -79,7 +79,10 @@
 		
 		<div id ="comments-div" th:each = "com, iterStat : ${doctorProfileComments}">
 			<label class ="user" th:text = "${com.getUser()} + '     '"></label>
-			<label class ="user" th:text = "#{rating} + ${': ' + com.getRating()}"></label><br/>		
+			<label class ="user" th:text = "#{rating} + ${': ' + com.getRating()}"></label>
+			<label class ="user" style = "float: right;" 
+				th:text = "${#strings.substring(com.getCommentDate(),0,19)}"></label>
+			<br/>		
 			<p th:text = "${com.getComment()}"></p>	
 		</div>
 		

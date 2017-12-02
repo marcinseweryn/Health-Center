@@ -1,11 +1,14 @@
 package com.github.marcinseweryn.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "doctor_rating")
@@ -14,6 +17,9 @@ public class DoctorRating {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer ID;
+	
+	@Column(name = "comment_date")
+	private Date commentDate;
 	
 	@Column(name = "doctor_ID")
 	private Integer doctorID;
@@ -24,6 +30,14 @@ public class DoctorRating {
 	private Integer rating;
 	
 	private String comment;
+
+	public Date getCommentDate() {
+		return commentDate;
+	}
+
+	public void setCommentDate(Date commentDate) {
+		this.commentDate = commentDate;
+	}
 
 	public Integer getID() {
 		return ID;
