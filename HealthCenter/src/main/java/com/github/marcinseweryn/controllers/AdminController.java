@@ -18,6 +18,7 @@ import com.github.marcinseweryn.model.User;
 import com.github.marcinseweryn.model.WorkSchedule;
 import com.github.marcinseweryn.pojo.IDsList;
 import com.github.marcinseweryn.service.DoctorService;
+import com.github.marcinseweryn.service.NewsService;
 import com.github.marcinseweryn.service.UserService;
 import com.github.marcinseweryn.service.WorkScheduleService;
 
@@ -32,6 +33,9 @@ public class AdminController {
 	
 	@Autowired
 	private WorkScheduleService workScheduleService;
+	
+	@Autowired
+	private NewsService newsService;
 	
 	private List<User> foundUsersList = null;
 
@@ -137,5 +141,40 @@ public class AdminController {
 		
 		return "redirect:/admin/workSchedule";
 	} 
+	
+	@RequestMapping(value = "/admin/news-management", method = RequestMethod.GET)
+	public String newsManagement(Model model){
+		
+		model.addAttribute("allNews",newsService.getAllNews());
+		
+		return "admin/news-management";
+	}
+	
+	@RequestMapping(value = "/admin/news-management-update", method = RequestMethod.POST)
+	public String newsManagementUpdateNews(@RequestParam String actionAndID, RedirectAttributes redirectAttributes){
+		
+		Integer ID = Integer.parseInt(actionAndID.substring(1, actionAndID.length()));
+		Character action = actionAndID.charAt(0);
+
+		redirectAttributes.addFlashAttribute("ID",ID);
+		if(action == 'U'){
+			return "redirect:/admin/news-management/news-update";
+		}else{
+			newsService.deleteNewsByID(ID);
+			return "redirect:/admin/news-management";
+		}
+	}
+	
+	@RequestMapping(value = "/admin/news-management/news-update", method = RequestMethod.GET)
+	public String newsUpdateGet(Model model){
+		
+		return "admin/news-update";
+	}
+	
+	@RequestMapping(value = "/admin/add-news", method = RequestMethod.GET)
+	public String addNews(Model model){
+		
+		return "admin/add-news";
+	}
 	
 }

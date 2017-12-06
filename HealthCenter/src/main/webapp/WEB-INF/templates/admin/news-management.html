@@ -1,0 +1,53 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+	  style="margin:0px">
+<head>
+	<title th:text="#{menu.newsManagement}"></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/admin/body.css}" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/admin/newsManagement.css}" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/fragments/adminHeader.css}" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/fragments/adminMenu.css}" />
+</head>
+
+<body  style="margin: 0px;">
+
+	<div th:replace = "fragments/adminHeader :: header"></div>
+	<div th:replace = "fragments/adminMenu :: menu"></div>
+	
+	<div id ="body">
+	
+		<div id = "add-news" class = "button-create">
+			<a href="https://localhost:8443/HealthCenter/admin/add-news" th:text = "#{news.addNews}"></a>
+		</div>	
+		
+		<table class ="admin-table" style = "font-size: 1.5vw;">
+			<thead>
+				<tr>
+					<th id = "title" class = "table-header" th:text = "#{title}"></th>
+					<th id = "date" class = "table-header"  th:text = "#{table.date}"></th>
+					<th class = "table-header" style= "min-width: 8.5vw;" th:text = "#{update}"></th>
+					<th class = "table-header" style= "min-width: 9.2vw;" th:text = "#{delete}"></th>
+				</tr>
+			</thead>
+			<tbody style = "max-height: 70vh">
+				<form id ="update" action = "#" th:action="@{/admin/news-management-update}"  method="post">
+					<tr th:each="news, iterStat : ${allNews}" th:class = "${iterStat.odd}? 'odd' : 'even'">
+						<td id = "title" th:text = "${news.getTitle()}"></td>
+						<td id = "date" th:text = "${#strings.substring(news.getDate(),0,11)}"></td>
+						<td style= "min-width: 8.5vw;"><button class = "button-update" name = "actionAndID" th:value="${'U' + news.getID()}" 
+							type="submit" th:text = "#{update}"></button></td>
+						<td style= "min-width: 8vw;"><button class = "button-delete" name = "actionAndID" th:value="${'D' + news.getID()}" 
+							type="submit" th:text = "#{delete}"></button></t>
+					</tr>
+				</form>
+			</tbody>
+		</table>
+	
+	</div>
+	
+
+
+</body>
+</html>

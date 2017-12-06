@@ -6,6 +6,9 @@
 	width: 16vw;
 	background-color: #00009b;
 	color: white;
+	
+	margin-top: 10.4vh;
+	position: fixed;
 }
 #admin-menu-table{
 	width: 100%;

@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<div id = "admin-menu">
+	<div id = "admin-menu" th:fragment = "menu">
 		<table id = "admin-menu-table">
 			<tr>
 				<td style = "margin-top: 1vh;" class = "admin-menu-td">
@@ -23,7 +23,10 @@
 				</td>
 			</tr>
 			<tr>
-				<td class = "admin-menu-td"><a>Lorem ipsum</a></td>
+				<td class = "admin-menu-td">
+					<a href="https://localhost:8443/HealthCenter/admin/news-management"
+					th:text = "#{menu.newsManagement}"></a>
+				</td>
 			</tr>
 			<tr>
 				<td class = "admin-menu-td"><a>Lorem ipsum</a></td>

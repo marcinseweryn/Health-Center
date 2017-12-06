@@ -5,6 +5,7 @@
 	background-color: #000080;
 	border-bottom: 0.35vw solid  #6974fc;
 	color: white;
+	position: fixed;
 }
 
 #admin-header-title{
