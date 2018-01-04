@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "news")
 public class News {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer ID;
@@ -20,11 +20,17 @@ public class News {
 	private String title, information, author;
 	private Timestamp date;
 	
-	@Column(name = "uploads_ID")
-	private Integer uploadsID;
+	@Column(name = "Uploads_file_name")
+	private String uploadsFileName;
 	
 	@Column(name = "for_roles")
 	private String forRoles;
+	
+	@Column(name = "update_author")
+	private String updateAuthor;
+	
+	@Column(name = "update_date")
+	private Timestamp updateDate;
 	
 
 	public Integer getID() {
@@ -35,12 +41,12 @@ public class News {
 		ID = iD;
 	}
 
-	public Integer getUploadsID() {
-		return uploadsID;
+	public String getUploadsFileName() {
+		return uploadsFileName;
 	}
 
-	public void setUploadsID(Integer uploadsID) {
-		this.uploadsID = uploadsID;
+	public void setUploadsFileName(String uploadsFileName) {
+		this.uploadsFileName = uploadsFileName;
 	}
 
 	public String getForRoles() {
@@ -81,5 +87,21 @@ public class News {
 
 	public void setDate(Timestamp date) {
 		this.date = date;
+	}
+
+	public String getUpdateAuthor() {
+		return updateAuthor;
+	}
+
+	public void setUpdateAuthor(String updateAuthor) {
+		this.updateAuthor = updateAuthor;
+	}
+
+	public Timestamp getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Timestamp updateDate) {
+		this.updateDate = updateDate;
 	}
 }

@@ -19,7 +19,7 @@
 	<div id ="body">
 	
 		<div id = "add-news" class = "button-create">
-			<a href="https://localhost:8443/HealthCenter/admin/add-news" th:text = "#{news.addNews}"></a>
+			<a href="https://localhost:8443/HealthCenter/admin/news-management/add-news" th:text = "#{news.addNews}"></a>
 		</div>	
 		
 		<table class ="admin-table" style = "font-size: 1.5vw;">
@@ -39,7 +39,7 @@
 						<td style= "min-width: 8.5vw;"><button class = "button-update" name = "actionAndID" th:value="${'U' + news.getID()}" 
 							type="submit" th:text = "#{update}"></button></td>
 						<td style= "min-width: 8vw;"><button class = "button-delete" name = "actionAndID" th:value="${'D' + news.getID()}" 
-							type="submit" th:text = "#{delete}"></button></t>
+							type="submit" th:text = "#{delete}"></button></td>
 					</tr>
 				</form>
 			</tbody>

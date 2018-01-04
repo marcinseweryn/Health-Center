@@ -3,11 +3,12 @@
       xmlns:th="http://www.thymeleaf.org"
 	  style="margin:0px">
 <head>
-	<title th:text="#{home.login}"></title>
+	<title th:text="#{news.add}"></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/admin/body.css}" />
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/fragments/adminHeader.css}" />
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/fragments/adminMenu.css}" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/admin/addNews.css}" />
 </head>
 
 <body  style="margin: 0px;">
@@ -17,9 +18,38 @@
 	
 	<div id ="body">
 	
-	</div>
-	
+	<form action = "#" th:action="@{'add-news' +'?' + ${_csrf.parameterName} + '=' + ${_csrf.token}}" 
+		th:object="${news}" method="post" enctype="multipart/form-data">
+		
+		<div id = "news-title">
+			<label class = "admin" th:text="#{title}"></label>
+			<input class = "admin" th:field = "*{title}" type = "text"/>	
+		</div>
+		<div id = "news-picture">
+			<label id = "select-file" for = "image" th:text = "#{upload.selectImage}"></label>
+			<input id = "image" class = "user"  style="width:0vw; visibility:hidden;" type = "file" name = "file" th:placeholder="#{load}">
+		</div>
+		<div id = "news-roles">
+			 <label class = "admin" th:text="#{destination} + ':'" style = "margin-left: 4vw; font-size: 1.8vw;"></label>
+		
+		    <input type = "checkbox" th:field = "*{forRoles}" value="administrator">
+		    <label class="admin" for="forRoles1" th:text="#{administrator}"></label>
 
+		    <input type="checkbox" th:field = "*{forRoles}" value="doctor">
+		    <label class="admin" for="forRoles2" th:text="#{table.doctor}"></label>
+		    
+		   	<input type="checkbox" th:field = "*{forRoles}" value="user">
+		    <label class="admin" for="forRoles3" th:text="#{user}"></label>
+		</div>
+	
+		<div id = "news-information">
+			<label class = "admin"  style = "margin-left: 2vw;" th:text = "#{information} + ':'"></label>
+			<textarea rows="30" cols="139" style = "margin-left: 2vw; resize: none;" maxlength="5000" 
+				th:field = "*{information}" ></textarea>
+			<button id = "send-button" class = "button-create" th:text= "#{send}"></button>
+		</div>
+	</form>
+	</div>
 
 </body>
 </html>

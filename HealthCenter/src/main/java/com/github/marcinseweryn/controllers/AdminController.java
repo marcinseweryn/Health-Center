@@ -1,5 +1,7 @@
 package com.github.marcinseweryn.controllers;
 
+import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,18 +9,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.marcinseweryn.model.Doctor;
+import com.github.marcinseweryn.model.News;
 import com.github.marcinseweryn.model.Patient;
 import com.github.marcinseweryn.model.User;
 import com.github.marcinseweryn.model.WorkSchedule;
 import com.github.marcinseweryn.pojo.IDsList;
 import com.github.marcinseweryn.service.DoctorService;
 import com.github.marcinseweryn.service.NewsService;
+import com.github.marcinseweryn.service.UploadsService;
 import com.github.marcinseweryn.service.UserService;
 import com.github.marcinseweryn.service.WorkScheduleService;
 
@@ -36,6 +42,9 @@ public class AdminController {
 	
 	@Autowired
 	private NewsService newsService;
+	
+	@Autowired
+	private UploadsService uploadsService;
 	
 	private List<User> foundUsersList = null;
 
@@ -166,15 +175,79 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/admin/news-management/news-update", method = RequestMethod.GET)
-	public String newsUpdateGet(Model model){
+	public String newsUpdateGET(@ModelAttribute("ID") Integer ID, Model model){
+		boolean admin = false, user = false, doctor = false;
+		News news =  newsService.findNewsByID(ID);
+		model.addAttribute("news",news);
+		
+		String temp = "";
+		for(int i = 0; i < news.getForRoles().length(); i++){	//Get roles from single cell
+			
+			if(news.getForRoles().charAt(i) == ','){
+				if(temp.equals("administrator"))admin = true;
+				if(temp.equals("doctor")) doctor = true;
+				if(temp.equals("user")) user = true;
+				temp = "";
+				continue;
+			}
+			temp += news.getForRoles().charAt(i);
+			
+			if(i == news.getForRoles().length() - 1){
+				if(temp.equals("administrator"))admin = true;
+				if(temp.equals("doctor")) doctor = true;
+				if(temp.equals("user")) user = true;
+			}
+		}
+		model.addAttribute("admin", admin);
+		model.addAttribute("doctor", doctor);
+		model.addAttribute("user", user);
 		
 		return "admin/news-update";
 	}
 	
-	@RequestMapping(value = "/admin/add-news", method = RequestMethod.GET)
-	public String addNews(Model model){
+	@RequestMapping(value = "/admin/news-management/news-update", method = RequestMethod.POST)
+	public String newsUpdatePOST(@RequestParam("file") MultipartFile file, Principal principal,
+			News news, RedirectAttributes redirectAttributes) throws IOException{
+		
+		User user = userService.findUserByID(Integer.parseInt(principal.getName()));
+	
+		if(file.getSize() != 0) uploadsService.updateFileByFileName(news.getUploadsFileName(), file.getBytes());
+		
+		news.setUpdateAuthor(user.getName() + " " + user.getSurname());
+		newsService.updateNews(news);
+		
+		redirectAttributes.addFlashAttribute("ID",news.getID());
+		
+		return "redirect:/admin/news-management/news-update";
+	}
+	
+	@RequestMapping(value = "/admin/news-management/add-news", method = RequestMethod.GET)
+	public String addNewsGET(Model model){
+		
+		model.addAttribute("news", new News());
 		
 		return "admin/add-news";
+	}
+	
+	@RequestMapping(value = "/admin/news-management/add-news", method = RequestMethod.POST)
+	public String addNewsPOST(@RequestParam("file") MultipartFile file, News news, Principal principal){
+		
+        byte[] bytes;
+        String uploadsFileName = null;
+		try {
+			bytes = file.getBytes();
+			uploadsFileName = "news_picture_" + System.currentTimeMillis();
+			uploadsService.save(uploadsFileName, bytes);
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+		User user = userService.findUserByID(Integer.parseInt(principal.getName()));
+		news.setAuthor(user.getName() + " " + user.getSurname());
+		news.setUploadsFileName(uploadsFileName);
+		newsService.addNews(news);
+		
+		return "redirect:/admin/news-management";
 	}
 	
 }

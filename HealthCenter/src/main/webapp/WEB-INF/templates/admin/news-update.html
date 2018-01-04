@@ -3,11 +3,12 @@
       xmlns:th="http://www.thymeleaf.org"
 	  style="margin:0px">
 <head>
-	<title th:text="#{home.login}"></title>
+	<title th:text="#{news.update}"></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/admin/body.css}" />
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/fragments/adminHeader.css}" />
 	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/fragments/adminMenu.css}" />
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/admin/updateNews.css}" />
 </head>
 
 <body  style="margin: 0px;">
@@ -17,9 +18,57 @@
 	
 	<div id ="body">
 	
+	<form action = "#" th:action="@{'news-update' +'?' + ${_csrf.parameterName} + '=' + ${_csrf.token}}"
+		 th:object="${news}" method="post" enctype="multipart/form-data">
+		
+		<input type="hidden" name="ID" th:value="${news.getID()}">
+		<input type="hidden" name="uploadsFileName" th:value="${news.getUploadsFileName()}">
+		<input type="hidden" name="author" th:value="${news.getAuthor()}">
+		<input type="hidden" name="date" th:value="${news.getDate()}">
+		
+		<div id = "news-title">
+			<label class = "admin" th:text="#{title}"></label>
+			<input class = "admin" th:field = "*{title}" type = "text"/>	
+		</div>
+		<div id ="box">
+			<div id = "news-picture">
+				<div id = "picture">	
+					<img th:src="${'/HealthCenter/news-picture/' + news.getUploadsFileName()}">
+				</div>
+				<label id = "select-file" for = "image" th:text = "#{upload.selectImage}"></label>
+				<input id = "image" class = "user"  style="width:0vw; visibility:hidden;" type = "file" name = "file" th:placeholder="#{load}">
+			</div>
+			<div id = "news-roles">
+				<label class = "admin" th:text="#{destination}" style = "margin-left: 2vw; margin-top: 3vh; font-size: 1.8vw;"></label>
+				<br>
+			    <input th:if="${admin == false}" id="forRoles1" type="checkbox" name = "forRoles" value="administrator">
+			    <input th:if="${admin == true}" id="forRoles1" type="checkbox" name = "forRoles" value="administrator" checked>
+			    <label class="admin" for="forRoles1" th:text="#{administrator}"></label>
+				<br>
+			    <input th:if="${doctor == false}" id="forRoles2" type="checkbox" name = "forRoles" value="doctor">
+			   	<input th:if="${doctor == true}" id="forRoles2" type="checkbox" name = "forRoles" value="doctor" checked>
+			    <label class="admin" for="forRoles2" th:text="#{table.doctor}"></label>
+			    <br>
+			   	<input th:if="${user == false}" id="forRoles3" type="checkbox" name = "forRoles" value="user">
+			   	<input th:if="${user == true}" id="forRoles3" type="checkbox" name = "forRoles" value="user" checked>
+			    <label class="admin" for="forRoles3" th:text="#{user}"></label>
+			</div>
+		</div>
+		<div id = "news-information">
+			<label class = "admin" th:text = "#{information} + ':'"></label>
+			<textarea style="resize: none;" maxlength="5000" th:field= "*{information}" rows="35" cols="100"></textarea>
+			<label class="admin" th:text= "#{author} + ':'"></label>
+			<label class="admin" th:text="${news.getAuthor() + ' ' + #strings.substring(news.getDate(),0,19)}"></label>		
+			<button id = "update-button" class = "button-update" th:text= "#{update}"></button>
+			<br>
+			<label th:if="${news.getUpdateAuthor() != null}" class="admin" th:text="#{lastUpdate} + ':'"></label>
+			<label th:if="${news.getUpdateAuthor() != null}" class="admin" th:text="${' ' + news.getUpdateAuthor() + 
+				' ' + #strings.substring(news.getUpdateDate(),0,19)}"></label>
+		</div>
+
+	</form>
+	
 	</div>
 	
-
-
 </body>
 </html>

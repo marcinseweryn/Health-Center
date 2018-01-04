@@ -49,4 +49,10 @@ public class UploadsDAOImpl implements UploadsDAO{
 		query.setParameter("file", file);
 		query.executeUpdate();
 	}
+
+	@Override
+	public Uploads findUploadsByFileName(String fileName) {
+		
+		return entityManager.find(Uploads.class, fileName);
+	}
 }

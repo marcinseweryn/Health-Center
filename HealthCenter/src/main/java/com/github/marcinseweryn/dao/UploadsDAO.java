@@ -10,4 +10,6 @@ public interface UploadsDAO {
 	
 	public void updateFileByFileName(String fileName, byte[] file);
 	
+	public Uploads findUploadsByFileName(String fileName);
+	
 }

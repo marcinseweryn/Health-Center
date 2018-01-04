@@ -20,6 +20,7 @@ public class NewsServiceImpl implements NewsService{
 	public void addNews(News news) {
 		
 		news.setDate(new Timestamp(System.currentTimeMillis()));
+
 		newsDAO.addNews(news);
 	}
 
@@ -33,6 +34,19 @@ public class NewsServiceImpl implements NewsService{
 	public void deleteNewsByID(Integer ID) {
 		
 		newsDAO.deleteNewsByID(ID);
+	}
+
+	@Override
+	public News findNewsByID(Integer ID) {
+	
+		return newsDAO.findNewsByID(ID);
+	}
+
+	@Override
+	public void updateNews(News news) {
+		
+		news.setUpdateDate(new Timestamp(System.currentTimeMillis()));
+		newsDAO.updateNews(news);
 	}
 
 }

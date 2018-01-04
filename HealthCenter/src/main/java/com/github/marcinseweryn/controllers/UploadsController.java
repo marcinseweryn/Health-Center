@@ -26,15 +26,13 @@ public class UploadsController {
 	
 	@RequestMapping(value = "/uploadProfilePicture", method = RequestMethod.POST)
 	public String myAccountUploadProfilePicture(@RequestParam("file") MultipartFile file,Principal principal){
-
-        byte[] bytes;
+		
 		try {
-			bytes = file.getBytes();
-			uploadsService.save("profile_picture_" + principal.getName(), bytes);
+			uploadsService.save("profile_picture_" + principal.getName(), file.getBytes());
 		} catch (IOException e) {
-
 			e.printStackTrace();
 		}
+		
 		return "redirect:/doctor/myAccount";
 
 	}
@@ -48,14 +46,13 @@ public class UploadsController {
 	    if(image != null){
 		    response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
 		    response.getOutputStream().write(image.getFile());
-	
 		    response.getOutputStream().close();
 	    }
 
 	}
 	
 	@RequestMapping(value = "/profile-picture/{ID}", method = RequestMethod.GET)
-	  public void showProfilePicture(HttpServletResponse response,HttpServletRequest request, Principal principal,
+	  public void showProfilePicture(HttpServletResponse response,HttpServletRequest request,
 			  @PathVariable Integer ID) 
 	          throws ServletException, IOException{
 
@@ -63,8 +60,34 @@ public class UploadsController {
 	    
 	    if(image != null){
 		    response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
-		    response.getOutputStream().write(image.getFile());
+		    response.getOutputStream().write(image.getFile());	
+		    response.getOutputStream().close();
+	    }
+
+	}
 	
+	@RequestMapping(value = "/uploadNewsPicture", method = RequestMethod.POST)
+	public String uploadNewsPicture(@RequestParam("file") MultipartFile file){
+
+		try {
+			uploadsService.save("news_picture_" + System.currentTimeMillis(), file.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:/admin/add-news";
+	}
+	
+	@RequestMapping(value = "/news-picture/{uploadsFileName}", method = RequestMethod.GET)
+	  public void showNewsPicture(HttpServletResponse response,HttpServletRequest request,
+			  @PathVariable String uploadsFileName) 
+	          throws ServletException, IOException{
+
+	    Uploads image = uploadsService.read(uploadsFileName);
+	    
+	    if(image != null){
+		    response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+		    response.getOutputStream().write(image.getFile());	
 		    response.getOutputStream().close();
 	    }
 

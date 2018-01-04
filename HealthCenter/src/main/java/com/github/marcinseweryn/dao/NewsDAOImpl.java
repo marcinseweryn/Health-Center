@@ -19,6 +19,7 @@ class NewsDAOImpl implements NewsDAO {
 	private EntityManager entityManager;
 	
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void addNews(News news) {
 		entityManager.persist(news);
 	}
@@ -37,6 +38,20 @@ class NewsDAOImpl implements NewsDAO {
 		
 		Query query = entityManager.createQuery("DELETE FROM News WHERE ID =" + ID);
 		query.executeUpdate();
+	}
+
+	@Override
+	public News findNewsByID(Integer ID) {
+	
+		return entityManager.find(News.class, ID);
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void updateNews(News news) {
+		
+		entityManager.merge(news);
+		
 	}
 
 }

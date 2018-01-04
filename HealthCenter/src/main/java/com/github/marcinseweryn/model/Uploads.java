@@ -12,22 +12,11 @@ import javax.persistence.Table;
 public class Uploads {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer ID;
-	
 	@Column(name = "file_name")
 	private String fileName;
-    
 
 	private byte[] file;
-
-	public Integer getID() {
-		return ID;
-	}
-
-	public void setID(Integer iD) {
-		ID = iD;
-	}
+	
 
 	public String getFileName() {
 		return fileName;

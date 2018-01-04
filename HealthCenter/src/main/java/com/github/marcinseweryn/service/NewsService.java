@@ -10,6 +10,11 @@ public interface NewsService {
 	
 	public List<News> getAllNews();
 	
+	public News findNewsByID(Integer ID);
+	
 	public void deleteNewsByID(Integer ID);
+	
+	public void updateNews(News news);
+	
 
 }

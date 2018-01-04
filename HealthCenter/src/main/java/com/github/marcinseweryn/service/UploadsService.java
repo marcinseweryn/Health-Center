@@ -7,4 +7,8 @@ public interface UploadsService {
 	public void save(String fileName, byte[] file);
 	
 	public Uploads read(String fileName);
+	
+	public void updateFileByFileName(String fileName, byte[] file);
+	
+	public Uploads findUploadsByFileName(String fileName);
 }

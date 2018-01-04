@@ -29,7 +29,19 @@ public class UploadsServiceImpl implements UploadsService {
 	@Override
 	public Uploads read(String fileName) {
 		
-			return 	uploadsDAO.read(fileName);
+		return uploadsDAO.read(fileName);
+	}
+
+	@Override
+	public void updateFileByFileName(String fileName, byte[] file) {
+		
+		uploadsDAO.updateFileByFileName(fileName, file);
+	}
+
+	@Override
+	public Uploads findUploadsByFileName(String fileName) {
+
+		return uploadsDAO.findUploadsByFileName(fileName);
 	}
 
 }
