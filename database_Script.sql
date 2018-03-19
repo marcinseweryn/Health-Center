@@ -169,10 +169,9 @@ ENGINE = InnoDB;
 -- Table `health_center`.`Uploads`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `health_center`.`Uploads` (
-  `ID` INT NOT NULL AUTO_INCREMENT,
   `file_name` VARCHAR(100) NOT NULL,
   `file` LONGBLOB NOT NULL,
-  PRIMARY KEY (`ID`),
+  PRIMARY KEY (`file_name`),
   UNIQUE INDEX `file_name_UNIQUE` (`file_name` ASC))
 ENGINE = InnoDB;
 
@@ -186,6 +185,7 @@ CREATE TABLE IF NOT EXISTS `health_center`.`doctor_rating` (
   `user_ID` INT NOT NULL,
   `comment` VARCHAR(1000) NOT NULL,
   `rating` VARCHAR(45) NOT NULL,
+  `comment_date` DATETIME NOT NULL,
   PRIMARY KEY (`ID`),
   INDEX `fk_doctor_rating_doctor1_idx` (`doctor_ID` ASC),
   INDEX `fk_doctor_rating_user1_idx` (`user_ID` ASC),
@@ -197,6 +197,29 @@ CREATE TABLE IF NOT EXISTS `health_center`.`doctor_rating` (
   CONSTRAINT `fk_doctor_rating_user1`
     FOREIGN KEY (`user_ID`)
     REFERENCES `health_center`.`user` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `health_center`.`News`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `health_center`.`News` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `Uploads_file_name` VARCHAR(100) NOT NULL,
+  `title` VARCHAR(100) NOT NULL,
+  `date` DATETIME NOT NULL,
+  `information` VARCHAR(5000) NOT NULL,
+  `for_roles` VARCHAR(100) NOT NULL,
+  `author` VARCHAR(45) NOT NULL,
+  `update_author` VARCHAR(45) NULL,
+  `update_date` VARCHAR(45) NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `fk_News_Uploads1_idx` (`Uploads_file_name` ASC),
+  CONSTRAINT `fk_News_Uploads1`
+    FOREIGN KEY (`Uploads_file_name`)
+    REFERENCES `health_center`.`Uploads` (`file_name`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
