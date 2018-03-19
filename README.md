@@ -1,7 +1,7 @@
 # Health Center (Work in progress)
 The application is created using the following tools and technologies: Java SE, Spring, Spring MVC, Spring Security, Thymeleaf, HTML, CSS, JavaScript, JPA, MySQL, Maven, Eclipse, MySQL Workbench, Apache Tomcat 9
 
-## Completed features (15.11.2017)
+## Completed features
 * Ability to register new user account (registration form with validation)
 * Ability to logout and login for administrator, user and doctor account
 * First version of GUI for users, administrator and main pages
@@ -11,6 +11,7 @@ The application is created using the following tools and technologies: Java SE, 
 **Administrator:**
 * Users management with ability to create, delete, update and search users
 * Setting a work schedule for doctors
+* News management with ability to create, delete, update and set destination.
 
 **User:**
 * Ability to change account settings
@@ -20,6 +21,7 @@ The application is created using the following tools and technologies: Java SE, 
 * Checking the state of the queue to the doctor online
 * Checking the visits history
 * Ability to browse doctors profiles with the ability to add ratings along with comments
+* Online help (uncompleted)
 
 **Doctor:**
 * Ability to change account settings
